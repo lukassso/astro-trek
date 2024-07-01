@@ -1,6 +1,7 @@
 import type { Handler } from "@netlify/functions";
 import { getAuth } from "firebase-admin/auth";
 import { app } from "../../src/firebase/server";
+import cookie from "cookie";
 
 const handler: Handler = async (event) => {
 	const auth = getAuth(app);
@@ -23,11 +24,18 @@ const handler: Handler = async (event) => {
 			expiresIn: fiveDays,
 		});
 
+		const setCookieHeader = cookie.serialize("__session", sessionCookie, {
+			httpOnly: false,
+			secure: true,
+			path: "/",
+			maxAge: fiveDays,
+		});
+
 		return {
 			statusCode: 302,
 			headers: {
-				"Set-Cookie": `__session=${sessionCookie}; Path=/; HttpOnly`,
-				Location: "/dashboard",
+				"Set-Cookie": setCookieHeader,
+				Location: "/dashboard/",
 			},
 			body: JSON.stringify({ message: "Successfully signed in" }),
 		};

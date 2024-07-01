@@ -1,7 +1,10 @@
 [build]
-command = "astro build"
-publish = "dist"
-functions = "netlify/functions"
+  command = "astro build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "20.11.0"
 
 [[redirects]]
 from = "/api/openai"
@@ -10,20 +13,20 @@ status = 200
 
 [[redirects]]
   from = "/api/auth/register"
-  to = "netlify/functions/register"
+  to = "/.netlify/functions/register"
   status = 200
 
 [[redirects]]
   from = "/api/auth/signin"
-  to = "netlify/functions/signin"
+  to = "/.netlify/functions/signin"
   status = 200
 
 [[redirects]]
   from = "/api/auth/signout"
-  to = "netlify/functions/signout"
+  to = "/.netlify/functions/signout"
   status = 200
 
 [[redirects]]
   from = "/api/auth/third-party-signin"
-  to = "netlify/functions/third-party-signin"
+  to = "/.netlify/functions/third-party-signin"
   status = 200

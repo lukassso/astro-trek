@@ -3,20 +3,16 @@ import { initializeApp, cert, getApps } from "firebase-admin/app";
 
 const activeApps = getApps();
 
-const getEnvVariable = (key: string): string | undefined => {
-	const value = process.env[key];
-	return value;
-};
-
 const serviceAccount = {
-	projectId: getEnvVariable("FIREBASE_PROJECT_ID"),
-	privateKey: getEnvVariable("FIREBASE_PRIVATE_KEY")?.replace(/\\n/g, "\n"),
-	clientEmail: getEnvVariable("FIREBASE_CLIENT_EMAIL"),
-	clientId: getEnvVariable("FIREBASE_CLIENT_ID"),
-	authUri: getEnvVariable("FIREBASE_AUTH_URI"),
-	tokenUri: getEnvVariable("FIREBASE_TOKEN_URI"),
-	authProviderX509CertUrl: getEnvVariable("FIREBASE_AUTH_CERT_URL"),
-	clientC509CertUrl: getEnvVariable("FIREBASE_CLIENT_CERT_URL"),
+	projectId: process.env.VITE_FIREBASE_PROJECT_ID,
+	privateKey: process.env.VITE_FIREBASE_PRIVATE_KEY,
+	privateKeyId: process.env.VITE_FIREBASE_PRIVATE_KEY_ID,
+	clientEmail: process.env.VITE_FIREBASE_CLIENT_EMAIL,
+	clientId: process.env.VITE_FIREBASE_CLIENT_ID,
+	authUri: process.env.VITE_FIREBASE_AUTH_URI,
+	tokenUri: process.env.VITE_FIREBASE_TOKEN_URI,
+	authProviderX509CertUrl: process.env.VITE_FIREBASE_AUTH_CERT_URL,
+	clientC509CertUrl: process.env.VITE_FIREBASE_CLIENT_CERT_URL,
 };
 
 const initApp = () => {

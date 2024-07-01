@@ -5,10 +5,9 @@ import querystring from "querystring";
 
 const handler: Handler = async (event) => {
 	const auth = getAuth(app);
-
-	const contentType = event.headers["content-type"] || event.headers["Content-Type"];
 	let data: { [key: string]: string } = {};
 
+	const contentType = event.headers["content-type"] || event.headers["Content-Type"];
 	if (contentType?.includes("application/json")) {
 		if (event.body !== null) {
 			data = JSON.parse(event.body);
@@ -22,9 +21,7 @@ const handler: Handler = async (event) => {
 		data = querystring.parse(event.body || "") as { [key: string]: string };
 	}
 
-	const email = data.email?.toString();
-	const password = data.password?.toString();
-	const name = data.name?.toString();
+	const { email, password, name } = data;
 
 	if (!email || !password || !name) {
 		return {
@@ -43,7 +40,7 @@ const handler: Handler = async (event) => {
 		return {
 			statusCode: 302,
 			headers: {
-				Location: "/signin",
+				Location: "/signin/",
 			},
 			body: JSON.stringify({ uid: userRecord.uid }),
 		};

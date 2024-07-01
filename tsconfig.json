@@ -17,8 +17,8 @@
 			"@/*": ["src/*"]
 		},
 		"jsx": "react-jsx",
-		"jsxImportSource": "react"
+		"jsxImportSource": "react",
+		"resolveJsonModule": true
 	},
-	"exclude": ["node_modules", "**/node_modules/*", ".vscode", "dist"],
-	"include": ["functions/**/*.ts"]
+	"exclude": ["node_modules", "**/node_modules/*", ".vscode", "dist"]
 }

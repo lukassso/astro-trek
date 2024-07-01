@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CollapsibleTrigger, Collapsible } from "@/components/ui/collapsible";
 import placeholderImage from "@/assets/placeholder.svg";

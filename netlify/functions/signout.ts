@@ -8,14 +8,14 @@ const handler: Handler = async () => {
 			statusCode: 302,
 			headers: {
 				"Set-Cookie": clearCookie,
-				Location: "/signin",
+				Location: "/signin/",
 			},
 			body: JSON.stringify({ message: "Successfully signed out" }),
 		};
 	} catch (error) {
 		return {
 			statusCode: 500,
-			body: JSON.stringify({ error: error.message }),
+			body: JSON.stringify({ error }),
 		};
 	}
 };
