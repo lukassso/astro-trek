@@ -7,9 +7,9 @@ import ContainerSection from "@/components/common/ContainerSection.astro";
 
 /* Check if the user is authenticated */
 const auth = getAuth(app);
-if (Astro.cookies.has("__session")) {
-	const sessionCookie = Astro.cookies.get("__session").value;
-	const decodedCookie = await auth.verifySessionCookie(sessionCookie);
+const sessionCookie = Astro.cookies.get("__session");
+if (sessionCookie) {
+	const decodedCookie = await auth.verifySessionCookie(sessionCookie.value);
 	if (decodedCookie) {
 		return Astro.redirect("/dashboard/");
 	}
@@ -114,32 +114,4 @@ if (Astro.cookies.has("__session")) {
 			console.error("Error signing in with email and password:", error);
 		}
 	});
-
-	// const form = document.getElementById("login-form") as HTMLFormElement;
-	// form.addEventListener("submit", async (e) => {
-	// 	const formData = new FormData(form);
-	// 	const email = formData.get("email")?.toString();
-	// 	const password = formData.get("password")?.toString();
-
-	// 	if (!email || !password) {
-	// 		return;
-	// 	}
-	// 	try {
-	// 		const userCredential = await signInWithEmailAndPassword(auth, email, password);
-	// 		const idToken = await userCredential.user.getIdToken();
-	// 		const response = await fetch("/api/auth/signin", {
-	// 			method: "POST",
-	// 			headers: {
-	// 				"Content-Type": "application/json",
-	// 				Authorization: `Bearer ${idToken}`,
-	// 			},
-	// 		});
-
-	// 		if (response.redirected) {
-	// 			window.location.assign(response.url);
-	// 		}
-	// 	} catch (error) {
-	// 		console.error("Error signing in with email and password:", error);
-	// 	}
-	// });
 </script>
