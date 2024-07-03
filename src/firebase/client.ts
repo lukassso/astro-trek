@@ -1,17 +1,31 @@
 import { initializeApp } from "firebase/app";
 
-if (!process.env.VITE_FIREBASE_API_KEY) {
-	throw new Error("Missing VITE_FIREBASE_API_KEY");
+function getEnvVariable(key: string) {
+	const isProduction = process.env.NODE_ENV === "production";
+
+	if (isProduction) {
+		const prodKey = `VITE_${key}`;
+		if (!process.env[prodKey]) {
+			throw new Error(`Missing environment variable: ${prodKey}`);
+		}
+		return process.env[prodKey];
+	} else {
+		const devKey = `PUBLIC_${key}`;
+		if (!import.meta.env[devKey]) {
+			throw new Error(`Missing environment variable: ${devKey}`);
+		}
+		return import.meta.env[devKey];
+	}
 }
 
 const firebaseConfig = {
-	apiKey: process.env.VITE_FIREBASE_API_KEY,
-	authDomain: process.env.VITE_FIREBASE_AUTH_DOMAIN,
-	projectId: process.env.VITE_FIREBASE_PROJECT_ID,
-	storageBucket: process.env.VITE_FIREBASE_STORAGE_BUCKET,
-	messagingSenderId: process.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-	appId: process.env.VITE_FIREBASE_APP_ID,
-	measurementId: process.env.VITE_MEASUREMENT_ID,
+	apiKey: getEnvVariable("FIREBASE_API_KEY"),
+	authDomain: getEnvVariable("FIREBASE_AUTH_DOMAIN"),
+	projectId: getEnvVariable("FIREBASE_PROJECT_ID"),
+	storageBucket: getEnvVariable("FIREBASE_STORAGE_BUCKET"),
+	messagingSenderId: getEnvVariable("FIREBASE_MESSAGING_SENDER_ID"),
+	appId: getEnvVariable("FIREBASE_APP_ID"),
+	measurementId: getEnvVariable("MEASUREMENT_ID"),
 };
 
 export const app = initializeApp(firebaseConfig);

@@ -17,7 +17,7 @@ export const siteConfig: SiteConfig = {
 
 export const portfolioItems: PortfolioItem[] = [
 	{
-		title: "Bank Transaction",
+		title: "Bank Transactions",
 		description:
 			"An application for viewing bank transactions with options to add, delete, and search transactions.",
 		technologies: [
