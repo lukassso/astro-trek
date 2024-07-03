@@ -1,15 +1,12 @@
 ---
 import Layout from "../layouts/PageLayout.astro";
 import ContainerSection from "@/components/common/ContainerSection.astro";
+import DashboardComponent from "@/components/portfolio/firebase-auth/Dashboard.component";
 ---
 
 <Layout meta={{ title: "Dashboard" }}>
 	<ContainerSection>
-		<h1>Welcome</h1>
-		<p>We are happy to see you here</p>
-		<form action="/api/auth/signout">
-			<button type="submit">Sign out</button>
-		</form>
+		<DashboardComponent client:visible />
 	</ContainerSection>
 </Layout>
 <script>
