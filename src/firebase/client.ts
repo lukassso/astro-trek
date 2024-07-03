@@ -1,17 +1,25 @@
 import { initializeApp } from "firebase/app";
 
-if (!process.env.VITE_FIREBASE_API_KEY) {
-	throw new Error("Missing VITE_FIREBASE_API_KEY");
+const isNetlify = import.meta.env.MODE === 'production';
+
+const envPrefix = isNetlify ? 'VITE_' : 'PUBLIC_';
+
+function getEnvVariable(name: string) {
+    const variable = import.meta.env[`${envPrefix}${name}`];
+    if (!variable) {
+        throw new Error(`Missing environment variable: ${envPrefix}${name}`);
+    }
+    return variable;
 }
 
 const firebaseConfig = {
-	apiKey: process.env.VITE_FIREBASE_API_KEY,
-	authDomain: process.env.VITE_FIREBASE_AUTH_DOMAIN,
-	projectId: process.env.VITE_FIREBASE_PROJECT_ID,
-	storageBucket: process.env.VITE_FIREBASE_STORAGE_BUCKET,
-	messagingSenderId: process.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-	appId: process.env.VITE_FIREBASE_APP_ID,
-	measurementId: process.env.VITE_MEASUREMENT_ID,
+    apiKey: getEnvVariable('FIREBASE_API_KEY'),
+    authDomain: getEnvVariable('FIREBASE_AUTH_DOMAIN'),
+    projectId: getEnvVariable('FIREBASE_PROJECT_ID'),
+    storageBucket: getEnvVariable('FIREBASE_STORAGE_BUCKET'),
+    messagingSenderId: getEnvVariable('FIREBASE_MESSAGING_SENDER_ID'),
+    appId: getEnvVariable('FIREBASE_APP_ID'),
+    measurementId: getEnvVariable('MEASUREMENT_ID'),
 };
 
 export const app = initializeApp(firebaseConfig);

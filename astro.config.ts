@@ -13,7 +13,6 @@ dotenv.config();
 // https://astro.build/config
 export default defineConfig({
 	site: "https://zetkolek.netlify.app/",
-	trailingSlash: "always",
 	integrations: [
 		expressiveCode(expressiveCodeOptions),
 		icon({
