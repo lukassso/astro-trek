@@ -17,22 +17,32 @@ const SigninComponent = () => {
 						</p>
 					</div>
 					<div className="grid gap-4">
-						<div className="grid gap-2">
-							<Label htmlFor="email">Email</Label>
-							<Input id="email" type="email" placeholder="m@example.com" required />
-						</div>
-						<div className="grid gap-2">
-							<div className="flex items-center">
-								<Label htmlFor="password">Password</Label>
-								<a href="#" className="ml-auto inline-block text-sm underline">
-									Forgot your password?
-								</a>
+						<form id="login-form" action="/api/auth/signin" method="post">
+							<div className="grid gap-4">
+								<div className="grid gap-2">
+									<Label htmlFor="email">Email</Label>
+									<Input
+										id="email"
+										type="email"
+										placeholder="m@example.com"
+										required
+										className="dark:text-gray-950"
+									/>
+								</div>
+								<div className="grid gap-2">
+									<div className="flex items-center">
+										<Label htmlFor="password">Password</Label>
+										<a href="#" className="ml-auto inline-block text-sm underline">
+											Forgot your password?
+										</a>
+									</div>
+									<Input id="password" type="password" required className="dark:text-gray-950" />
+								</div>
+								<Button type="submit" className="w-full">
+									Login
+								</Button>
 							</div>
-							<Input id="password" type="password" required />
-						</div>
-						<Button type="submit" className="w-full">
-							Login
-						</Button>
+						</form>
 						{/* TODO: These button section is pushing the main layout container */}
 						<div className="flex items-center gap-2">
 							<Button id="google-signin-button" type="button" variant="outline" className="w-full">
