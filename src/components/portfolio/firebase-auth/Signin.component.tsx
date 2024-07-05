@@ -1,11 +1,116 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Github, Chrome } from "lucide-react";
 import placeholder from "@/assets/placeholder.svg";
+import {
+	getAuth,
+	inMemoryPersistence,
+	signInWithEmailAndPassword,
+	signInWithPopup,
+	GoogleAuthProvider,
+	GithubAuthProvider,
+	type AuthProvider,
+} from "firebase/auth";
+import { useEffect } from "react";
+import { app } from "@/firebase/client";
 
 const placeholderImage = placeholder.src;
+
+const schema = z.object({
+	email: z.string().email({ message: "Invalid email address" }),
+	password: z.string().min(6, { message: "Password must be at least 6 characters" }),
+});
+
+type Inputs = z.infer<typeof schema>;
+
 const SigninComponent = () => {
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<Inputs>({
+		resolver: zodResolver(schema),
+	});
+
+	const auth = getAuth(app);
+	auth.setPersistence(inMemoryPersistence);
+
+	const onSubmit: SubmitHandler<Inputs> = async (data) => {
+		try {
+			const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password);
+			const idToken = await userCredential.user.getIdToken();
+
+			const response = await fetch("/api/auth/signin", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ idToken }),
+			});
+
+			if (response.redirected) {
+				window.location.assign(response.url);
+			} else {
+				console.error("Failed to sign in");
+			}
+		} catch (error) {
+			console.error("Error signing in with email and password:", error);
+		}
+	};
+
+	const handleSignInWithPopup = async (provider: AuthProvider) => {
+		try {
+			const result = await signInWithPopup(auth, provider);
+			const user = result.user;
+			const idToken = await user.getIdToken();
+
+			const response = await fetch("/api/auth/signin", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ idToken }),
+			});
+
+			if (response.redirected) {
+				window.location.assign(response.url);
+			} else {
+				console.error("Failed to sign in");
+			}
+		} catch (error) {
+			console.error(`Error signing in with ${provider.providerId.split(".")[0]}:`, error);
+		}
+	};
+
+	useEffect(() => {
+		const googleButton = document.getElementById("google-signin-button");
+		const githubButton = document.getElementById("github-signin-button");
+
+		if (googleButton) {
+			googleButton.addEventListener("click", () => handleSignInWithPopup(new GoogleAuthProvider()));
+		}
+		if (githubButton) {
+			githubButton.addEventListener("click", () => handleSignInWithPopup(new GithubAuthProvider()));
+		}
+
+		return () => {
+			if (googleButton) {
+				googleButton.removeEventListener("click", () =>
+					handleSignInWithPopup(new GoogleAuthProvider()),
+				);
+			}
+			if (githubButton) {
+				githubButton.removeEventListener("click", () =>
+					handleSignInWithPopup(new GithubAuthProvider()),
+				);
+			}
+		};
+	}, []);
+
 	return (
 		<div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
 			<div className="flex items-center justify-center py-12">
@@ -17,17 +122,20 @@ const SigninComponent = () => {
 						</p>
 					</div>
 					<div className="grid gap-4">
-						<form id="login-form" action="/api/auth/signin" method="post">
+						<form onSubmit={handleSubmit(onSubmit)} id="login-form">
 							<div className="grid gap-4">
 								<div className="grid gap-2">
 									<Label htmlFor="email">Email</Label>
 									<Input
 										id="email"
-										type="email"
+										type="text"
 										placeholder="m@example.com"
-										required
 										className="dark:text-gray-950"
+										{...register("email")}
 									/>
+									{errors.email && (
+										<span className="text-sm text-red-500">{errors.email.message}</span>
+									)}
 								</div>
 								<div className="grid gap-2">
 									<div className="flex items-center">
@@ -36,14 +144,21 @@ const SigninComponent = () => {
 											Forgot your password?
 										</a>
 									</div>
-									<Input id="password" type="password" required className="dark:text-gray-950" />
+									<Input
+										id="password"
+										type="password"
+										className="dark:text-gray-950"
+										{...register("password")}
+									/>
+									{errors.password && (
+										<span className="text-sm text-red-500">{errors.password.message}</span>
+									)}
 								</div>
 								<Button type="submit" className="w-full">
 									Login
 								</Button>
 							</div>
 						</form>
-						{/* TODO: These button section is pushing the main layout container */}
 						<div className="flex items-center gap-2">
 							<Button id="google-signin-button" type="button" variant="outline" className="w-full">
 								<Chrome className="mr-2 h-4 w-4" />
