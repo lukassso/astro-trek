@@ -4,6 +4,7 @@ import { getAuth } from "firebase-admin/auth";
 import Layout from "../layouts/PageLayout.astro";
 import SigninComponent from "@/components/portfolio/firebase-auth/Signin.component";
 import ContainerSection from "@/components/common/ContainerSection.astro";
+import HeaderFirebaseAuth from "@/components/portfolio/firebase-auth/HeaderFirebaseAuth.astro";
 
 /* Check if the user is authenticated */
 const auth = getAuth(app);
@@ -18,6 +19,7 @@ if (sessionCookie) {
 
 <Layout meta={{ title: "Signin" }}>
 	<ContainerSection>
+		<HeaderFirebaseAuth />
 		<SigninComponent client:visible />
 	</ContainerSection>
 </Layout>

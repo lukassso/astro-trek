@@ -2,10 +2,12 @@
 import Layout from "../layouts/PageLayout.astro";
 import ContainerSection from "@/components/common/ContainerSection.astro";
 import DashboardComponent from "@/components/portfolio/firebase-auth/Dashboard.component";
+import HeaderFirebaseAuth from "@/components/portfolio/firebase-auth/HeaderFirebaseAuth.astro";
 ---
 
 <Layout meta={{ title: "Dashboard" }}>
 	<ContainerSection>
+		<HeaderFirebaseAuth />
 		<DashboardComponent client:visible />
 	</ContainerSection>
 </Layout>
