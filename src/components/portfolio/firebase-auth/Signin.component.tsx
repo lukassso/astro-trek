@@ -15,7 +15,7 @@ import {
 	GithubAuthProvider,
 	type AuthProvider,
 } from "firebase/auth";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { app } from "@/firebase/client";
 
 const placeholderImage = placeholder.src;
@@ -39,9 +39,12 @@ const SigninComponent = () => {
 	const auth = getAuth(app);
 	auth.setPersistence(inMemoryPersistence);
 
-	const onSubmit: SubmitHandler<Inputs> = async (data) => {
+	const googleButtonRef = useRef<HTMLButtonElement>(null);
+	const githubButtonRef = useRef<HTMLButtonElement>(null);
+
+	const handleSignIn = async (getCredential: () => Promise<any>) => {
 		try {
-			const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password);
+			const userCredential = await getCredential();
 			const idToken = await userCredential.user.getIdToken();
 
 			const response = await fetch("/api/auth/signin", {
@@ -58,56 +61,29 @@ const SigninComponent = () => {
 				console.error("Failed to sign in");
 			}
 		} catch (error) {
-			console.error("Error signing in with email and password:", error);
+			console.error("Error signing in:", error);
 		}
 	};
 
-	const handleSignInWithPopup = async (provider: AuthProvider) => {
-		try {
-			const result = await signInWithPopup(auth, provider);
-			const user = result.user;
-			const idToken = await user.getIdToken();
+	const handleEmailSignIn: SubmitHandler<Inputs> = (data) =>
+		handleSignIn(() => signInWithEmailAndPassword(auth, data.email, data.password));
 
-			const response = await fetch("/api/auth/signin", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({ idToken }),
-			});
-
-			if (response.redirected) {
-				window.location.assign(response.url);
-			} else {
-				console.error("Failed to sign in");
-			}
-		} catch (error) {
-			console.error(`Error signing in with ${provider.providerId.split(".")[0]}:`, error);
-		}
-	};
+	const handleSignInWithPopup = (provider: AuthProvider) =>
+		handleSignIn(() => signInWithPopup(auth, provider));
 
 	useEffect(() => {
-		const googleButton = document.getElementById("google-signin-button");
-		const githubButton = document.getElementById("github-signin-button");
+		const googleButton = googleButtonRef.current;
+		const githubButton = githubButtonRef.current;
 
-		if (googleButton) {
-			googleButton.addEventListener("click", () => handleSignInWithPopup(new GoogleAuthProvider()));
-		}
-		if (githubButton) {
-			githubButton.addEventListener("click", () => handleSignInWithPopup(new GithubAuthProvider()));
-		}
+		const handleGoogleClick = () => handleSignInWithPopup(new GoogleAuthProvider());
+		const handleGithubClick = () => handleSignInWithPopup(new GithubAuthProvider());
+
+		googleButton?.addEventListener("click", handleGoogleClick);
+		githubButton?.addEventListener("click", handleGithubClick);
 
 		return () => {
-			if (googleButton) {
-				googleButton.removeEventListener("click", () =>
-					handleSignInWithPopup(new GoogleAuthProvider()),
-				);
-			}
-			if (githubButton) {
-				githubButton.removeEventListener("click", () =>
-					handleSignInWithPopup(new GithubAuthProvider()),
-				);
-			}
+			googleButton?.removeEventListener("click", handleGithubClick);
+			githubButton?.removeEventListener("click", handleGithubClick);
 		};
 	}, []);
 
@@ -122,7 +98,7 @@ const SigninComponent = () => {
 						</p>
 					</div>
 					<div className="grid gap-4">
-						<form onSubmit={handleSubmit(onSubmit)} id="login-form">
+						<form onSubmit={handleSubmit(handleEmailSignIn)}>
 							<div className="grid gap-4">
 								<div className="grid gap-2">
 									<Label htmlFor="email">Email</Label>
@@ -160,11 +136,11 @@ const SigninComponent = () => {
 							</div>
 						</form>
 						<div className="flex items-center gap-2">
-							<Button id="google-signin-button" type="button" variant="outline" className="w-full">
+							<Button ref={googleButtonRef} type="button" variant="outline" className="w-full">
 								<Chrome className="mr-2 h-4 w-4" />
 								Login with Google
 							</Button>
-							<Button id="github-signin-button" type="button" variant="outline" className="w-full">
+							<Button ref={githubButtonRef} type="button" variant="outline" className="w-full">
 								<Github className="mr-2 h-4 w-4" />
 								Login with Github
 							</Button>
