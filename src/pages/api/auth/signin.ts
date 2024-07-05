@@ -24,7 +24,7 @@ export const POST: APIRoute = async ({ request, cookies, redirect }) => {
 			path: "/",
 		});
 
-		return redirect("/dashboard");
+		return redirect("/firebase-auth/dashboard");
 	} catch (error) {
 		console.error("Error during sign-in:", error);
 		return new Response("Something went wrong", { status: 500 });

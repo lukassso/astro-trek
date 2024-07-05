@@ -8,7 +8,7 @@ const handler: Handler = async () => {
 			statusCode: 302,
 			headers: {
 				"Set-Cookie": clearCookie,
-				Location: "/signin/",
+				Location: "/firebase-auth/signin/",
 			},
 			body: JSON.stringify({ message: "Successfully signed out" }),
 		};

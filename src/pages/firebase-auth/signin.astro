@@ -1,7 +1,7 @@
 ---
-import { app } from "../firebase/server";
+import { app } from "../../firebase/server";
 import { getAuth } from "firebase-admin/auth";
-import Layout from "../layouts/PageLayout.astro";
+import Layout from "../../layouts/PageLayout.astro";
 import SigninComponent from "@/components/portfolio/firebase-auth/Signin.component";
 import ContainerSection from "@/components/common/ContainerSection.astro";
 import HeaderFirebaseAuth from "@/components/portfolio/firebase-auth/HeaderFirebaseAuth.astro";
@@ -12,7 +12,7 @@ const sessionCookie = Astro.cookies.get("__session");
 if (sessionCookie) {
 	const decodedCookie = await auth.verifySessionCookie(sessionCookie.value);
 	if (decodedCookie) {
-		return Astro.redirect("/dashboard/");
+		return Astro.redirect("/firebase-auth/dashboard/");
 	}
 }
 ---

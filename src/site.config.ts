@@ -74,7 +74,13 @@ export const portfolioItems: PortfolioItem[] = [
 		imageUrl: "assets/images/portfolio-svg-anime.png",
 		path: "/svg-anime-universe",
 	},
-
+	{
+		title: "Firebase Auth",
+		description: "Homepage view of an authentication service with Firebase.",
+		technologies: ["Firebase API", "Rest API", "React Hook Form", "Zod validation", "Astro Router"],
+		imageUrl: "assets/images/portfolio-firebase-auth.png",
+		path: "/firebase-auth/signin",
+	},
 	{
 		title: "Hacker News",
 		description: "A minimalist Hacker News client that facilitates access to technological news.",

@@ -65,7 +65,7 @@ const PasswordResetComponent = () => {
 				</Card>
 			</div>
 			<div className="flex items-center justify-center pb-12">
-				<a type="button" className="mt-4 w-full text-center" href="/signin">
+				<a type="button" className="mt-4 w-full text-center" href="/firebase-auth/signin">
 					<Button type="button" className="mt-4 max-w-sm">
 						<ArrowLeft className="mr-2 h-4 w-4" />
 						Back to Sign In

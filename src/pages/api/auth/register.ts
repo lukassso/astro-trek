@@ -23,5 +23,5 @@ export const POST: APIRoute = async ({ request, redirect }) => {
 		return new Response("Something went wrong", { status: 400 });
 	}
 
-	return redirect("/signin");
+	return redirect("/firebase-auth/signin");
 };

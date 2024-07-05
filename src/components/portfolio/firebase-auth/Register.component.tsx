@@ -35,7 +35,7 @@ const RegisterComponent = () => {
 				body: JSON.stringify(data),
 			});
 			if (response.ok) {
-				window.location.href = "/signin";
+				window.location.href = "/firebase-auth/signin";
 			} else {
 				console.error("Failed to register");
 			}
@@ -103,7 +103,7 @@ const RegisterComponent = () => {
 
 					<div className="mt-4 text-center text-sm">
 						Already have an account?{" "}
-						<a href="/signin" className="underline">
+						<a href="/firebase-auth/signin" className="underline">
 							Sign in
 						</a>
 					</div>

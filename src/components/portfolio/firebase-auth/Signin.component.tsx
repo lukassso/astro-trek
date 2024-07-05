@@ -116,7 +116,10 @@ const SigninComponent = () => {
 								<div className="grid gap-2">
 									<div className="flex items-center">
 										<Label htmlFor="password">Password</Label>
-										<a href="/password-reset" className="ml-auto inline-block text-sm underline">
+										<a
+											href="/firebase-auth/password-reset"
+											className="ml-auto inline-block text-sm underline"
+										>
 											Forgot your password?
 										</a>
 									</div>
@@ -148,7 +151,7 @@ const SigninComponent = () => {
 					</div>
 					<div className="mt-4 text-center text-sm">
 						Don&apos;t have an account?{" "}
-						<a href="/register" className="underline">
+						<a href="/firebase-auth/register" className="underline">
 							Sign up
 						</a>
 					</div>
