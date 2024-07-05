@@ -40,7 +40,7 @@ const handler: Handler = async (event) => {
 		return {
 			statusCode: 302,
 			headers: {
-				Location: "/signin/",
+				Location: "/firebase-auth/signin/",
 			},
 			body: JSON.stringify({ uid: userRecord.uid }),
 		};

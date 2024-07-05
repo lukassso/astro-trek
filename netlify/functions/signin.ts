@@ -35,7 +35,7 @@ const handler: Handler = async (event) => {
 			statusCode: 302,
 			headers: {
 				"Set-Cookie": setCookieHeader,
-				Location: "/dashboard/",
+				Location: "/firebase-auth/dashboard/",
 			},
 			body: JSON.stringify({ message: "Successfully signed in" }),
 		};

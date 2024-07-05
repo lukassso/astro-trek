@@ -2,31 +2,31 @@ import type { APIRoute } from "astro";
 import { app } from "../../../firebase/server";
 import { getAuth } from "firebase-admin/auth";
 
-export const GET: APIRoute = async ({ request, cookies, redirect }) => {
+export const POST: APIRoute = async ({ request, cookies, redirect }) => {
 	const auth = getAuth(app);
+  const { idToken } = await request.json();
 
-	/* Get token from request headers */
-	const idToken = request.headers.get("Authorization")?.split("Bearer ")[1];
-	if (!idToken) {
-		return new Response("No token found", { status: 401 });
-	}
-
-	/* Verify id token */
 	try {
-		await auth.verifyIdToken(idToken);
+		if (!idToken) {
+			return new Response("Missing idToken", { status: 400 });
+		}
+
+		const decodedToken = await auth.verifyIdToken(idToken);
+		if (!decodedToken) {
+			return new Response("Invalid token", { status: 401 });
+		}
+
+		const sessionCookie = await auth.createSessionCookie(idToken, {
+			expiresIn: 60 * 60 * 24 * 5 * 1000,
+		});
+
+		cookies.set("__session", sessionCookie, {
+			path: "/",
+		});
+
+		return redirect("/firebase-auth/dashboard");
 	} catch (error) {
-		return new Response("Invalid token", { status: 401 });
+		console.error("Error during sign-in:", error);
+		return new Response("Something went wrong", { status: 500 });
 	}
-
-	/* Create and set session cookie */
-	const fiveDays = 60 * 60 * 24 * 5 * 1000;
-	const sessionCookie = await auth.createSessionCookie(idToken, {
-		expiresIn: fiveDays,
-	});
-
-	cookies.set("__session", sessionCookie, {
-		path: "/",
-	});
-
-	return redirect("/dashboard");
 };
