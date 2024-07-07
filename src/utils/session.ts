@@ -5,6 +5,6 @@ export function checkSession() {
 		?.split("=")[1];
 
 	if (!sessionCookie) {
-		window.location.href = "/signin/";
+		window.location.href = "/dashboard/signin/";
 	}
 }
