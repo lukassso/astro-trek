@@ -24,7 +24,7 @@ export class DetectionModel {
 
 	async getDetections(model: tf.GraphModel, tensor: tf.Tensor): Promise<Detections> {
 		const results = (await model.executeAsync(tensor)) as tf.Tensor[];
-		const prominentDetection = tf.topk(results[0] as tf.Tensor);
+		const prominentDetection = tf.topk(results[0]);
 		const justBoxes = results[1].squeeze() as tf.Tensor;
 		const justValues = prominentDetection.values.squeeze() as tf.Tensor;
 
@@ -48,13 +48,11 @@ export class DetectionModel {
 		tf.dispose([
 			results[0],
 			results[1],
-			nmsDetections.selectedIndices,
-			nmsDetections.selectedScores,
 			prominentDetection.indices,
 			prominentDetection.values,
-			tensor,
 			justBoxes,
 			justValues,
+			tensor,
 		]);
 
 		return { chosen, maxIndices, scores, boxes };
@@ -111,6 +109,7 @@ export class DetectionModel {
 						webcamRef.current.video.videoWidth,
 					);
 				}
+				tensor.dispose();
 			}
 		}
 		requestAnimationFrame(() => this.detect(model, webcamRef, canvasRef));
