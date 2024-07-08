@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useCallback, useState } from "react";
 import Webcam from "react-webcam";
+import { DetectionModel } from "@/features/webcam-detection/model";
 
 const videoConstraints = {
 	width: 540,
@@ -8,33 +9,39 @@ const videoConstraints = {
 
 const Camera: React.FC = () => {
 	const webcamRef = useRef<Webcam>(null);
-	const [url, setUrl] = React.useState<string | null>(null);
+	const canvasRef = useRef<HTMLCanvasElement>(null);
+	const [url, setUrl] = useState<string | null>(null);
 
-	const capturePhoto = React.useCallback(() => {
+	const capturePhoto = useCallback(() => {
 		if (webcamRef.current) {
 			const imageSrc = webcamRef.current.getScreenshot();
 			setUrl(imageSrc);
 		}
 	}, [webcamRef]);
 
-	const onUserMedia = (e: any) => {
-		console.log(e);
-	};
+	useEffect(() => {
+		const model = new DetectionModel();
+		model.run(webcamRef, canvasRef);
+	}, []);
 
 	return (
 		<div className="flex min-h-screen flex-col items-center">
 			<div className="relative rounded-xl border-2 border-gray-300 p-4">
 				<Webcam
 					ref={webcamRef}
-					audio={false}
-					screenshotFormat="image/jpeg"
+					className="webcam-detection rounded-xl"
 					videoConstraints={videoConstraints}
-					onUserMedia={onUserMedia}
-					className="rounded-xl"
+				/>
+				<canvas
+					ref={canvasRef}
+					className="canvas-detection z-1 border-1 absolute left-4 top-4 rounded-xl"
 				/>
 			</div>
 			<div className="mt-4 flex flex-col items-center">
-				<button onClick={capturePhoto} className="mt-2 rounded-lg bg-blue-500 px-4 py-2 text-white">
+				<button
+					onClick={capturePhoto}
+					className="z-20 mt-2 rounded-lg bg-blue-500 px-4 py-2 text-white"
+				>
 					Capture
 				</button>
 				<button
