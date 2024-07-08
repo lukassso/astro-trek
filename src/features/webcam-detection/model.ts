@@ -11,11 +11,12 @@ export class DetectionModel {
 			return await tf.loadGraphModel(modelPath, { fromTFHub: true });
 		} catch (e) {
 			console.error("Error loading model", e);
+			throw e;
 		}
 	}
 
 	getWebcamTensor(webcamRef: WebcamRef): tf.Tensor | null {
-		if (webcamRef.current && webcamRef.current.video) {
+		if (webcamRef.current?.video) {
 			const video = webcamRef.current.video;
 			return tf.expandDims(tf.browser.fromPixels(video), 0);
 		}
@@ -96,7 +97,7 @@ export class DetectionModel {
 	}
 
 	async detect(model: tf.GraphModel, webcamRef: WebcamRef, canvasRef: CanvasRef): Promise<void> {
-		if (webcamRef.current && webcamRef.current.video && webcamRef.current.video.readyState === 4) {
+		if (webcamRef.current?.video?.readyState === 4) {
 			const tensor = this.getWebcamTensor(webcamRef);
 			if (tensor) {
 				const detections = await this.getDetections(model, tensor);
@@ -116,7 +117,7 @@ export class DetectionModel {
 	}
 
 	adjustCanvasSize(webcamRef: WebcamRef, canvasRef: CanvasRef): void {
-		if (webcamRef.current && webcamRef.current.video && canvasRef.current) {
+		if (webcamRef.current?.video && canvasRef.current) {
 			const video = webcamRef.current.video;
 			const canvas = canvasRef.current;
 			const aspectRatio = video.videoWidth / video.videoHeight;
@@ -151,6 +152,7 @@ export class DetectionModel {
 			}
 		} catch (e) {
 			console.error(e);
+			throw e;
 		}
 	}
 }

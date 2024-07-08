@@ -17,6 +17,13 @@ export const siteConfig: SiteConfig = {
 
 export const portfolioItems: PortfolioItem[] = [
 	{
+		title: "Webcam Detection",
+		description: "A real-time image object detection application using your webcam.",
+		technologies: ["React", "Typescript", "react-webcam", "Coco-ssd", "Tensorflow.js"],
+		imageUrl: "assets/images/portfolio-webcam-detection.png",
+		path: "/webcam-detection",
+	},
+	{
 		title: "Bank Transactions",
 		description:
 			"An application for viewing bank transactions with options to add, delete, and search transactions.",

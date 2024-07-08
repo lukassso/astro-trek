@@ -3,7 +3,6 @@ import PageLayout from "@/layouts/PageLayout.astro";
 import ContainerSection from "@/components/common/ContainerSection.astro";
 import WebcamDetectionComponent from "@/components/portfolio/webcam-detection";
 import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
-import type mod from "astro/zod";
 ---
 
 <PageLayout meta={{ title: "Webcam Detection App" }}>
@@ -11,7 +10,7 @@ import type mod from "astro/zod";
 		<HeaderPortfolio
 			client:visible
 			title={"Webcam Detection"}
-			description={"Image object detection in webcam"}
+			description={"A real-time image object detection application using your webcam. This project leverages the power of TensorFlow.js to detect and identify objects in your webcam feed."}
 			chipsList={["React", "Typescript", "react-webcam", "Coco-ssd", "Tensorflow.js"]}
 		/>
 		<WebcamDetectionComponent client:visible />
