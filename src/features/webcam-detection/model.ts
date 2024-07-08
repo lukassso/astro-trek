@@ -14,8 +14,8 @@ export class DetectionModel {
 		}
 	}
 
-	getWebcamTensor(webcamRef: WebcamRef): tf.Tensor<tf.Rank> | null {
-		if (webcamRef.current) {
+	getWebcamTensor(webcamRef: WebcamRef): tf.Tensor | null {
+		if (webcamRef.current && webcamRef.current.video) {
 			const video = webcamRef.current.video;
 			return tf.expandDims(tf.browser.fromPixels(video), 0);
 		}
@@ -98,7 +98,7 @@ export class DetectionModel {
 	}
 
 	async detect(model: tf.GraphModel, webcamRef: WebcamRef, canvasRef: CanvasRef): Promise<void> {
-		if (webcamRef.current && webcamRef.current.video.readyState === 4) {
+		if (webcamRef.current && webcamRef.current.video && webcamRef.current.video.readyState === 4) {
 			const tensor = this.getWebcamTensor(webcamRef);
 			if (tensor) {
 				const detections = await this.getDetections(model, tensor);
@@ -117,11 +117,28 @@ export class DetectionModel {
 	}
 
 	adjustCanvasSize(webcamRef: WebcamRef, canvasRef: CanvasRef): void {
-		if (webcamRef.current && canvasRef.current) {
+		if (webcamRef.current && webcamRef.current.video && canvasRef.current) {
 			const video = webcamRef.current.video;
 			const canvas = canvasRef.current;
+			const aspectRatio = video.videoWidth / video.videoHeight;
 			canvas.width = video.videoWidth;
 			canvas.height = video.videoHeight;
+
+			const maxWidth = window.innerWidth * 0.9;
+			const maxHeight = window.innerHeight * 0.9;
+
+			if (video.videoWidth > maxWidth || video.videoHeight > maxHeight) {
+				if (maxWidth / aspectRatio <= maxHeight) {
+					canvas.style.width = `${maxWidth}px`;
+					canvas.style.height = `${maxWidth / aspectRatio}px`;
+				} else {
+					canvas.style.width = `${maxHeight * aspectRatio}px`;
+					canvas.style.height = `${maxHeight}px`;
+				}
+			} else {
+				canvas.style.width = `${video.videoWidth}px`;
+				canvas.style.height = `${video.videoHeight}px`;
+			}
 		}
 	}
 
