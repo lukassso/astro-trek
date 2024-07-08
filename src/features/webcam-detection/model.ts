@@ -91,7 +91,7 @@ export class DetectionModel {
 			const textWidth = ctx.measureText(label).width;
 			ctx.fillRect(startX - 2, startY - textHeight, textWidth + textPad, textHeight + textPad);
 
-			ctx.fillStyle = "#fff";
+			ctx.fillStyle = "#d70000";
 			ctx.fillText(label, startX, startY - textPad);
 		});
 	}
