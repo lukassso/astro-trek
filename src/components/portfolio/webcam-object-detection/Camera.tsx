@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useCallback, useState } from "react";
 import Webcam from "react-webcam";
-import { DetectionModel } from "@/features/webcam-detection/model";
+import { DetectionModel } from "@/features/webcam-object-detection/model";
 
 const videoConstraints = {
 	width: 540,
