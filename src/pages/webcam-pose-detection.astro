@@ -1,7 +1,7 @@
 ---
 import PageLayout from "@/layouts/PageLayout.astro";
 import ContainerSection from "@/components/common/ContainerSection.astro";
-import WebcamPoseDetectionComponent from "@/components/portfolio/webcam-object-detection";
+import WebcamPoseDetectionComponent from "@/components/portfolio/webcam-pose-detection";
 import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
 ---
 
@@ -9,7 +9,7 @@ import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
 	<ContainerSection maxWidth="max-w-2xl">
 		<HeaderPortfolio
 			client:visible
-			title={"Webcam Detection"}
+			title={"Webcam Pose Detection"}
 			description={"A real-time image object detection application using your webcam. This project leverages the power of TensorFlow.js to detect and identify objects in your webcam feed."}
 			chipsList={["React", "Typescript", "react-webcam", "Coco-ssd", "Tensorflow.js"]}
 		/>
