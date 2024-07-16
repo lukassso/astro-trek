@@ -31,7 +31,21 @@ export default defineConfig({
 		edgeMiddleware: true,
 	}),
 	vite: {
+		optimizeDeps: {
+			include: ["isomorphic-fetch", "@tensorflow/tfjs", "@tensorflow-models/posenet"],
+		},
+		build: {
+			commonjsOptions: {
+				include: [/@tensorflow/, /node_modules/],
+			},
+		},
+		resolve: {
+			alias: {
+				"node-fetch": "isomorphic-fetch",
+			},
+		},
 		define: {
+			global: "globalThis",
 			"process.env.PUBLIC_MOVIE_API_KEY": JSON.stringify(process.env.PUBLIC_MOVIE_API_KEY),
 			"process.env.MOVIE_API_KEY": JSON.stringify(process.env.MOVIE_API_KEY),
 			"process.env.PUBLIC_OPENAI_API_KEY": JSON.stringify(process.env.PUBLIC_OPENAI_API_KEY),
