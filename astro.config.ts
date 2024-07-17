@@ -32,12 +32,7 @@ export default defineConfig({
 	}),
 	vite: {
 		optimizeDeps: {
-			include: ["isomorphic-fetch", "@tensorflow/tfjs", "@tensorflow-models/posenet"],
-		},
-		build: {
-			commonjsOptions: {
-				include: [/@tensorflow/, /node_modules/],
-			},
+			include: ["isomorphic-fetch"],
 		},
 		resolve: {
 			alias: {

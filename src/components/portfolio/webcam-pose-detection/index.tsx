@@ -1,170 +1,159 @@
 import React, { useRef, useEffect, useState } from "react";
-import Webcam from "react-webcam";
 import * as posenet from "@tensorflow-models/posenet";
 import * as tf from "@tensorflow/tfjs";
 
 const videoConstraints = {
-  width: 640,
-  height: 480,
-  facingMode: "user",
+	width: 640,
+	height: 480,
+	facingMode: "user",
 };
 
-const drawKeypoints = (keypoints: posenet.Keypoint[], minConfidence: number, ctx: CanvasRenderingContext2D): void => {
-  keypoints.forEach((keypoint) => {
-    if (keypoint.score >= minConfidence) {
-      const { y, x } = keypoint.position;
-      ctx.beginPath();
-      ctx.arc(x, y, 5, 0, 2 * Math.PI);
-      ctx.fillStyle = "red";
-      ctx.fill();
-    }
-  });
-};
+class PoseDetectionModel {
+	net: posenet.PoseNet | null = null;
 
-const drawSkeleton = (keypoints: posenet.Keypoint[], minConfidence: number, ctx: CanvasRenderingContext2D): void => {
-  const adjacentKeyPoints = posenet.getAdjacentKeyPoints(keypoints, minConfidence);
+	async loadModel() {
+		await tf.ready();
+		await tf.setBackend("webgl");
+		this.net = await posenet.load({
+			inputResolution: { width: 640, height: 480 },
+			scale: 0.5,
+		});
+		console.log("PoseNet model loaded successfully");
+	}
 
-  adjacentKeyPoints.forEach((keypoints) => {
-    const [p1, p2] = keypoints;
-    ctx.beginPath();
-    ctx.moveTo(p1.position.x, p1.position.y);
-    ctx.lineTo(p2.position.x, p2.position.y);
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = "aqua";
-    ctx.stroke();
-  });
-};
+	async detectPose(video: HTMLVideoElement, canvas: HTMLCanvasElement) {
+		if (!this.net) return;
 
-const getWebcamTensor = (webcamRef: React.RefObject<Webcam>): tf.Tensor | null => {
-  if (webcamRef.current?.video) {
-    const video = webcamRef.current.video;
-    return tf.expandDims(tf.browser.fromPixels(video), 0);
-  }
-  return null;
-};
+		const pose = await this.net.estimateSinglePose(video);
+		const ctx = canvas.getContext("2d");
+		if (ctx) {
+			const videoWidth = video.videoWidth;
+			const videoHeight = video.videoHeight;
+
+			canvas.width = videoWidth;
+			canvas.height = videoHeight;
+			ctx.clearRect(0, 0, videoWidth, videoHeight);
+
+			this.drawKeypoints(pose.keypoints, 0.2, ctx);
+			this.drawSkeleton(pose.keypoints, 0.2, ctx);
+		} else {
+			console.error("Unable to get canvas context");
+		}
+	}
+
+	drawKeypoints(
+		keypoints: posenet.Keypoint[],
+		minConfidence: number,
+		ctx: CanvasRenderingContext2D,
+	) {
+		keypoints.forEach((keypoint) => {
+			if (keypoint.score >= minConfidence) {
+				const { y, x } = keypoint.position;
+				if (x !== 0 && y !== 0) {
+					ctx.beginPath();
+					ctx.arc(x, y, 5, 0, 2 * Math.PI);
+					ctx.fillStyle = "red";
+					ctx.fill();
+					console.log(`Drawing keypoint at (${x}, ${y}) with confidence ${keypoint.score}`);
+				} else {
+					console.log(`Invalid keypoint position: (${x}, ${y})`);
+				}
+			}
+		});
+	}
+
+	drawSkeleton(
+		keypoints: posenet.Keypoint[],
+		minConfidence: number,
+		ctx: CanvasRenderingContext2D,
+	) {
+		const adjacentKeyPoints = posenet.getAdjacentKeyPoints(keypoints, minConfidence);
+
+		adjacentKeyPoints.forEach((keypoints) => {
+			const [p1, p2] = keypoints;
+			if (
+				p1.position.x !== 0 &&
+				p1.position.y !== 0 &&
+				p2.position.x !== 0 &&
+				p2.position.y !== 0
+			) {
+				ctx.beginPath();
+				ctx.moveTo(p1.position.x, p1.position.y);
+				ctx.lineTo(p2.position.x, p2.position.y);
+				ctx.lineWidth = 4;
+				ctx.strokeStyle = "aqua";
+				ctx.stroke();
+				console.log(
+					`Drawing skeleton from (${p1.position.x}, ${p1.position.y}) to (${p2.position.x}, ${p2.position.y})`,
+				);
+			} else {
+				console.log(
+					`Invalid skeleton position: (${p1.position.x}, ${p1.position.y}) to (${p2.position.x}, ${p2.position.y})`,
+				);
+			}
+		});
+	}
+
+	async run(
+		videoRef: React.RefObject<HTMLVideoElement>,
+		canvasRef: React.RefObject<HTMLCanvasElement>,
+	) {
+		if (!this.net) await this.loadModel();
+		const video = videoRef.current;
+		const canvas = canvasRef.current;
+
+		if (video && canvas) {
+			const detect = async () => {
+				if (video.readyState === 4) {
+					await this.detectPose(video, canvas);
+				}
+				requestAnimationFrame(detect);
+			};
+			detect();
+		}
+	}
+}
 
 const Camera: React.FC = () => {
-  const webcamRef = useRef<Webcam>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [net, setNet] = useState<posenet.PoseNet | null>(null);
+	const videoRef = useRef<HTMLVideoElement>(null);
+	const canvasRef = useRef<HTMLCanvasElement>(null);
+	const [model, setModel] = useState<PoseDetectionModel | null>(null);
 
-  const loadPosenetModel = async (): Promise<void> => {
-    try {
-      await tf.setBackend('webgl');
-      console.log("Using backend:", tf.getBackend());
-      const loadedNet = await posenet.load({
-        inputResolution: { width: 640, height: 480 },
-        scale: 0.5,
-      });
-      setNet(loadedNet);
-      console.log("PoseNet model loaded successfully");
-    } catch (error) {
-      console.error("Error loading PoseNet model:", error);
-    }
-  };
+	useEffect(() => {
+		const setupCamera = async () => {
+			if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+				const stream = await navigator.mediaDevices.getUserMedia({
+					video: videoConstraints,
+				});
+				if (videoRef.current) {
+					videoRef.current.srcObject = stream;
+					videoRef.current.play();
+				}
+			}
+		};
 
-  useEffect(() => {
-    loadPosenetModel();
-  }, []);
+		setupCamera();
+	}, [videoRef]);
 
-  const detect = async (): Promise<void> => {
-    if (
-      net &&
-      webcamRef.current &&
-      webcamRef.current.video &&
-      webcamRef.current.video.readyState === 4
-    ) {
-      const video = webcamRef.current.video;
-      const videoWidth = video.videoWidth;
-      const videoHeight = video.videoHeight;
+	useEffect(() => {
+		const newModel = new PoseDetectionModel();
+		// setModel(newModel);
+		newModel.run(videoRef, canvasRef);
+	}, []);
 
-      webcamRef.current.video.width = videoWidth;
-      webcamRef.current.video.height = videoHeight;
-
-      if (canvasRef.current) {
-        canvasRef.current.width = videoWidth;
-        canvasRef.current.height = videoHeight;
-      }
-
-      const webcamTensor = getWebcamTensor(webcamRef);
-
-      if (webcamTensor) {
-        try {
-          const pose = await net.estimateSinglePose(webcamTensor);
-          console.log("Pose detected:", pose);
-
-          const ctx = canvasRef.current?.getContext("2d");
-          if (ctx) {
-            ctx.clearRect(0, 0, videoWidth, videoHeight);
-
-            // Debugging: Draw a simple rectangle and text
-            ctx.fillStyle = 'rgba(0, 255, 0, 0.5)';
-            ctx.fillRect(10, 10, 100, 100);
-            ctx.fillStyle = 'black';
-            ctx.font = '20px Arial';
-            ctx.fillText('Debug Text', 10, 150);
-
-            // Drawing keypoints and skeleton
-            drawKeypoints(pose.keypoints, 0.5, ctx);
-            drawSkeleton(pose.keypoints, 0.5, ctx);
-          } else {
-            console.error("Unable to get canvas context");
-          }
-        } catch (error) {
-          console.error("Error during pose estimation:", error);
-        } finally {
-          tf.dispose(webcamTensor); // Dispose tensor to free up memory
-        }
-      }
-    }
-  };
-
-  useEffect(() => {
-    let animationFrameId: number;
-
-    const runPoseDetection = async () => {
-      await detect();
-      animationFrameId = requestAnimationFrame(runPoseDetection);
-    };
-
-    if (net) {
-      runPoseDetection();
-    }
-
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, [net]);
-
-  return (
-    <div className="flex min-h-screen flex-col items-center justify-center">
-      <div className="relative" style={{ width: '640px', height: '480px' }}>
-        <Webcam
-          ref={webcamRef}
-          audio={false}
-          videoConstraints={videoConstraints}
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-          }}
-        />
-        <canvas
-          ref={canvasRef}
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-          }}
-        />
-      </div>
-    </div>
-  );
+	return (
+		<div className="flex min-h-screen flex-col items-center">
+			<div className="relative rounded-xl border-2 border-gray-300 p-4 ">
+				<video
+					ref={videoRef}
+					className="left-0 top-0 z-10 rounded-xl"
+					width={videoConstraints.width}
+					height={videoConstraints.height}
+				/>
+				<canvas ref={canvasRef} className="border-1 absolute left-0 top-0 z-20 rounded-xl" />
+			</div>
+		</div>
+	);
 };
 
 export default Camera;
