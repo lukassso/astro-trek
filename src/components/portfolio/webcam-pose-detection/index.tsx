@@ -1,4 +1,4 @@
-import React, { useRef, useEffect} from "react";
+import React, { useRef, useEffect } from "react";
 import { PoseDetectionModel } from "@/features/webcam-pose-detection/model";
 
 const videoConstraints = {
@@ -33,14 +33,19 @@ const Camera: React.FC = () => {
 
 	return (
 		<div className="flex min-h-screen flex-col items-center">
-			<div className="relative rounded-xl border-2 border-gray-300 p-4 ">
+			<div className="aspect-ratio-box relative h-full max-h-full w-full max-w-full">
 				<video
 					ref={videoRef}
-					className="left-0 top-0 z-10 rounded-xl"
+					className="absolute left-0 top-0 h-full w-full rounded-xl object-contain"
 					width={videoConstraints.width}
 					height={videoConstraints.height}
 				/>
-				<canvas ref={canvasRef} className="border-1 absolute left-0 top-0 z-20 rounded-xl" />
+				<canvas
+					ref={canvasRef}
+					className="absolute left-0 top-0 h-full w-full rounded-xl"
+					width={videoConstraints.width}
+					height={videoConstraints.height}
+				/>
 			</div>
 		</div>
 	);

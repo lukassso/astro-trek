@@ -20,6 +20,7 @@ export class PoseDetectionModel {
 			const videoWidth = video.videoWidth;
 			const videoHeight = video.videoHeight;
 
+			// Set canvas dimensions to match video dimensions
 			canvas.width = videoWidth;
 			canvas.height = videoHeight;
 			ctx.clearRect(0, 0, videoWidth, videoHeight);
