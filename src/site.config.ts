@@ -24,6 +24,13 @@ export const portfolioItems: PortfolioItem[] = [
 		path: "/webcam-object-detection",
 	},
 	{
+		title: "Pose Detection",
+		description: "A real-time image pose detection application using your webcam.",
+		technologies: ["React", "Typescript", "Tensorflow.js"],
+		imageUrl: "assets/images/portfolio-webcam-detection.png",
+		path: "/webcam-pose-detection",
+	},
+	{
 		title: "Bank Transactions",
 		description:
 			"An application for viewing bank transactions with options to add, delete, and search transactions.",
