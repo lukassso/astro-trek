@@ -1,6 +1,7 @@
 import * as poseDetection from "@tensorflow-models/pose-detection";
 import * as tf from "@tensorflow/tfjs";
 import "core-js/stable";
+import Webcam from "react-webcam";
 
 export class PoseDetectionModel {
 	detector: poseDetection.PoseDetector | null = null;
@@ -18,16 +19,23 @@ export class PoseDetectionModel {
 		const ctx = canvas.getContext("2d");
 		if (ctx && poses.length > 0) {
 			const pose = poses[0];
+
+			// Get original video dimensions
 			const videoWidth = video.videoWidth;
 			const videoHeight = video.videoHeight;
 
-			// Set canvas dimensions to match video dimensions
-			canvas.width = videoWidth;
-			canvas.height = videoHeight;
-			ctx.clearRect(0, 0, videoWidth, videoHeight);
+			// Get new canvas dimensions
+			const canvasWidth = canvas.width;
+			const canvasHeight = canvas.height;
 
-			this.drawKeypoints(pose.keypoints, 0.2, ctx);
-			this.drawSkeleton(pose.keypoints, 0.2, ctx);
+			// Calculate scale factors
+			const scaleX = canvasWidth / videoWidth;
+			const scaleY = canvasHeight / videoHeight;
+
+			ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+			this.drawKeypoints(pose.keypoints, 0.2, ctx, scaleX, scaleY);
+			this.drawSkeleton(pose.keypoints, 0.2, ctx, scaleX, scaleY);
 		} else {
 			console.error("Unable to get canvas context or no poses detected");
 		}
@@ -37,35 +45,35 @@ export class PoseDetectionModel {
 		keypoints: poseDetection.Keypoint[],
 		minConfidence: number,
 		ctx: CanvasRenderingContext2D,
+		scaleX: number,
+		scaleY: number,
 	) {
 		keypoints.forEach((keypoint, index) => {
 			const score = keypoint.score ?? 0;
 			if (score >= minConfidence) {
 				const { y, x } = keypoint;
 				ctx.beginPath();
-				ctx.arc(x, y, 5, 0, 2 * Math.PI);
+				ctx.arc(x * scaleX, y * scaleY, 5, 0, 2 * Math.PI);
 				// Assign colors based on keypoint index for specific points
-				ctx.arc(x, y, 5, 0, 2 * Math.PI);
-				// Assign colors based on keypoint index for specific points
-				if (index === 0) {
-					ctx.fillStyle = "green"; // Green color for nose
-				} else if (index === 1 || index === 2) {
-					ctx.fillStyle = "yellow"; // Yellow color for eyes
-				} else if (index === 3 || index === 4) {
-					ctx.fillStyle = "red"; // Red color for ears
-				} else {
-					ctx.fillStyle = "green"; // Green color for the rest
-				}
+				ctx.fillStyle = this.getColorForKeypoint(index);
 				ctx.fill();
-				console.log(`Drawing keypoint at (${x}, ${y}) with confidence ${score}`);
 			}
 		});
+	}
+
+	getColorForKeypoint(index: number) {
+		if (index === 0) return "green"; // Nose
+		if (index === 1 || index === 2) return "yellow"; // Eyes
+		if (index === 3 || index === 4) return "red"; // Ears
+		return "green"; // Other points
 	}
 
 	drawSkeleton(
 		keypoints: poseDetection.Keypoint[],
 		minConfidence: number,
 		ctx: CanvasRenderingContext2D,
+		scaleX: number,
+		scaleY: number,
 	) {
 		const adjacentKeyPoints = poseDetection.util.getAdjacentPairs(
 			poseDetection.SupportedModels.MoveNet,
@@ -86,8 +94,8 @@ export class PoseDetectionModel {
 				p2.y !== 0
 			) {
 				ctx.beginPath();
-				ctx.moveTo(p1.x, p1.y);
-				ctx.lineTo(p2.x, p2.y);
+				ctx.moveTo(p1.x * scaleX, p1.y * scaleY);
+				ctx.lineTo(p2.x * scaleX, p2.y * scaleY);
 				ctx.lineWidth = 2; // Adjust line width if needed
 				ctx.strokeStyle = "white"; // White color for skeleton lines
 				ctx.stroke();
