@@ -1,5 +1,6 @@
 import * as poseDetection from "@tensorflow-models/pose-detection";
 import * as tf from "@tensorflow/tfjs";
+import "core-js/stable";
 
 export class PoseDetectionModel {
 	detector: poseDetection.PoseDetector | null = null;
@@ -41,24 +42,22 @@ export class PoseDetectionModel {
 			const score = keypoint.score ?? 0;
 			if (score >= minConfidence) {
 				const { y, x } = keypoint;
-				if (x !== 0 && y !== 0) {
-					ctx.beginPath();
-					ctx.arc(x, y, 5, 0, 2 * Math.PI);
-					// Assign colors based on keypoint index for specific points
-					if (index === 0) {
-						ctx.fillStyle = "green"; // Green color for nose
-					} else if (index === 1 || index === 2) {
-						ctx.fillStyle = "yellow"; // Yellow color for eyes
-					} else if (index === 3 || index === 4) {
-						ctx.fillStyle = "red"; // Red color for ears
-					} else {
-						ctx.fillStyle = "green"; // Green color for the rest
-					}
-					ctx.fill();
-					console.log(`Drawing keypoint at (${x}, ${y}) with confidence ${score}`);
+				ctx.beginPath();
+				ctx.arc(x, y, 5, 0, 2 * Math.PI);
+				// Assign colors based on keypoint index for specific points
+				ctx.arc(x, y, 5, 0, 2 * Math.PI);
+				// Assign colors based on keypoint index for specific points
+				if (index === 0) {
+					ctx.fillStyle = "green"; // Green color for nose
+				} else if (index === 1 || index === 2) {
+					ctx.fillStyle = "yellow"; // Yellow color for eyes
+				} else if (index === 3 || index === 4) {
+					ctx.fillStyle = "red"; // Red color for ears
 				} else {
-					console.log(`Invalid keypoint position: (${x}, ${y})`);
+					ctx.fillStyle = "green"; // Green color for the rest
 				}
+				ctx.fill();
+				console.log(`Drawing keypoint at (${x}, ${y}) with confidence ${score}`);
 			}
 		});
 	}
@@ -71,7 +70,6 @@ export class PoseDetectionModel {
 		const adjacentKeyPoints = poseDetection.util.getAdjacentPairs(
 			poseDetection.SupportedModels.MoveNet,
 		);
-		const faceKeyPoints = [3, 1, 0, 2, 4]; // Key points for face (ears, eyes, nose)
 
 		// Draw body skeleton
 		adjacentKeyPoints.forEach(([i, j]) => {
@@ -98,42 +96,22 @@ export class PoseDetectionModel {
 				console.log(`Invalid skeleton position: (${p1.x}, ${p1.y}) to (${p2.x}, ${p2.y})`);
 			}
 		});
-
-		// Draw a single line connecting face key points
-		ctx.beginPath();
-		faceKeyPoints.forEach((index, i) => {
-			const keypoint = keypoints[index];
-			const score = keypoint.score ?? 0;
-			if (score >= minConfidence && keypoint.x !== 0 && keypoint.y !== 0) {
-				if (i === 0) {
-					ctx.moveTo(keypoint.x, keypoint.y);
-				} else {
-					ctx.lineTo(keypoint.x, keypoint.y);
-				}
-			}
-		});
-		ctx.lineWidth = 2; // Adjust line width if needed
-		ctx.strokeStyle = "white"; // White color for face lines
-		ctx.stroke();
-		console.log("Drawing face line connecting key points");
 	}
 
-	async run(
-		videoRef: React.RefObject<HTMLVideoElement>,
-		canvasRef: React.RefObject<HTMLCanvasElement>,
-	) {
+	async run(webcamRef: React.RefObject<Webcam>, canvasRef: React.RefObject<HTMLCanvasElement>) {
 		if (!this.detector) await this.loadModel();
-		const video = videoRef.current;
-		const canvas = canvasRef.current;
 
-		if (video && canvas) {
-			const detect = async () => {
+		const detect = async () => {
+			if (webcamRef.current && webcamRef.current.video && canvasRef.current) {
+				const video = webcamRef.current.video;
+				const canvas = canvasRef.current;
 				if (video.readyState === 4) {
 					await this.detectPose(video, canvas);
 				}
-				requestAnimationFrame(detect);
-			};
-			detect();
-		}
+			}
+			requestAnimationFrame(detect);
+		};
+
+		detect();
 	}
 }
