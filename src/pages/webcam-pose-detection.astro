@@ -1,0 +1,18 @@
+---
+import PageLayout from "@/layouts/PageLayout.astro";
+import ContainerSection from "@/components/common/ContainerSection.astro";
+import WebcamPoseDetectionComponent from "@/components/portfolio/webcam-pose-detection";
+import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
+---
+
+<PageLayout meta={{ title: "Webcam Pose Detection App" }}>
+	<ContainerSection maxWidth="max-w-2xl">
+		<HeaderPortfolio
+			client:visible
+			title={"Webcam Pose Detection"}
+			description={"A web app that uses a webcam feed to detect and visualize human poses in real-time, demonstrating the integration of machine learning with web technologies for pose estimation."}
+			chipsList={["React", "Typescript", "pose-detection model", "Tensorflow.js", "Tailwind CSS"]}
+		/>
+		<WebcamPoseDetectionComponent client:visible />
+	</ContainerSection>
+</PageLayout>
