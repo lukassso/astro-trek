@@ -4,7 +4,7 @@ export interface CurrencyRate {
   mid: number;
 }
 
-export interface CurrencyTable {
+export interface CurrencyTableTypes {
   rates: CurrencyRate[];
 }
 
@@ -37,4 +37,9 @@ export interface DateRange {
 
 export interface ExchangeRates {
   [key: string]: number;
+}
+
+export interface TableCellProps {
+  className?: string;
+  children: React.ReactNode;
 }
