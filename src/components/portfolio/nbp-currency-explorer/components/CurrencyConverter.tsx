@@ -88,7 +88,7 @@ const CurrencyConverter = () => {
 						type="number"
 						value={amount}
 						onChange={handleAmountChange}
-						className="min-w-[80px] rounded-r-none"
+						className="min-w-[80px] rounded-r-none dark:text-gray-950"
 						aria-label="Amount"
 					/>
 					{isSourcePLN ? (

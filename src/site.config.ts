@@ -24,6 +24,18 @@ export const portfolioItems: PortfolioItem[] = [
 		path: "/webcam-object-detection",
 	},
 	{
+		title: "Currency Explorer",
+		description: "An app to display and analyze NBP currency exchange rates.",
+		technologies: ["React",
+				"SCSS",
+				"Rest API",
+				"Chart.js",
+				"React Router",
+				"Date Fns"],
+		imageUrl: "assets/images/portfolio-nbp-currency-explorer.gif",
+		path: "/nbp-currency-explorer",
+	},
+	{
 		title: "Pose Detection",
 		description: "A real-time image pose detection application using your webcam.",
 		technologies: ["React", "Typescript", "Tensorflow.js"],

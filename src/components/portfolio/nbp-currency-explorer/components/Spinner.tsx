@@ -2,13 +2,6 @@ import { useEffect } from "react";
 import { Loader } from "lucide-react";
 
 export default function Spinner() {
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, []);
 
   return (
     <div className="flex justify-center items-center h-screen">
