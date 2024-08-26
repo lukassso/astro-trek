@@ -1,0 +1,27 @@
+---
+import PageLayout from "@/layouts/PageLayout.astro";
+import ContainerSection from "@/components/common/ContainerSection.astro";
+import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
+import NbpCurrencyExplorerComponent from "@/components/portfolio/nbp-currency-explorer";
+---
+
+<PageLayout meta={{ title: "NBP Currency Explorer" }}>
+	<ContainerSection>
+		<HeaderPortfolio
+			client:visible
+			title={"NBP Currency Explorer"}
+			description={"An app to display and analyze NBP currency exchange rates with historical trends and conversion features."}
+			chipsList={[
+				"React",
+				"Typescript",
+				"Tailwind CSS",
+				"Radix UI",
+				"Rest API",
+				"Chart.js",
+				"React Router",
+				"Date Fns",
+			]}
+		/>
+		<NbpCurrencyExplorerComponent client:only="react" />
+	</ContainerSection>
+</PageLayout>
