@@ -24,6 +24,21 @@ export const portfolioItems: PortfolioItem[] = [
 		path: "/webcam-object-detection",
 	},
 	{
+		title: "Playground AI",
+		description:
+			"A user-friendly interface integrating OpenAI's ChatGPT, allowing interactive AI model settings and responses",
+		technologies: ["React", "Typescript", "Tailwind CSS", "Shadcn UI", "Radix UI", "OpenAI API"],
+		imageUrl: "assets/images/portfolio-playground-ai.png",
+		path: "/dashboards/playground-ai",
+	},
+	{
+		title: "Pose Detection",
+		description: "A real-time image pose detection application using your webcam.",
+		technologies: ["React", "Typescript", "Tensorflow.js"],
+		imageUrl: "assets/images/portfolio-webcam-pose-detection.png",
+		path: "/webcam-pose-detection",
+	},
+	{
 		title: "Currency Explorer",
 		description: "An app to display and analyze NBP currency exchange rates.",
 		technologies: ["React",
@@ -34,13 +49,6 @@ export const portfolioItems: PortfolioItem[] = [
 				"Date Fns"],
 		imageUrl: "assets/images/portfolio-nbp-currency-explorer.gif",
 		path: "/nbp-currency-explorer",
-	},
-	{
-		title: "Pose Detection",
-		description: "A real-time image pose detection application using your webcam.",
-		technologies: ["React", "Typescript", "Tensorflow.js"],
-		imageUrl: "assets/images/portfolio-webcam-pose-detection.png",
-		path: "/webcam-pose-detection",
 	},
 	{
 		title: "Bank Transactions",
@@ -77,14 +85,7 @@ export const portfolioItems: PortfolioItem[] = [
 		imageUrl: "assets/images/portfolio-movie-app.png",
 		path: "/movie-app",
 	},
-	{
-		title: "Playground AI",
-		description:
-			"A user-friendly interface integrating OpenAI's ChatGPT, allowing interactive AI model settings and responses",
-		technologies: ["React", "Typescript", "Tailwind CSS", "Shadcn UI", "Radix UI", "OpenAI API"],
-		imageUrl: "assets/images/portfolio-playground-ai.png",
-		path: "/dashboards/playground-ai",
-	},
+	
 	{
 		title: "Task Manager",
 		description:
