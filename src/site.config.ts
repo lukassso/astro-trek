@@ -41,14 +41,16 @@ export const portfolioItems: PortfolioItem[] = [
 	{
 		title: "Currency Explorer",
 		description: "An app to display and analyze NBP currency exchange rates.",
-		technologies: ["React",
-				"SCSS",
-				"Rest API",
-				"Chart.js",
-				"React Router",
-				"Date Fns"],
+		technologies: ["React", "SCSS", "Rest API", "Chart.js", "React Router", "Date Fns"],
 		imageUrl: "assets/images/portfolio-nbp-currency-explorer.gif",
 		path: "/nbp-currency-explorer",
+	},
+	{
+		title: "Multi Select Component",
+		description: "A component for displaying and selecting multiple options.",
+		technologies: ["React", "Typescript", "Tailwind CSS", "Radix UI"],
+		imageUrl: "assets/images/portfolio-nbp-currency-explorer.gif",
+		path: "/multi-select-component",
 	},
 	{
 		title: "Bank Transactions",
@@ -85,7 +87,7 @@ export const portfolioItems: PortfolioItem[] = [
 		imageUrl: "assets/images/portfolio-movie-app.png",
 		path: "/movie-app",
 	},
-	
+
 	{
 		title: "Task Manager",
 		description:
