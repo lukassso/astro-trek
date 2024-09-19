@@ -38,9 +38,7 @@ const MultiSelectComponent = () => {
 			onValueChange={() => {}}
 			defaultValue={["next.js"]}
 			placeholder="Select options"
-			variant="default"
-			animation={2}
-			maxCount={1}
+			maxCount={3}
 		/>
 	);
 };
