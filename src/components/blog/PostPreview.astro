@@ -25,14 +25,13 @@ import defaultImage from "@/assets/post_img.png";
 						)
 					}
 				</h1>
-
 				<p class="text-1xl py-1">{desc}</p>
 				<div class="mt-2 flex justify-between">
 					<div>
 						<span class="py-1 text-xs">{publishDate}</span>
 					</div>
 					<div class="justify-end">
-						{tags && tags.map((tag: string) => <a class="badge badge-outline ml-2">{tag}</a>)}
+						{tags && tags.map((tag: string) => <a class="badge badge-outline m-1 ml-2">{tag}</a>)}
 					</div>
 				</div>
 			</div>
