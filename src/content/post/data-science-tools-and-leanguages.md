@@ -13,7 +13,7 @@ Data science is all about solving problems and uncovering insights that drive de
 > "There are no perfect tools, just good tools for people with certain goals."
 >
 > — Lisa Charlotte Rost, Data Visualization Enthusiast
-In this blog, we delve into the essential tools and languages that are the backbone of data science. Whether you're a seasoned data scientist or just starting your journey, you'll find valuable insights into the tools, languages, libraries, frameworks, and software that power data science projects.
+In this blogpost, we delve into the essential tools and languages that are the backbone of data science. Whether you're a seasoned data scientist or just starting your journey, you'll find valuable insights into the tools, languages, libraries, frameworks, and software that power data science projects.
 
 Our content is designed to help you understand and appreciate the role of these tools in the data science ecosystem. By the end of your journey with us, you'll have a better grasp of the following:
 
@@ -23,3 +23,9 @@ Our content is designed to help you understand and appreciate the role of these 
 - Key considerations for businesses and individuals when choosing data transformation tools
 
 Whether you're looking to expand your knowledge or choose the right tools for your projects, this blog is here to guide you through the dynamic world of data science tools and languages.
+
+## How to use the generative AI more ecologically
+
+During the observers are exiting the gen AI tools like OpenAI, Google, Anthropic, and Cohere, we need to think about hidden costs and environmental impact which are not visible to the users and often are skipped in the conversation. Actually the tools starting growing in size and popularity but is consious to judge the costs will grow dramatically in the near future.
+
+
