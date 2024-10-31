@@ -22,7 +22,22 @@ Our content is designed to help you understand and appreciate the role of these 
 - A selection of popular tools for data analysis and visualization, including Microsoft Excel, Google Sheets, SQL, Python, Tableau, and Matplotlib
 - Key considerations for businesses and individuals when choosing data transformation tools
 
-Whether you're looking to expand your knowledge or choose the right tools for your projects, this blog is here to guide you through the dynamic world of data science tools and languages.
+Whether you're looking to expand your knowledge or choose the right tools for your projects, this blogpost here is the guide you through the dynamic world of data science tools and languages.
+
+Key points during the postgraduate course about Python and AI programming (Data Science):
+- Python Basics: Understanding variables, data types, and basic operations helps set a solid foundation. We'll learn how to handle different types of data, such as text, numbers, and logical values, and perform conversions between them.
+
+- Data Handling: Data science involves creating, modifying, and analyzing collections of data using structures like lists, tuples, dictionaries, and sets. We’ll explore each one’s purpose and the methods to manipulate them.
+
+- Control Structures: Using conditionals and loops allows us to make decisions and process large datasets effectively. This includes if statements, for and while loops, and their combinations.
+
+- Functions: Functions help break down complex tasks into smaller, manageable parts. They allow for reusability and clarity, which is essential for working on larger data projects.
+
+- Libraries and Tools: Data science relies on specialized libraries like NumPy for numerical data, Pandas for data manipulation, and Matplotlib for visualization. We’ll look at why each library is useful and how to apply them.
+
+- Version Control with Git and GitHub: Version control tools help track changes, collaborate with others, and manage code efficiently, which is crucial in data science projects.
+
+- Data Science Applications: Finally, we’ll look at the practical applications of data science tools, like performing data analysis, visualization, and basic data transformation, which are essential in real-world problem-solving
 
 ## How to use the generative AI more ecologically
 
