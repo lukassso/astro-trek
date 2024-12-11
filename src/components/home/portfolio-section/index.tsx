@@ -58,7 +58,7 @@ export default function PortfolioSection() {
 						The App Suite
 					</h2>
 					<p className="mx-auto max-w-[700px] text-gray-500 dark:text-gray-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-						Check out some of the simple apps I've built to showcase my skills.
+						Take a look at some apps I've built to demonstrate my skills
 					</p>
 				</div>
 				<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

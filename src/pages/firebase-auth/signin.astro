@@ -10,16 +10,16 @@ import HeaderFirebaseAuth from "@/components/portfolio/firebase-auth/HeaderFireb
 const auth = getAuth(app);
 const sessionCookie = Astro.cookies.get("__session");
 if (sessionCookie) {
-	const decodedCookie = await auth.verifySessionCookie(sessionCookie.value);
-	if (decodedCookie) {
-		return Astro.redirect("/firebase-auth/dashboard/");
-	}
+  const decodedCookie = await auth.verifySessionCookie(sessionCookie.value);
+  if (decodedCookie) {
+    return Astro.redirect("/firebase-auth/dashboard/");
+  }
 }
 ---
 
 <Layout meta={{ title: "Signin" }}>
-	<ContainerSection>
-		<HeaderFirebaseAuth />
-		<SigninComponent client:visible />
-	</ContainerSection>
+  <ContainerSection>
+    <HeaderFirebaseAuth />
+    <SigninComponent client:visible />
+  </ContainerSection>
 </Layout>

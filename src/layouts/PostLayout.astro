@@ -6,13 +6,13 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 import { Image } from "astro:assets";
 
 interface Props {
-	post: CollectionEntry<"post">;
+  post: CollectionEntry<"post">;
 }
 
 const { post } = Astro.props;
 const {
-	data: { tags, draft, description, heroImage, ogImage, publishDate, title, updatedDate },
-	slug,
+  data: { tags, draft, description, heroImage, ogImage, publishDate, title, updatedDate },
+  slug,
 } = post;
 
 dayjs.extend(localizedFormat);
@@ -23,45 +23,45 @@ const socialImage = ogImage ?? `/og-image/${slug}.png`;
 ---
 
 <PageLayout meta={{ articleDate, description, ogImage: socialImage, title }}>
-	<div class="mx-auto max-w-screen-md px-4 py-24 text-default md:px-6 md:py-32 lg:py-40">
-		{
-			heroImage && (
-				<Image
-					width={750}
-					height={422}
-					format="webp"
-					src={heroImage}
-					alt={title}
-					class="mb-6 w-full"
-				/>
-			)
-		}
-		<article class="mx-auto flex-grow break-words" data-pagefind-body>
-			<div class="mt-3">
-				<div class="pb-4">
-					<h1 class="title my-2 text-4xl font-bold">
-						{title}
-						{
-							draft && (
-								<span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-									Draft
-								</span>
-							)
-						}
-					</h1>
-					<div class="py-2">
-						{tags && tags.map((tag) => <a class="badge badge-outline mr-2 no-underline">{tag}</a>)}
-					</div>
-					{
-						updatedDate && (
-							<time class="text-xs">
-								Last updated on <time>{articleLastUpdate}</time>{" "}
-							</time>
-						)
-					}
-				</div>
-				<div
-					class="prose-headings:text-accent-2 prose-headings:before:text-accent
+  <div class="mx-auto max-w-screen-md px-4 py-24 text-default md:px-6 md:py-32 lg:py-40">
+    {
+      heroImage && (
+        <Image
+          width={750}
+          height={422}
+          format="webp"
+          src={heroImage}
+          alt={title}
+          class="mb-6 w-full"
+        />
+      )
+    }
+    <article class="mx-auto flex-grow break-words" data-pagefind-body>
+      <div class="mt-3">
+        <div class="pb-4">
+          <h1 class="title my-2 text-4xl font-bold">
+            {title}
+            {
+              draft && (
+                <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                  Draft
+                </span>
+              )
+            }
+          </h1>
+          <div class="py-2">
+            {tags && tags.map((tag) => <a class="badge badge-outline mr-2 no-underline">{tag}</a>)}
+          </div>
+          {
+            updatedDate && (
+              <time class="text-xs">
+                Last updated on <time>{articleLastUpdate}</time>{" "}
+              </time>
+            )
+          }
+        </div>
+        <div
+          class="prose-headings:text-accent-2 prose-headings:before:text-accent
 					prose
 					prose-blog
 					max-w-none
@@ -70,10 +70,23 @@ const socialImage = ogImage ?? `/og-image/${slug}.png`;
 					prose-headings:before:absolute
 					prose-headings:before:-ms-4
 					prose-th:before:content-none"
-				>
-					<slot />
-				</div>
-			</div>
-		</article>
-	</div>
+        >
+          <slot />
+        </div>
+      </div>
+    </article>
+  </div>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "{title}",
+      "datePublished": "{publishDate}",
+      "dateModified": "{updatedDate}",
+      "author": {
+        "@type": "Person",
+        "name": "{siteConfig.author}"
+      }
+    }
+  </script>
 </PageLayout>

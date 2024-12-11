@@ -6,13 +6,13 @@ import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
 ---
 
 <PageLayout meta={{ title: "Task Manager App" }}>
-	<ContainerSection maxWidth="max-w-2xl">
-		<HeaderPortfolio
-			client:visible
-			title={"Task Manager"}
-			description={"Task management tool that simplifies daily organization and enhances productivity."}
-			chipsList={["React", "Typescript", "react-redux", "@reduxjs/toolkit", "Context API"]}
-		/>
-		<TaskRoot client:visible />
-	</ContainerSection>
+  <ContainerSection maxWidth="max-w-2xl">
+    <HeaderPortfolio
+      client:visible
+      title={"Task Manager"}
+      description={"Task management tool that simplifies daily organization and enhances productivity."}
+      chipsList={["React", "Typescript", "react-redux", "@reduxjs/toolkit", "Context API"]}
+    />
+    <TaskRoot client:visible />
+  </ContainerSection>
 </PageLayout>

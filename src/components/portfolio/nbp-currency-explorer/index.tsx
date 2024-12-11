@@ -2,9 +2,9 @@ import { DateRangeProvider } from "@/features/nbp-currency-explorer/context/Date
 import AppRouting from "@/features/nbp-currency-explorer/AppRouting";
 
 const NbpCurrencyExplorerComponent = () => (
-	<DateRangeProvider>
-		<AppRouting />
-	</DateRangeProvider>
+  <DateRangeProvider>
+    <AppRouting />
+  </DateRangeProvider>
 );
 
 export default NbpCurrencyExplorerComponent;

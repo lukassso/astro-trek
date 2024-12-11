@@ -23,7 +23,7 @@ const Camera: React.FC = () => {
           canvasRef.current.height = newHeight;
 
           // Trigger a rerender of the canvas contents
-          const ctx = canvasRef.current.getContext('2d');
+          const ctx = canvasRef.current.getContext("2d");
           if (ctx) {
             ctx.clearRect(0, 0, newWidth, newHeight); // Clear canvas before redraw
           }
@@ -51,11 +51,7 @@ const Camera: React.FC = () => {
   return (
     <div className="flex min-h-screen flex-col items-center">
       <div className="relative rounded-xl border-2 border-gray-300 p-4">
-        <Webcam
-          ref={webcamRef}
-          className="rounded-xl"
-          onLoadedData={adjustCanvasSize}
-        />
+        <Webcam ref={webcamRef} className="rounded-xl" onLoadedData={adjustCanvasSize} />
         <canvas ref={canvasRef} className="z-3 absolute left-0 top-0 rounded-xl"></canvas>
       </div>
     </div>

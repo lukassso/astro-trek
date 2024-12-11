@@ -2,49 +2,50 @@
 import { Icon } from "astro-icon/components";
 
 const socialLinks: {
-	friendlyName: string;
-	link: string;
-	name: string;
+  friendlyName: string;
+  link: string;
+  name: string;
 }[] = [
-	{
-		friendlyName: "Github",
-		link: "https://github.com/lukassso",
-		name: "tabler:brand-github",
-	},
-	{
-		friendlyName: "LinkedIn",
-		link: "https://www.linkedin.com/in/lukasz-zatyka/",
-		name: "tabler:brand-linkedin",
-	},
-	{
-		friendlyName: "Behance",
-		link: "https://www.behance.net/lukaszkolaa577",
-		name: "tabler:brand-behance",
-	},
-	{
-		friendlyName: "email",
-		link: "mailto:lukasz.zatyka@gmail.com",
-		name: "tabler:mail",
-	},
+  {
+    friendlyName: "Github",
+    link: "https://github.com/lukassso",
+    name: "tabler:brand-github",
+  },
+  {
+    friendlyName: "LinkedIn",
+    link: "https://www.linkedin.com/in/lukasz-zatyka/",
+    name: "tabler:brand-linkedin",
+  },
+  {
+    friendlyName: "Behance",
+    link: "https://www.behance.net/lukaszkolaa577",
+    name: "tabler:brand-behance",
+  },
+  {
+    friendlyName: "email",
+    link: "mailto:lukasz.zatyka@gmail.com",
+    name: "tabler:mail",
+  },
 ];
 ---
 
 <div class="flex flex-wrap items-end gap-x-4">
-	<ul class="flex flex-1 items-center gap-x-2 sm:flex-initial">
-		{
-			socialLinks.map(({ friendlyName, link, name }) => (
-				<li class="flex">
-					<a
-						class="sm:hover:text-link inline-block p-1"
-						href={link}
-						rel={"noopener noreferrer"}
-						target="_blank"
-					>
-						<Icon aria-hidden="true" class="h-6 w-6 sm:h-8 sm:w-8" focusable="false" name={name} />
-						<span class="sr-only">{friendlyName}</span>
-					</a>
-				</li>
-			))
-		}
-	</ul>
+  <ul class="flex flex-1 items-center gap-x-2 sm:flex-initial">
+    {
+      socialLinks.map(({ friendlyName, link, name }) => (
+        <li class="flex">
+          <a
+            class="sm:hover:text-link inline-block p-1"
+            href={link}
+            rel={"noopener noreferrer"}
+            target="_blank"
+            aria-label={friendlyName}
+          >
+            <Icon aria-hidden="true" class="h-6 w-6 sm:h-8 sm:w-8" focusable="false" name={name} />
+            <span class="sr-only">{friendlyName}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
 </div>

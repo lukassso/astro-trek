@@ -1,7 +1,7 @@
 import Camera from "./Camera";
 
 const WebcamObjectDetectionComponent = () => {
-	return <Camera />;
+  return <Camera />;
 };
 
 export default WebcamObjectDetectionComponent;

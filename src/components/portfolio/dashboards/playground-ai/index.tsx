@@ -5,14 +5,14 @@ import { PlaygroundAiComponent } from "./PlaygroundAi.component";
 import { SettingsProvider } from "@/features/dashboards/playground-ai/SettingsContext";
 
 const PlaygroundAiAppComponent = () => {
-	return (
-		<QueryClientProvider client={queryClient}>
-			<SettingsProvider>
-				<PlaygroundAiComponent />
-				<ReactQueryDevtools initialIsOpen={false} />
-			</SettingsProvider>
-		</QueryClientProvider>
-	);
+  return (
+    <QueryClientProvider client={queryClient}>
+      <SettingsProvider>
+        <PlaygroundAiComponent />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </SettingsProvider>
+    </QueryClientProvider>
+  );
 };
 
 export default PlaygroundAiAppComponent;

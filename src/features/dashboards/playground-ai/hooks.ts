@@ -4,14 +4,14 @@ import type { OpenAiResponse, SettingsStoreType, Message } from "./types";
 import { fetchOpenAi } from "./fetchOpenAi";
 
 export const useOpenAi = (
-	options?: UseMutationOptions<
-		OpenAiResponse,
-		Error,
-		{ messages: Message[]; settings: SettingsStoreType }
-	>,
+  options?: UseMutationOptions<
+    OpenAiResponse,
+    Error,
+    { messages: Message[]; settings: SettingsStoreType }
+  >,
 ) => {
-	return useMutation<OpenAiResponse, Error, Parameters<typeof fetchOpenAi>[0]>({
-		mutationFn: fetchOpenAi,
-		...options,
-	});
+  return useMutation<OpenAiResponse, Error, Parameters<typeof fetchOpenAi>[0]>({
+    mutationFn: fetchOpenAi,
+    ...options,
+  });
 };
