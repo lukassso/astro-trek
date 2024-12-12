@@ -8,7 +8,8 @@ export const siteConfig: SiteConfig = {
   // Meta property used to construct the meta title property, found in src/components/BaseHead.astro L:11
   title: "Astro-Trek by Lukasz Zatyka",
   // Meta property used as the default description meta property
-  description: "Showcasing the versatility of Web Development",
+  description:
+    "Welcome to Astro-Trek — your go-to destination for web development insights, programming tutorials, and coding challenges. Contact me to discuss exciting collaboration opportunities!",
   // HTML lang property, found in src/layouts/Base.astro L:18
   lang: "en-GB",
   // Meta property, found in src/components/BaseHead.astro L:42
