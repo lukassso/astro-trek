@@ -33,13 +33,15 @@ const frameworksList = [
 
 const MultiSelectComponent = () => {
 	return (
-		<MultiSelect
-			options={frameworksList}
-			onValueChange={() => {}}
-			defaultValue={["next.js"]}
-			placeholder="Select options"
-			maxCount={3}
-		/>
+		<div className="h-full min-h-[25vh]">
+			<MultiSelect
+				options={frameworksList}
+				onValueChange={() => {}}
+				defaultValue={["next.js"]}
+				placeholder="Select options"
+				maxCount={3}
+			/>
+		</div>
 	);
 };
 

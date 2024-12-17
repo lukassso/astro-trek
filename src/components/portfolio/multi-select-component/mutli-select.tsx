@@ -145,9 +145,7 @@ export function MultiSelect({
 									})}
 									{selectedValues.length > maxCount && (
 										<Badge
-											className={cn(
-												"text-foreground border-foreground/10 bg-transparent hover:bg-transparent",
-											)}
+										
 										>
 											{`+ ${selectedValues.length - maxCount} more`}
 										</Badge>
@@ -155,14 +153,14 @@ export function MultiSelect({
 								</div>
 								<div className="flex items-center justify-between">
 									<XIcon
-										className="text-muted-foreground mx-2 h-4 cursor-pointer"
+										className="mx-2 h-4 text-gray-950"
 										onClick={(event) => {
 											event.stopPropagation();
 											handleClear();
 										}}
 									/>
 									<Separator orientation="vertical" className="h-full min-h-6" />
-									<ChevronDown className="text-muted-foreground mx-2 h-4 cursor-pointer" />
+									<ChevronDown className="text-gray-950 mx-2 h-4 cursor-pointer" />
 								</div>
 							</div>
 						) : (
