@@ -49,8 +49,8 @@ export const portfolioItems: PortfolioItem[] = [
 	{
 		title: "Multi Select Component",
 		description: "A component for displaying and selecting multiple options.",
-		technologies: ["React", "Typescript", "Tailwind CSS", "Radix UI"],
-		imageUrl: "assets/images/portfolio-nbp-currency-explorer.gif",
+		technologies: ["React", "Typescript", "Cmdk", "Tailwind CSS", "Radix UI", "React Select"],
+		imageUrl: "assets/images/portfolio-multi-select.png",
 		path: "/multi-select",
 	},
 	{

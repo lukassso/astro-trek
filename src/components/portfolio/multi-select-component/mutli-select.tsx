@@ -1,5 +1,5 @@
-import React from "react";
-import { CheckIcon, XCircle, ChevronDown, XIcon, PlusIcon, Keyboard } from "lucide-react";
+import { useRef, useEffect, useState } from "react";
+import { CheckIcon, XCircle, ChevronDown, XIcon } from "lucide-react";
 import { cn } from "@/utils/shadcn";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
+import { useMediaQuery } from "@/utils/hooks/use-media-query";
 
 interface MultiSelectProps {
 	options: {
@@ -37,11 +38,20 @@ export function MultiSelect({
 	maxCount = 3,
 	className,
 }: MultiSelectProps) {
-	const [selectedValues, setSelectedValues] = React.useState<string[]>(defaultValue);
-	const [open, setOpen] = React.useState(false);
-	const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
+	const [selectedValues, setSelectedValues] = useState<string[]>(defaultValue);
+	const [open, setOpen] = useState(false);
+	const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+	const triggerRef = useRef<HTMLButtonElement>(null);
+	const popoverContentRef = useRef<HTMLDivElement>(null);
+	const isMobile = useMediaQuery("(max-width: 768px)");
 
-	React.useEffect(() => {
+	useEffect(() => {
+		if (triggerRef.current && popoverContentRef.current) {
+			popoverContentRef.current.style.width = `${triggerRef.current.offsetWidth}px`;
+		}
+	}, []);
+
+	useEffect(() => {
 		const down = (e: KeyboardEvent) => {
 			if (e.key === "j" && (e.metaKey || e.ctrlKey)) {
 				e.preventDefault();
@@ -77,21 +87,36 @@ export function MultiSelect({
 	};
 
 	const handleTogglePopover = () => {
-		setIsPopoverOpen((prev) => !prev);
+		if (isMobile) {
+			setOpen(true);
+			setIsPopoverOpen(true);
+		} else {
+			setIsPopoverOpen((prev) => !prev);
+		}
+	};
+
+	const handleCloseDialog = () => {
+		setOpen(false);
+		setIsPopoverOpen(false);
 	};
 
 	return (
-		<div className="mx-auto max-w-md">
-			<Button
-				variant="ghost"
-				onClick={() => setOpen(true)}
-				className="mb-4 flex items-center border border-green-500 text-green-500"
-			>
-				<kbd className="bg-muted-foreground rounded px-2 py-1 text-sm">Ctrl+J</kbd>
-			</Button>
+		<div className="mx-auto w-full max-w-md">
+			{!isMobile && (
+				<Button
+					ref={triggerRef}
+					
+					variant="ghost"
+					onClick={() => setOpen(true)}
+					className="mb-4 flex items-center border border-green-500 text-green-500"
+				>
+					<kbd className="bg-muted-foreground rounded px-2 py-1 text-sm">Ctrl+J</kbd>
+				</Button>
+			)}
 			<Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
-				<PopoverTrigger asChild>
+				<PopoverTrigger asChild className="w-full">
 					<Button
+						ref={triggerRef}
 						onClick={handleTogglePopover}
 						className={cn(
 							"flex h-auto min-h-10 w-full items-center justify-between rounded-md border bg-inherit p-1 hover:bg-inherit",
@@ -148,7 +173,12 @@ export function MultiSelect({
 						)}
 					</Button>
 				</PopoverTrigger>
-				<PopoverContent className="max-w-md p-0" align="start">
+				<PopoverContent
+					ref={popoverContentRef}
+					className="p-0"
+					align="start"
+					style={{ width: triggerRef.current ? `${triggerRef.current.offsetWidth}px` : 'auto' }}
+				>
 					<Command>
 						<CommandInput placeholder="Search..." />
 						<CommandList>
@@ -216,77 +246,89 @@ export function MultiSelect({
 					</Command>
 				</PopoverContent>
 			</Popover>
-			<CommandDialog open={open} onOpenChange={setOpen}>
-				<CommandInput placeholder="Search or select options..." />
-
-				{/* Display selected values under search input */}
-				{selectedValues.length > 0 && (
-					<div className="border-b border-gray-200 px-4 py-2">
-						<div className="flex flex-wrap gap-2">
-							{selectedValues.map((value) => {
-								const option = options.find((o) => o.value === value);
-								return (
-									<Badge key={value} className="flex items-center">
-										{option?.label}
-										<XCircle
-											className="ml-2 h-4 w-4 cursor-pointer"
-											onClick={() => toggleOption(value)}
-										/>
-									</Badge>
-								);
-							})}
-						</div>
-					</div>
-				)}
-
-				<CommandList>
-					<CommandEmpty>No results found.</CommandEmpty>
-					<CommandGroup heading="Options">
-						<CommandItem onSelect={toggleAll} className="cursor-pointer">
-							<CheckIcon className="mr-2 h-4 w-4" />
-							<span>
-								{selectedValues.length === options.length ? "Deselect All" : "Select All"}
-							</span>
-						</CommandItem>
-						{options.map((option) => {
-							const isSelected = selectedValues.includes(option.value);
-							return (
-								<CommandItem
-									key={option.value}
-									onSelect={() => toggleOption(option.value)}
-									className="cursor-pointer"
-								>
-									<CheckIcon
-										className={cn(
-											"mr-2 h-4 w-4",
-											isSelected ? "text-primary-foreground" : "opacity-0",
-										)}
-									/>
-									{option.icon && <option.icon className="mr-2 h-4 w-4" />}
-									<span>{option.label}</span>
-								</CommandItem>
-							);
-						})}
-					</CommandGroup>
-					<CommandSeparator />
+			<CommandDialog 
+				open={isMobile ? isPopoverOpen || open : open} 
+				onOpenChange={handleCloseDialog}
+			>
+				<div className={cn(
+					isMobile && "h-screen flex flex-col"
+				)}>
+					<CommandInput 
+						placeholder="Search or select options..." 
+						className={cn(
+							isMobile && "h-14"
+						)}
+					/>
 					{selectedValues.length > 0 && (
-						<CommandGroup heading="Selected Options">
-							{selectedValues.slice(0, maxCount).map((value) => {
-								const option = options.find((o) => o.value === value);
+						<div className="border-b border-gray-200 px-4 py-2">
+							<div className="flex flex-wrap gap-2">
+								{selectedValues.map((value) => {
+									const option = options.find((o) => o.value === value);
+									return (
+										<Badge key={value} className="flex items-center">
+											{option?.label}
+											<XCircle
+												className="ml-2 h-4 w-4 cursor-pointer"
+												onClick={() => toggleOption(value)}
+											/>
+										</Badge>
+									);
+								})}
+							</div>
+						</div>
+					)}
+
+					<CommandList className={cn(
+						isMobile && "flex-1"
+					)}>
+						<CommandEmpty>No results found.</CommandEmpty>
+						<CommandGroup heading="Options">
+							<CommandItem onSelect={toggleAll} className="cursor-pointer">
+								<CheckIcon className="mr-2 h-4 w-4" />
+								<span>
+									{selectedValues.length === options.length ? "Deselect All" : "Select All"}
+								</span>
+							</CommandItem>
+							{options.map((option) => {
+								const isSelected = selectedValues.includes(option.value);
 								return (
 									<CommandItem
-										key={value}
-										onSelect={() => toggleOption(value)}
+										key={option.value}
+										onSelect={() => toggleOption(option.value)}
 										className="cursor-pointer"
 									>
-										<XCircle className="mr-2 h-4 w-4" />
-										{option?.label}
+										<CheckIcon
+											className={cn(
+												"mr-2 h-4 w-4",
+												isSelected ? "text-primary-foreground" : "opacity-0",
+											)}
+										/>
+										{option.icon && <option.icon className="mr-2 h-4 w-4" />}
+										<span>{option.label}</span>
 									</CommandItem>
 								);
 							})}
 						</CommandGroup>
-					)}
-				</CommandList>
+						<CommandSeparator />
+						{selectedValues.length > 0 && (
+							<CommandGroup heading="Selected Options">
+								{selectedValues.slice(0, maxCount).map((value) => {
+									const option = options.find((o) => o.value === value);
+									return (
+										<CommandItem
+											key={value}
+											onSelect={() => toggleOption(value)}
+											className="cursor-pointer"
+										>
+											<XCircle className="mr-2 h-4 w-4" />
+											{option?.label}
+										</CommandItem>
+									);
+								})}
+							</CommandGroup>
+						)}
+					</CommandList>
+				</div>
 			</CommandDialog>
 		</div>
 	);
