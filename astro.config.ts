@@ -7,6 +7,7 @@ import { expressiveCodeOptions } from "./src/site.config";
 import react from "@astrojs/react";
 import netlify from "@astrojs/netlify";
 import dotenv from "dotenv";
+import sitemap from "@astrojs/sitemap";
 
 dotenv.config();
 
@@ -14,6 +15,11 @@ dotenv.config();
 export default defineConfig({
   site: "https://zetkolek.netlify.app/",
   integrations: [
+    sitemap({
+      changefreq: "weekly",
+      priority: 0.7,
+      lastmod: new Date("2024-12-17"),
+    }),
     expressiveCode(expressiveCodeOptions),
     icon({
       include: {
@@ -114,3 +120,4 @@ export default defineConfig({
     },
   },
 });
+
