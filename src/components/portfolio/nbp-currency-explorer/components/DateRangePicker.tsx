@@ -5,16 +5,11 @@ import type { DateRange } from "react-day-picker";
 import { cn } from "@/utils/shadcn";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useDateRange } from "@/features/nbp-currency-explorer/context/DateRangeContext";
 
 export function DateRangePicker() {
-  const { dateRange = { from: undefined, to: undefined }, setDateRange } =
-    useDateRange();
+  const { dateRange = { from: undefined, to: undefined }, setDateRange } = useDateRange();
   const [popoverOpen, setPopoverOpen] = useState(false);
 
   const handleDateChange = (selectedDate: DateRange | undefined) => {
@@ -30,7 +25,7 @@ export function DateRangePicker() {
             variant="outline"
             className={cn(
               "w-[300px] justify-start text-left font-normal",
-              !dateRange && "text-muted-foreground"
+              !dateRange && "text-muted-foreground",
             )}
             onClick={() => setPopoverOpen(!popoverOpen)}
           >
@@ -38,8 +33,7 @@ export function DateRangePicker() {
             {dateRange.from ? (
               dateRange.to ? (
                 <>
-                  {format(dateRange.from, "LLL dd, y")} -{" "}
-                  {format(dateRange.to, "LLL dd, y")}
+                  {format(dateRange.from, "LLL dd, y")} - {format(dateRange.to, "LLL dd, y")}
                 </>
               ) : (
                 format(dateRange.from, "LLL dd, y")

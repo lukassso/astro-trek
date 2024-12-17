@@ -40,7 +40,7 @@ const ChartComponent = ({ data }: ChartComponentProps) => {
   }, [data]);
 
   return (
-    <div className="relative w-full h-64">
+    <div className="relative h-64 w-full">
       <canvas ref={chartRef} />
     </div>
   );

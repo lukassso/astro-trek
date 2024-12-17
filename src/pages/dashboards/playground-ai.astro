@@ -7,21 +7,21 @@ import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
 ---
 
 <PageLayout meta={{ title: "Playground AI" }}>
-	<ContainerSection>
-		<HeaderPortfolio
-			client:visible
-			title={"Playground AI"}
-			description={"A user-friendly interface integrating OpenAI's ChatGPT, allowing interactive AI model settings and responses."}
-			chipsList={[
-				"React",
-				"Typescript",
-				"MobX",
-				"Tailwind CSS",
-				"Shadcn UI",
-				"Radix UI",
-				"OpenAI API",
-			]}
-		/>
-		<PlaygroundAiAppComponent client:only />
-	</ContainerSection>
+  <ContainerSection>
+    <HeaderPortfolio
+      client:visible
+      title={"Playground AI"}
+      description={"A user-friendly interface integrating OpenAI's ChatGPT, allowing interactive AI model settings and responses."}
+      chipsList={[
+        "React",
+        "Typescript",
+        "MobX",
+        "Tailwind CSS",
+        "Shadcn UI",
+        "Radix UI",
+        "OpenAI API",
+      ]}
+    />
+    <PlaygroundAiAppComponent client:only />
+  </ContainerSection>
 </PageLayout>

@@ -4,5 +4,5 @@ import clsx from "clsx";
 import type { TableCellProps } from "@/features/nbp-currency-explorer/types";
 
 export const TableCell: React.FC<TableCellProps> = ({ className, children }) => {
-	return <td className={clsx(styles.cell, className)}>{children}</td>;
+  return <td className={clsx(styles.cell, className)}>{children}</td>;
 };

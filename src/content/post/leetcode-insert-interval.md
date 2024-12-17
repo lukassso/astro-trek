@@ -72,35 +72,35 @@ Let's find out a solution based on the linear scan approach:
 // Define a function named `insert` that takes `intervals` (an array of number arrays representing intervals)
 // and `newInterval` (a number array representing the interval to be inserted).
 function insert(intervals: number[][], newInterval: number[]): number[][] {
-	// Initialize an empty array `result` to store the resulting intervals after insertion.
-	let result: number[][] = [];
+  // Initialize an empty array `result` to store the resulting intervals after insertion.
+  let result: number[][] = [];
 
-	// Iterate through each `interval` in the `intervals` array.
-	for (let interval of intervals) {
-		// Check if the end of the current `interval` is less than the start of `newInterval`.
-		if (interval[1] < newInterval[0]) {
-			// If there's no overlap, add the current `interval` to `result`.
-			result.push(interval);
-		} else if (interval[0] > newInterval[1]) {
-			// If all subsequent intervals will not overlap with `newInterval`,
-			// add `newInterval` first followed by the current `interval`.
-			result.push(newInterval);
-			newInterval = interval; // Update `newInterval` to the current `interval`.
-		} else {
-			// If there's an overlap between `interval` and `newInterval`,
-			// merge them by updating `newInterval`.
-			newInterval = [
-				Math.min(interval[0], newInterval[0]), // Start of the merged interval.
-				Math.max(newInterval[1], interval[1]), // End of the merged interval.
-			];
-		}
-	}
+  // Iterate through each `interval` in the `intervals` array.
+  for (let interval of intervals) {
+    // Check if the end of the current `interval` is less than the start of `newInterval`.
+    if (interval[1] < newInterval[0]) {
+      // If there's no overlap, add the current `interval` to `result`.
+      result.push(interval);
+    } else if (interval[0] > newInterval[1]) {
+      // If all subsequent intervals will not overlap with `newInterval`,
+      // add `newInterval` first followed by the current `interval`.
+      result.push(newInterval);
+      newInterval = interval; // Update `newInterval` to the current `interval`.
+    } else {
+      // If there's an overlap between `interval` and `newInterval`,
+      // merge them by updating `newInterval`.
+      newInterval = [
+        Math.min(interval[0], newInterval[0]), // Start of the merged interval.
+        Math.max(newInterval[1], interval[1]), // End of the merged interval.
+      ];
+    }
+  }
 
-	// Add the final `newInterval` (merged if necessary) to `result`.
-	result.push(newInterval);
+  // Add the final `newInterval` (merged if necessary) to `result`.
+  result.push(newInterval);
 
-	// Return the `result` array containing the intervals after insertion.
-	return result;
+  // Return the `result` array containing the intervals after insertion.
+  return result;
 }
 ```
 

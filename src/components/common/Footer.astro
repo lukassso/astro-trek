@@ -6,7 +6,7 @@ const year = new Date().getFullYear();
 ---
 
 <footer
-	class="relative
+  class="relative
   w-full
   transform
   overflow-x-hidden
@@ -16,8 +16,8 @@ const year = new Date().getFullYear();
   dark:text-gray-400
   sm:absolute sm:bottom-8 sm:left-1/2 sm:max-w-6xl sm:-translate-x-1/2"
 >
-	<div
-		class="flex
+  <div
+    class="flex
     flex-col
     items-center
     justify-center
@@ -27,20 +27,20 @@ const year = new Date().getFullYear();
     sm:space-y-0
     sm:text-xs
     sm:font-semibold"
-	>
-		<div class="order-2 mt-5 text-xs sm:order-none sm:mt-0">
-			&copy; {siteConfig.author}
-			{year}
-		</div>
-		<ThemeToggle />
-		<nav aria-label="More on this site" class="flex gap-x-2 sm:gap-x-4">
-			{
-				menuLinks.slice(0, 2).map((link) => (
-					<a class="hover:text-textColor px-2 py-1 sm:py-0 sm:hover:underline" href={link.path}>
-						{link.title}
-					</a>
-				))
-			}
-		</nav>
-	</div>
+  >
+    <div class="order-2 mt-5 text-xs sm:order-none sm:mt-0">
+      &copy; {siteConfig.author}
+      {year}
+    </div>
+    <ThemeToggle />
+    <nav aria-label="More on this site" class="flex gap-x-2 sm:gap-x-4">
+      {
+        menuLinks.slice(0, 2).map((link) => (
+          <a class="hover:text-textColor px-2 py-1 sm:py-0 sm:hover:underline" href={link.path}>
+            {link.title}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
 </footer>
