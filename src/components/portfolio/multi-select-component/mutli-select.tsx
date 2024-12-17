@@ -130,7 +130,7 @@ export function MultiSelect({
 										const option = options.find((o) => o.value === value);
 										const IconComponent = option?.icon;
 										return (
-											<Badge key={value}>
+											<Badge key={value} className="flex items-center mr-1">
 												{IconComponent && <IconComponent className="mr-2 h-4 w-4" />}
 												{option?.label}
 												<XCircle
@@ -279,12 +279,21 @@ export function MultiSelect({
 					)}
 
 					<CommandList className={cn(
-						isMobile && "flex-1"
+						isMobile && "flex-1 max-h-[80vh]"
 					)}>
 						<CommandEmpty>No results found.</CommandEmpty>
 						<CommandGroup heading="Options">
 							<CommandItem onSelect={toggleAll} className="cursor-pointer">
-								<CheckIcon className="mr-2 h-4 w-4" />
+								<div
+									className={cn(
+										"mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
+										selectedValues.length === options.length
+											? "text-primary-foreground bg-primary"
+											: "opacity-50 [&_svg]:invisible",
+									)}
+								>
+									<CheckIcon className="h-4 w-4" />
+								</div>
 								<span>
 									{selectedValues.length === options.length ? "Deselect All" : "Select All"}
 								</span>
@@ -297,36 +306,22 @@ export function MultiSelect({
 										onSelect={() => toggleOption(option.value)}
 										className="cursor-pointer"
 									>
-										<CheckIcon
+										<div
 											className={cn(
-												"mr-2 h-4 w-4",
-												isSelected ? "text-primary-foreground" : "opacity-0",
+												"mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
+												isSelected
+													? "text-primary-foreground bg-primary"
+													: "opacity-50 [&_svg]:invisible",
 											)}
-										/>
+										>
+											<CheckIcon className="h-4 w-4" />
+										</div>
 										{option.icon && <option.icon className="mr-2 h-4 w-4" />}
 										<span>{option.label}</span>
 									</CommandItem>
 								);
 							})}
 						</CommandGroup>
-						<CommandSeparator />
-						{selectedValues.length > 0 && (
-							<CommandGroup heading="Selected Options">
-								{selectedValues.slice(0, maxCount).map((value) => {
-									const option = options.find((o) => o.value === value);
-									return (
-										<CommandItem
-											key={value}
-											onSelect={() => toggleOption(value)}
-											className="cursor-pointer"
-										>
-											<XCircle className="mr-2 h-4 w-4" />
-											{option?.label}
-										</CommandItem>
-									);
-								})}
-							</CommandGroup>
-						)}
 					</CommandList>
 				</div>
 			</CommandDialog>
