@@ -3,57 +3,57 @@ import { Icon } from "astro-icon/components";
 ---
 
 <theme-toggle class="ms-2 sm:ms-4">
-	<button class="relative h-9 w-9 transition-all" type="button">
-		<span class="sr-only">Dark Theme</span>
-		<Icon
-			name="theme-sun"
-			class="absolute start-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0 transition-all dark:scale-100 dark:opacity-100"
-		/>
-		<Icon
-			name="theme-moon"
-			class="absolute start-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 scale-100 opacity-100 transition-all dark:scale-0 dark:opacity-0"
-		/>
-	</button>
+  <button class="relative h-9 w-9 transition-all" type="button">
+    <span class="sr-only">Dark Theme</span>
+    <Icon
+      name="theme-sun"
+      class="absolute start-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0 transition-all dark:scale-100 dark:opacity-100"
+    />
+    <Icon
+      name="theme-moon"
+      class="absolute start-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 scale-100 opacity-100 transition-all dark:scale-0 dark:opacity-0"
+    />
+  </button>
 </theme-toggle>
 
 <script>
-	import { rootInDarkMode } from "@/utils/index";
+  import { rootInDarkMode } from "@/utils/index";
 
-	class ThemeToggle extends HTMLElement {
-		#controller: AbortController | undefined;
+  class ThemeToggle extends HTMLElement {
+    #controller: AbortController | undefined;
 
-		connectedCallback() {
-			const button = this.querySelector("button")!;
-			// set aria role value
-			button.setAttribute("role", "switch");
-			button.setAttribute("aria-checked", String(rootInDarkMode()));
-			// Abort signal
-			const { signal } = (this.#controller = new AbortController());
+    connectedCallback() {
+      const button = this.querySelector("button")!;
+      // set aria role value
+      button.setAttribute("role", "switch");
+      button.setAttribute("aria-checked", String(rootInDarkMode()));
+      // Abort signal
+      const { signal } = (this.#controller = new AbortController());
 
-			// button event
-			button.addEventListener(
-				"click",
-				() => {
-					// invert theme
-					let themeChangeEvent = new CustomEvent("theme-change", {
-						detail: {
-							theme: rootInDarkMode() ? "light" : "dark",
-						},
-					});
-					// dispatch event -> ThemeProvider.astro
-					document.dispatchEvent(themeChangeEvent);
+      // button event
+      button.addEventListener(
+        "click",
+        () => {
+          // invert theme
+          let themeChangeEvent = new CustomEvent("theme-change", {
+            detail: {
+              theme: rootInDarkMode() ? "light" : "dark",
+            },
+          });
+          // dispatch event -> ThemeProvider.astro
+          document.dispatchEvent(themeChangeEvent);
 
-					// set the aria-checked attribute
-					button.setAttribute("aria-checked", String(rootInDarkMode()));
-				},
-				{ signal },
-			);
-		}
+          // set the aria-checked attribute
+          button.setAttribute("aria-checked", String(rootInDarkMode()));
+        },
+        { signal },
+      );
+    }
 
-		disconnectedCallback() {
-			this.#controller?.abort();
-		}
-	}
+    disconnectedCallback() {
+      this.#controller?.abort();
+    }
+  }
 
-	customElements.define("theme-toggle", ThemeToggle);
+  customElements.define("theme-toggle", ThemeToggle);
 </script>

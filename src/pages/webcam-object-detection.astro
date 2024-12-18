@@ -6,13 +6,13 @@ import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
 ---
 
 <PageLayout meta={{ title: "Webcam Object Detection App" }}>
-	<ContainerSection maxWidth="max-w-2xl">
-		<HeaderPortfolio
-			client:visible
-			title={"Webcam Object Detection"}
-			description={"A real-time image object detection application using your webcam. This project leverages the power of TensorFlow.js to detect and identify objects in your webcam feed."}
-			chipsList={["Typescript", "react-webcam", "Coco-ssd model", "Tensorflow.js"]}
-		/>
-		<WebcamObjectDetectionComponent client:visible />
-	</ContainerSection>
+  <ContainerSection maxWidth="max-w-2xl">
+    <HeaderPortfolio
+      client:visible
+      title={"Webcam Object Detection"}
+      description={"A real-time image object detection application using your webcam. This project leverages the power of TensorFlow.js to detect and identify objects in your webcam feed."}
+      chipsList={["Typescript", "react-webcam", "Coco-ssd model", "Tensorflow.js"]}
+    />
+    <WebcamObjectDetectionComponent client:visible />
+  </ContainerSection>
 </PageLayout>

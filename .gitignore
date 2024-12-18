@@ -27,3 +27,6 @@ chatroom-f0512-firebase-adminsdk.json
 
 # Local Netlify folder
 .netlify
+
+# Utility
+.cursorrules

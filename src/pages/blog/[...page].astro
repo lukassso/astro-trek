@@ -10,18 +10,19 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 import Pagination from "@/components/common/Paginator.astro";
 
 export const getStaticPaths = (async ({ paginate }) => {
-	const allPosts = await getAllPosts();
-	const allPostsByDate = sortMDByDate(allPosts);
-	return paginate(allPostsByDate, { pageSize: 8 });
+  const allPosts = await getAllPosts();
+  const allPostsByDate = sortMDByDate(allPosts);
+  return paginate(allPostsByDate, { pageSize: 8 });
 }) satisfies GetStaticPaths;
 
 const meta = {
-	description: "Collection of posts",
-	title: "Blog posts",
+  description:
+    "Discover in-depth articles on web development, coding challenges, and general programming. Stay updated with the latest tutorials and insights to boost your programming skills",
+  title: "Blog posts",
 };
 
 interface Props {
-	page: Page<CollectionEntry<"post">>;
+  page: Page<CollectionEntry<"post">>;
 }
 
 const { page } = Astro.props;
@@ -29,50 +30,50 @@ const { page } = Astro.props;
 dayjs.extend(localizedFormat);
 
 const previewData = (a: Date) => {
-	return dayjs(a).format("ll");
+  return dayjs(a).format("ll");
 };
 
 const paginationProps = {
-	...(page.url.prev && {
-		prevUrl: {
-			text: `← Previous Posts`,
-			url: page.url.prev,
-		},
-	}),
-	...(page.url.next && {
-		nextUrl: {
-			text: `Next Posts →`,
-			url: page.url.next,
-		},
-	}),
+  ...(page.url.prev && {
+    prevUrl: {
+      text: `← Previous Posts`,
+      url: page.url.prev,
+    },
+  }),
+  ...(page.url.next && {
+    nextUrl: {
+      text: `Next Posts →`,
+      url: page.url.next,
+    },
+  }),
 };
 ---
 
 <PageLayout meta={meta}>
-	<ContainerSection>
-		<h1 class="mb-6 text-3xl font-bold">The Blog</h1>
-		<section aria-label="Blog post list" class="mb-24">
-			<ul class="space-y-8 text-start">
-				{
-					page.data.map((post) => (
-						<>
-							<PostPreview
-								title={post.data.title}
-								img={post.data.coverImage?.src}
-								desc={post.data.description}
-								target="_self"
-								alt={post.data.coverImage?.alt}
-								draft={post.data.draft}
-								url={`/blog/${post.slug}`}
-								publishDate={previewData(post.data.publishDate)}
-								tags={post.data.tags}
-							/>
-							<div class="border border-y border-brcolor" />
-						</>
-					))
-				}
-			</ul>
-			<Pagination {...paginationProps} />
-		</section>
-	</ContainerSection>
+  <ContainerSection>
+    <h1 class="mb-6 text-3xl font-bold">The Blog</h1>
+    <section aria-label="Blog post list" class="mb-24">
+      <ul class="space-y-8 text-start">
+        {
+          page.data.map((post) => (
+            <>
+              <PostPreview
+                title={post.data.title}
+                img={post.data.coverImage?.src}
+                desc={post.data.description}
+                target="_self"
+                alt={post.data.coverImage?.alt}
+                draft={post.data.draft}
+                url={`/blog/${post.slug}`}
+                publishDate={previewData(post.data.publishDate)}
+                tags={post.data.tags}
+              />
+              <div class="border border-y border-brcolor" />
+            </>
+          ))
+        }
+      </ul>
+      <Pagination {...paginationProps} />
+    </section>
+  </ContainerSection>
 </PageLayout>

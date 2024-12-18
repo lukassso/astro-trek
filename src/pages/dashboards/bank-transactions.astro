@@ -6,22 +6,22 @@ import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
 ---
 
 <PageLayout meta={{ title: "Bank Transactions" }}>
-	<ContainerSection>
-		<HeaderPortfolio
-			client:visible
-			title={"Bank Transactions"}
-			description={"An application for viewing bank transactions with options to add, delete, and search transactions."}
-			chipsList={[
-				"React",
-				"Typescript",
-				"Tailwind CSS",
-				"Radix UI",
-				"React Hook Form",
-				"Yup",
-				"useContext",
-				"useReducer",
-			]}
-		/>
-		<BankTransactionComponent client:visible />
-	</ContainerSection>
+  <ContainerSection>
+    <HeaderPortfolio
+      client:visible
+      title={"Bank Transactions"}
+      description={"An application for viewing bank transactions with options to add, delete, and search transactions."}
+      chipsList={[
+        "React",
+        "Typescript",
+        "Tailwind CSS",
+        "Radix UI",
+        "React Hook Form",
+        "Yup",
+        "useContext",
+        "useReducer",
+      ]}
+    />
+    <BankTransactionComponent client:visible />
+  </ContainerSection>
 </PageLayout>

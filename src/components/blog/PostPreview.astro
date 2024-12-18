@@ -5,37 +5,37 @@ import defaultImage from "@/assets/post_img.png";
 ---
 
 <div class="rounded-lg transition ease-in-out hover:scale-[102%] hover:shadow-xl">
-	<a href={url} target={target}>
-		<div class="post-preview-list flex-col items-start md:flex-row">
-			<Image
-				src={img ? img : defaultImage}
-				width={750}
-				height={422}
-				alt={alt ? alt : "post image"}
-				class="max-w-full rounded-lg md:max-w-[13rem]"
-			/>
-			<div class="w-full grow">
-				<h1 class="text-xl font-bold">
-					{title}
-					{
-						draft && (
-							<span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-								Draft
-							</span>
-						)
-					}
-				</h1>
-
-				<p class="text-1xl py-1">{desc}</p>
-				<div class="mt-2 flex justify-between">
-					<div>
-						<span class="py-1 text-xs">{publishDate}</span>
-					</div>
-					<div class="justify-end">
-						{tags && tags.map((tag: string) => <a class="badge badge-outline ml-2">{tag}</a>)}
-					</div>
-				</div>
-			</div>
-		</div>
-	</a>
+  <a href={url} target={target}>
+    <div class="post-preview-list flex-col items-start md:flex-row">
+      <Image
+        src={img ? img : defaultImage}
+        width={750}
+        height={422}
+        alt={alt ? alt : "post image"}
+        class="max-w-full rounded-lg md:max-w-[13rem]"
+        loading="lazy"
+      />
+      <div class="w-full grow">
+        <h1 class="text-xl font-bold">
+          {title}
+          {
+            draft && (
+              <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                Draft
+              </span>
+            )
+          }
+        </h1>
+        <p class="text-1xl py-1">{desc}</p>
+        <div class="mt-2 flex justify-between">
+          <div>
+            <span class="py-1 text-xs">{publishDate}</span>
+          </div>
+          <div class="justify-end">
+            {tags && tags.map((tag: string) => <a class="badge badge-outline m-1 ml-2">{tag}</a>)}
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
 </div>

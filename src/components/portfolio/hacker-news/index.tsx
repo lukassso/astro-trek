@@ -4,10 +4,10 @@ import Pagination from "./components/Pagination";
 import Search from "./components/Search";
 
 const HackerNewsRoot = () => (
-	<AppProvider>
-		<Search />
-		<Pagination />
-		<HackerNewsStories />
-	</AppProvider>
+  <AppProvider>
+    <Search />
+    <Pagination />
+    <HackerNewsStories />
+  </AppProvider>
 );
 export default HackerNewsRoot;

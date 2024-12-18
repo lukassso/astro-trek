@@ -1,20 +1,20 @@
 import { useState, useEffect } from "react";
 
 export function useMediaQuery(query: string) {
-	const [matches, setMatches] = useState<boolean>(false);
+  const [matches, setMatches] = useState<boolean>(false);
 
-	useEffect(() => {
-		const media = window.matchMedia(query);
-		console.log("media", media);
-		if (media.matches !== matches) {
-			setMatches(media.matches);
-		}
-		const listener = () => {
-			setMatches(media.matches);
-		};
-		media.addEventListener("change", listener);
-		return () => media.removeEventListener("change", listener);
-	}, [matches, query]);
+  useEffect(() => {
+    const media = window.matchMedia(query);
+    console.log("media", media);
+    if (media.matches !== matches) {
+      setMatches(media.matches);
+    }
+    const listener = () => {
+      setMatches(media.matches);
+    };
+    media.addEventListener("change", listener);
+    return () => media.removeEventListener("change", listener);
+  }, [matches, query]);
 
-	return matches;
+  return matches;
 }

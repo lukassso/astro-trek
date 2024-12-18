@@ -1,4 +1,4 @@
-export { Table } from "./Table";
-export { TableHeader } from "./TableHeader";
-export { TableRow } from "./TableRow";
-export { TableCell } from "./TableCell";
+export { Table } from "./table/Table";
+export { TableHeader } from "./table/TableHeader";
+export { TableRow } from "./table/TableRow";
+export { TableCell } from "./table/TableCell";

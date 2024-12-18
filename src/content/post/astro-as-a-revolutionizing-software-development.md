@@ -54,11 +54,11 @@ import VueComponent from "./VueComponent.vue";
 ---
 
 <html>
-	<body>
-		<h1>My Astro Page</h1>
-		<ReactComponent />
-		<VueComponent />
-	</body>
+  <body>
+    <h1>My Astro Page</h1>
+    <ReactComponent />
+    <VueComponent />
+  </body>
 </html>
 ```
 
@@ -98,10 +98,10 @@ const pubDate = new Date("2024-07-09");
 ---
 
 <article>
-	<h1>{title}</h1>
-	<p>Published on: {pubDate.toDateString()}</p>
-	<slot />
-	<!-- This is where the content will go -->
+  <h1>{title}</h1>
+  <p>Published on: {pubDate.toDateString()}</p>
+  <slot />
+  <!-- This is where the content will go -->
 </article>
 ```
 

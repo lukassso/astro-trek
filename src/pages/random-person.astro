@@ -6,13 +6,13 @@ import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
 ---
 
 <PageLayout meta={{ title: "Random Person App" }}>
-	<ContainerSection maxWidth="max-w-2xl">
-		<HeaderPortfolio
-			client:visible
-			title={"Random Person"}
-			description={"A random profile generator for testing purposes, complete with contact details and a photograph."}
-			chipsList={["React", "Typescript", "react-icons", "Rest API", "Tailwind CSS"]}
-		/>
-		<RandomPersonComponent client:visible />
-	</ContainerSection>
+  <ContainerSection maxWidth="max-w-2xl">
+    <HeaderPortfolio
+      client:visible
+      title={"Random Person"}
+      description={"A random profile generator for testing purposes, complete with contact details and a photograph."}
+      chipsList={["React", "Typescript", "react-icons", "Rest API", "Tailwind CSS"]}
+    />
+    <RandomPersonComponent client:visible />
+  </ContainerSection>
 </PageLayout>

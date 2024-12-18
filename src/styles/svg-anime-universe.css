@@ -1,281 +1,281 @@
 .bg-gradient {
-	position: fixed;
-	z-index: -1;
-	top: 0;
-	left: 0;
-	height: 100vh;
-	width: 100vw;
-	background-size: 150% 150%;
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-size: 150% 150%;
 }
 .bg-gradient-mix {
-	background:
-		radial-gradient(
-				circle at -10% 120%,
-				var(--clr-radial-gradient-1-start) 0,
-				var(--clr-radial-gradient-1-mid) 10%,
-				var(--clr-radial-gradient-1-end) 20%,
-				var(--clr-radial-gradient-1-transparent) 40%
-			)
-			50% 50%,
-		radial-gradient(
-				circle at 100% -10%,
-				var(--clr-radial-gradient-2-start) 0,
-				var(--clr-radial-gradient-2-end) 40%
-			)
-			50% 50%,
-		radial-gradient(
-				circle at 50% 50%,
-				var(--clr-radial-gradient-3-start) 20%,
-				var(--clr-radial-gradient-3-end) 100%
-			)
-			50% 50%;
+  background:
+    radial-gradient(
+        circle at -10% 120%,
+        var(--clr-radial-gradient-1-start) 0,
+        var(--clr-radial-gradient-1-mid) 10%,
+        var(--clr-radial-gradient-1-end) 20%,
+        var(--clr-radial-gradient-1-transparent) 40%
+      )
+      50% 50%,
+    radial-gradient(
+        circle at 100% -10%,
+        var(--clr-radial-gradient-2-start) 0,
+        var(--clr-radial-gradient-2-end) 40%
+      )
+      50% 50%,
+    radial-gradient(
+        circle at 50% 50%,
+        var(--clr-radial-gradient-3-start) 20%,
+        var(--clr-radial-gradient-3-end) 100%
+      )
+      50% 50%;
 }
 
 .heroWrapper {
-	margin: 0 auto;
-	padding: 0 24px;
-	max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  max-width: 1200px;
 }
 .heroContent {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 .heroTitle h1 {
-	position: relative;
-	z-index: 0;
-	line-height: 3rem;
-	font-weight: 900;
-	font-size: 3.2rem;
-	color: var(--clr-primary);
-	text-align: center;
+  position: relative;
+  z-index: 0;
+  line-height: 3rem;
+  font-weight: 900;
+  font-size: 3.2rem;
+  color: var(--clr-primary);
+  text-align: center;
 }
 .contentText {
-	text-align: center;
-	padding-top: 20px;
-	line-height: 2rem;
+  text-align: center;
+  padding-top: 20px;
+  line-height: 2rem;
 }
 .contentButtons {
-	display: flex;
-	justify-content: center;
-	text-align: center;
-	padding: 0;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 0;
 }
 .contentButtons button {
-	margin-top: 20px;
+  margin-top: 20px;
 }
 .contentButtons button:nth-child(1) {
-	margin-right: 20px;
+  margin-right: 20px;
 }
 .imageHero {
-	margin: 50px auto 0;
+  margin: 50px auto 0;
 }
 .bcgAnimeHero {
-	margin: 80px 0;
+  margin: 80px 0;
 }
 @media screen and (min-width: 900px) {
-	.heroWrapper {
-		margin: 0px auto;
-		position: relative;
-	}
-	.heroContent {
-		display: flex;
-		flex-direction: row-reverse;
-	}
-	.contentWrapper {
-		max-width: 500px;
-		padding: 130px 0 0;
-	}
-	.heroTitle h1 {
-		position: absolute;
-		top: 30px;
-		z-index: 2;
-		font-weight: 900;
-		font-size: 3.2rem;
-	}
-	.heroTitle h2 {
-		display: block;
-		padding-top: 130px;
-		font-weight: 500;
-		font-size: 2.8rem;
-		text-transform: uppercase;
-	}
-	.contentText {
-		text-align: left;
-		padding-top: 20px;
-		line-height: 1.5rem;
-	}
-	.contentButtons {
-		text-align: left;
-		padding: 22px 20px 0 0;
-		justify-content: flex-start;
-	}
-	.contentButtons button {
-		margin-top: 20px;
-		margin-right: 20px;
-	}
-	.imageHero {
-		width: 100%;
-		margin: 160px 0 0;
-		display: flex;
-		justify-content: flex-end;
-	}
+  .heroWrapper {
+    margin: 0px auto;
+    position: relative;
+  }
+  .heroContent {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+  .contentWrapper {
+    max-width: 500px;
+    padding: 130px 0 0;
+  }
+  .heroTitle h1 {
+    position: absolute;
+    top: 30px;
+    z-index: 2;
+    font-weight: 900;
+    font-size: 3.2rem;
+  }
+  .heroTitle h2 {
+    display: block;
+    padding-top: 130px;
+    font-weight: 500;
+    font-size: 2.8rem;
+    text-transform: uppercase;
+  }
+  .contentText {
+    text-align: left;
+    padding-top: 20px;
+    line-height: 1.5rem;
+  }
+  .contentButtons {
+    text-align: left;
+    padding: 22px 20px 0 0;
+    justify-content: flex-start;
+  }
+  .contentButtons button {
+    margin-top: 20px;
+    margin-right: 20px;
+  }
+  .imageHero {
+    width: 100%;
+    margin: 160px 0 0;
+    display: flex;
+    justify-content: flex-end;
+  }
 }
 .primary {
-	color: var(--clr-primary);
+  color: var(--clr-primary);
 }
 
 .buttonAnime {
-	padding: 18px 24px;
-	border-radius: var(--radius);
-	font-weight: 500;
-	cursor: pointer;
+  padding: 18px 24px;
+  border-radius: var(--radius);
+  font-weight: 500;
+  cursor: pointer;
 }
 
 .buttonPrimary {
-	border: none;
-	background: var(--clr-primary);
-	color: var(--clr-buttonPrimary-color);
+  border: none;
+  background: var(--clr-primary);
+  color: var(--clr-buttonPrimary-color);
 }
 .buttonSecondary {
-	outline: 1px solid var(--clr-grey-6);
-	background: var(--clr-buttonSecondary-background);
-	color: var(--clr-buttonSecondary-color);
+  outline: 1px solid var(--clr-grey-6);
+  background: var(--clr-buttonSecondary-background);
+  color: var(--clr-buttonSecondary-color);
 }
 :root {
-	--clr-primary: #e45410;
-	--clr-primary-dark: #ff5d11;
-	--clr-primary-light: rgba(229, 83, 16, 15);
+  --clr-primary: #e45410;
+  --clr-primary-dark: #ff5d11;
+  --clr-primary-light: rgba(229, 83, 16, 15);
 
-	/* Miscellaneous */
-	--radius: 0.3rem;
+  /* Miscellaneous */
+  --radius: 0.3rem;
 
-	/* grey palette */
-	--clr-grey-0: #fff;
-	--clr-grey-1: #f4f6f8;
-	--clr-grey-2: #ecf0f3;
-	--clr-grey-3: #bcc0cc;
-	--clr-grey-4: #4a4f61;
-	--clr-grey-5: #363636;
-	--clr-grey-6: #292929;
-	--clr-grey-7: #1c1c1c;
-	--clr-grey-8: #fdebe2;
-	/* shapes and curve paths */
-	--clr-menu-line-btm: rgba(139, 144, 161, 0.3);
-	/* color palette */
-	--clr-white: #fff;
-	--clr-gold: rgba(250, 173, 41, 1);
-	--clr-red-dark: #bb2525;
-	--clr-red-light: #e66b6b;
-	--clr-black: rgba(24, 22, 22, 1);
-	--clr-blue: #6a8cb9;
+  /* grey palette */
+  --clr-grey-0: #fff;
+  --clr-grey-1: #f4f6f8;
+  --clr-grey-2: #ecf0f3;
+  --clr-grey-3: #bcc0cc;
+  --clr-grey-4: #4a4f61;
+  --clr-grey-5: #363636;
+  --clr-grey-6: #292929;
+  --clr-grey-7: #1c1c1c;
+  --clr-grey-8: #fdebe2;
+  /* shapes and curve paths */
+  --clr-menu-line-btm: rgba(139, 144, 161, 0.3);
+  /* color palette */
+  --clr-white: #fff;
+  --clr-gold: rgba(250, 173, 41, 1);
+  --clr-red-dark: #bb2525;
+  --clr-red-light: #e66b6b;
+  --clr-black: rgba(24, 22, 22, 1);
+  --clr-blue: #6a8cb9;
 
-	/* radial gradient */
-	--clr-radial-gradient-1-start-dark: #6841be;
-	--clr-radial-gradient-1-mid-dark: #442980;
-	--clr-radial-gradient-1-end-dark: #241348;
-	--clr-radial-gradient-1-transparent-dark: rgba(1, 1, 2, 0);
+  /* radial gradient */
+  --clr-radial-gradient-1-start-dark: #6841be;
+  --clr-radial-gradient-1-mid-dark: #442980;
+  --clr-radial-gradient-1-end-dark: #241348;
+  --clr-radial-gradient-1-transparent-dark: rgba(1, 1, 2, 0);
 
-	--clr-radial-gradient-2-start-dark: #ae5a56;
-	--clr-radial-gradient-2-end-dark: rgba(5, 3, 3, 0);
+  --clr-radial-gradient-2-start-dark: #ae5a56;
+  --clr-radial-gradient-2-end-dark: rgba(5, 3, 3, 0);
 
-	--clr-radial-gradient-3-start-dark: #010102;
-	--clr-radial-gradient-3-end-dark: #010102;
+  --clr-radial-gradient-3-start-dark: #010102;
+  --clr-radial-gradient-3-end-dark: #010102;
 
-	--clr-radial-gradient-1-start-light: #f9f5ff;
-	--clr-radial-gradient-1-mid-light: #c4d3ff;
-	--clr-radial-gradient-1-end-light: #89a6ff;
-	--clr-radial-gradient-1-transparent-light: rgba(249, 245, 255, 0);
+  --clr-radial-gradient-1-start-light: #f9f5ff;
+  --clr-radial-gradient-1-mid-light: #c4d3ff;
+  --clr-radial-gradient-1-end-light: #89a6ff;
+  --clr-radial-gradient-1-transparent-light: rgba(249, 245, 255, 0);
 
-	--clr-radial-gradient-2-start-light: #bafdc6;
-	--clr-radial-gradient-2-end-light: rgba(186, 253, 198, 0);
+  --clr-radial-gradient-2-start-light: #bafdc6;
+  --clr-radial-gradient-2-end-light: rgba(186, 253, 198, 0);
 
-	--clr-radial-gradient-3-start-light: #ffe0b5;
-	--clr-radial-gradient-3-end-light: #ffc784;
+  --clr-radial-gradient-3-start-light: #ffe0b5;
+  --clr-radial-gradient-3-end-light: #ffc784;
 }
 [data-theme="dark"] {
-	--clr-primary: var(--clr-primary-dark);
-	--clr-bcg-main: theme("colors.gray.700");
-	--clr-bcg-3: var("colors.gray.700");
-	--clr-bcg-cards: var(--clr-grey-7);
-	--clr-bcg-menu: var(--clr-grey-6);
-	--clr-fill-logo-1: var(--clr-grey-0);
-	--clr-fill-logo-2: var(--clr-grey-0);
-	/* buttons */
-	--clr-buttonPrimary-color: var(--clr-grey-0);
-	--clr-buttonSecondary-background: var(--clr-grey-0);
-	--clr-buttonSecondary-color: var(--clr-primary);
-	--clr-button-scroll-to-top-1: var(--clr-grey-6);
-	--clr-button-scroll-to-top-2: var(--clr-grey-7);
-	/* components variables */
-	--clr-labels-color: var(--clr-grey-0);
-	--clr-labels-background: var(--clr-grey-5);
-	--clr-card-title-color: var(--clr-primary);
-	/* hero image */
-	--clr-hero-image-1: #1f1f1f;
-	--clr-hero-image-2: #363636;
-	--clr-hero-image-3: #1f1f1f;
-	--clr-hero-image-4: #363636;
-	--clr-hero-image-5: #474747;
-	/* radial gradient */
-	--clr-radial-gradient-1-start: var(--clr-radial-gradient-1-start-dark);
-	--clr-radial-gradient-1-mid: var(--clr-radial-gradient-1-mid-dark);
-	--clr-radial-gradient-1-end: var(--clr-radial-gradient-1-end-dark);
-	--clr-radial-gradient-1-transparent: var(--clr-radial-gradient-1-transparent-dark);
+  --clr-primary: var(--clr-primary-dark);
+  --clr-bcg-main: theme("colors.gray.700");
+  --clr-bcg-3: var("colors.gray.700");
+  --clr-bcg-cards: var(--clr-grey-7);
+  --clr-bcg-menu: var(--clr-grey-6);
+  --clr-fill-logo-1: var(--clr-grey-0);
+  --clr-fill-logo-2: var(--clr-grey-0);
+  /* buttons */
+  --clr-buttonPrimary-color: var(--clr-grey-0);
+  --clr-buttonSecondary-background: var(--clr-grey-0);
+  --clr-buttonSecondary-color: var(--clr-primary);
+  --clr-button-scroll-to-top-1: var(--clr-grey-6);
+  --clr-button-scroll-to-top-2: var(--clr-grey-7);
+  /* components variables */
+  --clr-labels-color: var(--clr-grey-0);
+  --clr-labels-background: var(--clr-grey-5);
+  --clr-card-title-color: var(--clr-primary);
+  /* hero image */
+  --clr-hero-image-1: #1f1f1f;
+  --clr-hero-image-2: #363636;
+  --clr-hero-image-3: #1f1f1f;
+  --clr-hero-image-4: #363636;
+  --clr-hero-image-5: #474747;
+  /* radial gradient */
+  --clr-radial-gradient-1-start: var(--clr-radial-gradient-1-start-dark);
+  --clr-radial-gradient-1-mid: var(--clr-radial-gradient-1-mid-dark);
+  --clr-radial-gradient-1-end: var(--clr-radial-gradient-1-end-dark);
+  --clr-radial-gradient-1-transparent: var(--clr-radial-gradient-1-transparent-dark);
 
-	--clr-radial-gradient-2-start: var(--clr-radial-gradient-2-start-dark);
-	--clr-radial-gradient-2-end: var(--clr-radial-gradient-2-end-dark);
+  --clr-radial-gradient-2-start: var(--clr-radial-gradient-2-start-dark);
+  --clr-radial-gradient-2-end: var(--clr-radial-gradient-2-end-dark);
 
-	--clr-radial-gradient-3-start: var(--clr-radial-gradient-3-start-dark);
-	--clr-radial-gradient-3-end: var(--clr-radial-gradient-3-end-dark);
+  --clr-radial-gradient-3-start: var(--clr-radial-gradient-3-start-dark);
+  --clr-radial-gradient-3-end: var(--clr-radial-gradient-3-end-dark);
 }
 [data-theme="dark"] h1 span,
 [data-theme="dark"] h2 span {
-	color: var(--clr-grey-3);
+  color: var(--clr-grey-3);
 }
 [data-theme="dark"] p,
 [data-theme="dark"] a {
-	color: var(--clr-grey-3);
+  color: var(--clr-grey-3);
 }
 [data-theme="light"] {
-	--clr-bcg-main: theme("colors.gray.50");
-	--clr-bcg-3: theme("colors.gray.50");
-	--clr-bcg-cards: var(--clr-grey-0);
-	--clr-bcg-menu: var(--clr-grey-2);
-	--clr-fill-logo-1: var(--clr-primary);
-	--clr-fill-logo-2: var(--clr-grey-6);
-	/* buttons */
-	--clr-buttonPrimary-color: var(--clr-grey-0);
-	--clr-buttonSecondary-background: none;
-	--clr-buttonSecondary-color: var(--clr-grey-4);
-	--clr-button-scroll-to-top-1: var(--clr-grey-3);
-	--clr-button-scroll-to-top-2: var(--clr-grey-4);
-	/* components variables */
-	--clr-labels-color: var(--clr-primary);
-	--clr-labels-background: var(--clr-primary-light);
-	--clr-card-title-color: var(--clr-grey-4);
-	/* hero image */
-	--clr-hero-image-1: #263238;
-	--clr-hero-image-2: #fff;
-	--clr-hero-image-3: #c7c7c7;
-	--clr-hero-image-4: #ebebeb;
-	--clr-hero-image-5: #dbdbdb;
-	/* radial gradient */
-	--clr-radial-gradient-1-start: var(--clr-radial-gradient-1-start-light);
-	--clr-radial-gradient-1-mid: var(--clr-radial-gradient-1-mid-light);
-	--clr-radial-gradient-1-end: var(--clr-radial-gradient-1-end-light);
-	--clr-radial-gradient-1-transparent: var(--clr-radial-gradient-1-transparent-light);
+  --clr-bcg-main: theme("colors.gray.50");
+  --clr-bcg-3: theme("colors.gray.50");
+  --clr-bcg-cards: var(--clr-grey-0);
+  --clr-bcg-menu: var(--clr-grey-2);
+  --clr-fill-logo-1: var(--clr-primary);
+  --clr-fill-logo-2: var(--clr-grey-6);
+  /* buttons */
+  --clr-buttonPrimary-color: var(--clr-grey-0);
+  --clr-buttonSecondary-background: none;
+  --clr-buttonSecondary-color: var(--clr-grey-4);
+  --clr-button-scroll-to-top-1: var(--clr-grey-3);
+  --clr-button-scroll-to-top-2: var(--clr-grey-4);
+  /* components variables */
+  --clr-labels-color: var(--clr-primary);
+  --clr-labels-background: var(--clr-primary-light);
+  --clr-card-title-color: var(--clr-grey-4);
+  /* hero image */
+  --clr-hero-image-1: #263238;
+  --clr-hero-image-2: #fff;
+  --clr-hero-image-3: #c7c7c7;
+  --clr-hero-image-4: #ebebeb;
+  --clr-hero-image-5: #dbdbdb;
+  /* radial gradient */
+  --clr-radial-gradient-1-start: var(--clr-radial-gradient-1-start-light);
+  --clr-radial-gradient-1-mid: var(--clr-radial-gradient-1-mid-light);
+  --clr-radial-gradient-1-end: var(--clr-radial-gradient-1-end-light);
+  --clr-radial-gradient-1-transparent: var(--clr-radial-gradient-1-transparent-light);
 
-	--clr-radial-gradient-2-start: var(--clr-radial-gradient-2-start-light);
-	--clr-radial-gradient-2-end: var(--clr-radial-gradient-2-end-light);
+  --clr-radial-gradient-2-start: var(--clr-radial-gradient-2-start-light);
+  --clr-radial-gradient-2-end: var(--clr-radial-gradient-2-end-light);
 
-	--clr-radial-gradient-3-start: var(--clr-radial-gradient-3-start-light);
-	--clr-radial-gradient-3-end: var(--clr-radial-gradient-3-end-light);
+  --clr-radial-gradient-3-start: var(--clr-radial-gradient-3-start-light);
+  --clr-radial-gradient-3-end: var(--clr-radial-gradient-3-end-light);
 }
 [data-theme="light"] h1 span,
 [data-theme="light"] h2 span {
-	color: var(--clr-grey-5);
+  color: var(--clr-grey-5);
 }
 [data-theme="light"] p,
 [data-theme="light"] a {
-	color: var(--clr-grey-4);
+  color: var(--clr-grey-4);
 }

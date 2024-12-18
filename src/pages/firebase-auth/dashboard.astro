@@ -6,12 +6,12 @@ import HeaderFirebaseAuth from "@/components/portfolio/firebase-auth/HeaderFireb
 ---
 
 <Layout meta={{ title: "Dashboard" }}>
-	<ContainerSection>
-		<HeaderFirebaseAuth />
-		<DashboardComponent client:visible />
-	</ContainerSection>
+  <ContainerSection>
+    <HeaderFirebaseAuth />
+    <DashboardComponent client:visible />
+  </ContainerSection>
 </Layout>
 <script>
-	import { checkSession } from "@/utils/session";
-	checkSession();
+  import { checkSession } from "@/utils/session";
+  checkSession();
 </script>

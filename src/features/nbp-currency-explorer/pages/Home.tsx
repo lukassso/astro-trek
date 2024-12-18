@@ -10,57 +10,57 @@ import CurrencyTable from "@/components/portfolio/nbp-currency-explorer/componen
 import CurrencyCards from "@/components/portfolio/nbp-currency-explorer/components/currency-cards/CurrencyCards";
 
 export default function HomePage() {
-	const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
-	const [currencyRates, setCurrencyRates] = useState<CurrencyRate[]>([]);
-	const [loading, setLoading] = useState<boolean>(true);
-	const [error, setError] = useState<string | null>(null);
+  const [currencyRates, setCurrencyRates] = useState<CurrencyRate[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
-	useEffect(() => {
-		const fetchRates = async () => {
-			try {
-				setLoading(true);
-				const rates = await fetchCurrencyRates();
-				setCurrencyRates(rates);
-			} catch (error) {
-				console.error("Error fetching currency rates:", error);
-				setError("Failed to load currency rates.");
-			} finally {
-				setLoading(false);
-			}
-		};
+  useEffect(() => {
+    const fetchRates = async () => {
+      try {
+        setLoading(true);
+        const rates = await fetchCurrencyRates();
+        setCurrencyRates(rates);
+      } catch (error) {
+        console.error("Error fetching currency rates:", error);
+        setError("Failed to load currency rates.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-		fetchRates();
-	}, []);
+    fetchRates();
+  }, []);
 
-	if (loading) {
-		return <Spinner />;
-	}
+  if (loading) {
+    return <Spinner />;
+  }
 
-	if (error) {
-		return <div>{error}</div>;
-	}
+  if (error) {
+    return <div>{error}</div>;
+  }
 
-	return (
-		<section className="mx-auto w-full max-w-5xl px-4 py-12 md:px-6 md:py-16">
-			<CurrencyConverter />
-			<Card>
-				<CardHeader>
-					<CardTitle>Currency Exchange Rates</CardTitle>
-					<CardDescription>
-						Real-time exchange rates from the National Bank of Poland (NBP)
-					</CardDescription>
-				</CardHeader>
-				<CardContent>
-					<div className={styles.tableContainer}>
-						{!isDesktop ? (
-							<CurrencyCards rates={currencyRates} />
-						) : (
-							<CurrencyTable rates={currencyRates} />
-						)}
-					</div>
-				</CardContent>
-			</Card>
-		</section>
-	);
+  return (
+    <section className="mx-auto w-full max-w-5xl px-4 py-12 md:px-6 md:py-16">
+      <CurrencyConverter />
+      <Card>
+        <CardHeader>
+          <CardTitle>Currency Exchange Rates</CardTitle>
+          <CardDescription>
+            Real-time exchange rates from the National Bank of Poland (NBP)
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className={styles.tableContainer}>
+            {!isDesktop ? (
+              <CurrencyCards rates={currencyRates} />
+            ) : (
+              <CurrencyTable rates={currencyRates} />
+            )}
+          </div>
+        </CardContent>
+      </Card>
+    </section>
+  );
 }
