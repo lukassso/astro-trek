@@ -4,12 +4,25 @@ import Hero from "@/components/home/Hero.astro";
 import ContainerSection from "@/components/common/ContainerSection.astro";
 import PortfolioSection from "@/components/home/portfolio-section";
 import GreetingsSection from "@/components/home/greetings-section";
+import ServicesSection from "@/components/home/services-section";
 ---
 
 <PageLayout meta={{ title: "Home" }}>
   <Hero />
-  <ContainerSection>
-    <GreetingsSection client:visible />
-    <PortfolioSection client:visible />
-  </ContainerSection>
+  <div class="py-24 md:py-32 lg:py-40">
+    <ContainerSection>
+      <GreetingsSection client:visible />
+      <PortfolioSection client:visible />
+    </ContainerSection>
+    <div class="grid place-items-center py-8 md:py-20">
+      <h2
+        class="items-center justify-center text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl"
+      >
+        What can I do for You
+      </h2>
+    </div>
+    <ContainerSection fullWidth>
+      <ServicesSection client:visible />
+    </ContainerSection>
+  </div>
 </PageLayout>

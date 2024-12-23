@@ -1,7 +1,14 @@
 ---
-const { maxWidth = "max-w-6xl" } = Astro.props;
+const { 
+  maxWidth = "max-w-6xl",
+  fullWidth = false 
+} = Astro.props;
+
+const containerClass = fullWidth 
+  ? "relative w-full" 
+  : `relative ${maxWidth} mx-auto px-4 text-default md:px-6 `;
 ---
 
-<section class=`"relative ${maxWidth} mx-auto px-4 py-24 text-default md:px-6 md:py-32 lg:py-40"`>
+<section class={containerClass}>
   <slot />
 </section>
