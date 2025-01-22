@@ -6,7 +6,7 @@
   import invariant from "tiny-invariant";
 
   const root = document.documentElement;
-  const isDarkMode = root.getAttribute("data-theme") === "dark";
+  const isDarkMode = root.getAttribute("data-theme") === "dark" || !root.getAttribute("data-theme");
 
   const COUNT = 300;
   const SPEED = Math.random() * 0.1 + 0.25;
