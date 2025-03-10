@@ -22,7 +22,7 @@ export default function PortfolioSection() {
     );
     setItems(initialItems);
     setRandomTechnologies(initialRandomTechnologies);
-  }, []);
+  }, [visibleCount]);
 
   const getRandomElements = (arr: string[], numElements: number) => {
     const shuffled = [...arr].sort(() => 0.5 - Math.random());
