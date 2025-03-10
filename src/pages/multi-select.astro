@@ -1,0 +1,18 @@
+---
+import PageLayout from "@/layouts/PageLayout.astro";
+import ContainerSection from "@/components/common/ContainerSection.astro";
+import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
+import MultiSelectComponent from "@/components/portfolio/multi-select-component";
+---
+
+<PageLayout meta={{ title: "Multi Select Component" }}>
+	<ContainerSection>
+		<HeaderPortfolio
+			client:visible
+			title={"Multi Select Component"}
+			description={"A multi-select component that allows users to select multiple items from a list. It features a user-friendly interface with options to select or deselect all items, and it is optimized for both desktop and mobile views."}
+			chipsList={["React", "Typescript", "React Select", "Tailwind CSS", "Radix UI", "Zod", "Cmdk"]}
+		/>
+		<MultiSelectComponent client:visible />
+	</ContainerSection>
+</PageLayout>

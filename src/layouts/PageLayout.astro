@@ -1,36 +1,37 @@
 ---
 import type { SiteMeta } from "@/types";
-import Footer from "@/components/layout/Footer.astro";
-import Header from "@/components/layout/Header.astro";
-import BaseHead from "@/components/BaseHead.astro";
-import ThemeProvider from "@/components/ThemeProvider.astro";
-import { siteConfig, menuLinks } from "@/site-config";
+import Footer from "@/components/common/Footer.astro";
+import Header from "@/components/common/Header.astro";
+import BaseHead from "@/components/common/BaseHead.astro";
+import ThemeProvider from "@/components/common/ThemeProvider.astro";
+import { siteConfig, menuLinks } from "@/site.config";
 
 interface Props {
-	meta: SiteMeta;
-	heroAnime?: boolean;
+  meta: SiteMeta;
+  heroAnime?: boolean;
 }
 
 const {
-	meta: { articleDate, description = siteConfig.description, ogImage, title },
-	heroAnime,
+  meta: { articleDate, description = siteConfig.description, ogImage, title },
+  heroAnime,
 } = Astro.props;
 ---
 
 <html lang={siteConfig.lang}>
-	<head>
-		<BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} />
-	</head>
-	<body
-		class="relative h-full min-h-screen overflow-x-hidden bg-default text-base text-default selection:bg-secondary selection:text-white"
-	>
-		{heroAnime ? <div class="bg-gradient bg-gradient-mix" /> : undefined}
+  <head>
+    <BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} />
+  </head>
+  <body
+    aria-label={title}
+    class="relative h-full min-h-screen overflow-x-hidden bg-default text-base text-default selection:bg-secondary selection:text-white"
+  >
+    {heroAnime ? <div class="bg-gradient bg-gradient-mix" /> : undefined}
 
-		<ThemeProvider />
-		<Header menuLinks={menuLinks} />
-		<main>
-			<slot />
-		</main>
-		<Footer />
-	</body>
+    <ThemeProvider />
+    <Header menuLinks={menuLinks} />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
 </html>

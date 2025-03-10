@@ -1,0 +1,42 @@
+.card {
+  margin-bottom: 1rem;
+}
+
+.cardContent {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid hsl(var(--border));
+  overflow: hidden;
+}
+
+.cardRow:last-child {
+  border-bottom: none;
+}
+
+.buttonRow {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 1rem;
+}
+
+.label {
+  font-weight: bold;
+  color: hsl(var(--foreground));
+}
+
+.boldText {
+  font-weight: bold;
+}
+
+@media (min-width: 768px) {
+  .card {
+    display: none;
+  }
+}

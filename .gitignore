@@ -16,9 +16,17 @@ pnpm-debug.log*
 # environment variables
 .env
 .env.production
+.env.development
+chatroom-f0512-firebase-adminsdk.json
 
 # macOS-specific files
 .DS_Store
 
 # VSCode
 .vscode/*
+
+# Local Netlify folder
+.netlify
+
+# Utility
+.cursorrules

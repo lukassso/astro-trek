@@ -1,0 +1,12 @@
+---
+import PageLayout from "@/layouts/PageLayout.astro";
+import FramerParallaxComponent from "@/components/portfolio/framer-parallax";
+import Content from "@/components/portfolio/framer-parallax/components/Content.astro";
+---
+
+<PageLayout meta={{ title: "Framer Parallax" }}>
+  <div>
+    <FramerParallaxComponent client:visible />
+    <Content />
+  </div>
+</PageLayout>

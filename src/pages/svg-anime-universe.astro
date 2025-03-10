@@ -1,0 +1,20 @@
+---
+import SvgAnimeUniverseRoot from "@/components/portfolio/svg-anime-universe";
+import PageLayout from "@/layouts/PageLayout.astro";
+import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
+---
+
+<PageLayout
+  heroAnime
+  meta={{ title: "SVG Anime Universe", description: "Homepage teaser with a parallax effect" }}
+>
+  <div class="w-full overflow-hidden pb-20 pt-32">
+    <HeaderPortfolio
+      client:visible
+      title={"SVG Anime Universe"}
+      description={"Homepage view of an anime service with advanced SVG animation of moving circles."}
+      chipsList={["React", "Typescript", "SVG API", "CSS"]}
+    />
+    <SvgAnimeUniverseRoot client:visible />
+  </div>
+</PageLayout>

@@ -1,13 +1,18 @@
 ---
 import PageLayout from "@/layouts/PageLayout.astro";
-import ContainerSection from "@/components/ContainerSection.astro";
-import TaskRoot from "@/components/task-manager";
-import AppHeader from "@/components/task-manager/components/AppHeader.astro";
+import ContainerSection from "@/components/common/ContainerSection.astro";
+import TaskRoot from "@/components/portfolio/task-manager";
+import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
 ---
 
-<PageLayout meta={{ title: "Task Manager" }}>
-	<ContainerSection maxWidth="max-w-2xl">
-		<AppHeader />
-		<TaskRoot client:visible />
-	</ContainerSection>
+<PageLayout meta={{ title: "Task Manager App" }}>
+  <ContainerSection maxWidth="max-w-2xl">
+    <HeaderPortfolio
+      client:visible
+      title={"Task Manager"}
+      description={"Task management tool that simplifies daily organization and enhances productivity."}
+      chipsList={["React", "Typescript", "react-redux", "@reduxjs/toolkit", "Context API"]}
+    />
+    <TaskRoot client:visible />
+  </ContainerSection>
 </PageLayout>

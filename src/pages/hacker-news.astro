@@ -1,13 +1,18 @@
 ---
 import PageLayout from "@/layouts/PageLayout.astro";
-import ContainerSection from "@/components/ContainerSection.astro";
-import HackerNewsRoot from "@/components/hacker-news";
-import AppHeader from "@/components/hacker-news/components/AppHeader.astro";
+import ContainerSection from "@/components/common/ContainerSection.astro";
+import HackerNewsRoot from "@/components/portfolio/hacker-news";
+import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
 ---
 
 <PageLayout meta={{ title: "Hacker News" }}>
-	<ContainerSection maxWidth="max-w-2xl">
-		<AppHeader />
-		<HackerNewsRoot client:visible />
-	</ContainerSection>
+  <ContainerSection maxWidth="max-w-2xl">
+    <HeaderPortfolio
+      client:visible
+      title={"Hacker News"}
+      description={"A minimalist Hacker News client that facilitates access to technological news."}
+      chipsList={["React", "Typescript", "Tailwind CSS", "Rest API", "Context API", "useReducer"]}
+    />
+    <HackerNewsRoot client:visible />
+  </ContainerSection>
 </PageLayout>

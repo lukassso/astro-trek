@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import type { TypedUseSelectorHook } from "react-redux";
 
 export const store = configureStore({
-	reducer: {
-		taskState: taskSlice,
-	},
+  reducer: {
+    taskState: taskSlice,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
