@@ -15,7 +15,7 @@ function ServiceItem({ title, className }: ServiceItemProps) {
 }
 
 export default function ServicesSection() {
-  const services = ["WEBDESIGN", "WEBDEVELOPMENT", "PRODUCTDESIGN", "SEO", "TAILOREDTEAMMATE"];
+  const services = ["Web Development", "Product Design", "AI Prototyping", "Data Processing"];
   
   useStarfield({
     containerId: "starfield-services",
@@ -25,7 +25,7 @@ export default function ServicesSection() {
   return (
     <section className="relative w-full bg-transparent py-12 md:py-24">
       <div id="starfield-services" className="absolute inset-0 h-full w-full">
-        <canvas id="starfield-canvas-services" className="h-full w-full"></canvas>
+        <canvas id="starfield-canvas-services" className="h-full w-full" />
       </div>
       <div className="relative grid gap-10 px-4 text-center md:px-14">
         <div className="flex flex-col items-start space-y-6 text-white md:space-y-14">
