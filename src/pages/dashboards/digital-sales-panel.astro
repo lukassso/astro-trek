@@ -1,0 +1,29 @@
+---
+export const prerender = false;
+import PageLayout from "@/layouts/PageLayout.astro";
+import DigitalSalesComponent from "@/components/portfolio/dashboards/digital-sales-analysis";
+import ContainerSection from "@/components/common/ContainerSection.astro";
+import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
+---
+
+<PageLayout meta={{ title: "Digital Sales Analysis" }}>
+  <ContainerSection>
+    <HeaderPortfolio
+      client:visible
+      title={"Digital Sales Analysis"}
+      description={"A comprehensive dashboard for analyzing digital sales data and trends."}
+      chipsList={[
+        "React",
+        "Typescript",
+        "MobX",
+        "Tailwind CSS",
+        "Shadcn UI",
+        "Radix UI",
+        "OpenAI API",
+        "Data Visualization",
+        "Analytics Tools",
+      ]}
+    />
+    <DigitalSalesComponent client:only />
+  </ContainerSection>
+</PageLayout>
