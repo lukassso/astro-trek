@@ -35,7 +35,7 @@ export const technologies: TechArrayProp[] = [
     image: "/src/assets/tech-stack/WordPress.svg",
     category: "Frameworks & Libraries",
   },
-  // 🧾 Programming leanguages
+  // 🧾 Programming languages
   { name: "JavaScript", image: "/src/assets/tech-stack/JavaScript.svg", category: "Languages" },
   { name: "TypeScript", image: "/src/assets/tech-stack/TypeScript.svg", category: "Languages" },
   { name: "Python", image: "/src/assets/tech-stack/Python.svg", category: "Languages" },
@@ -64,13 +64,13 @@ export const technologies: TechArrayProp[] = [
     category: "Data Science & ML",
   },
   // 🧪 Tests
-  { name: "Playwrite", image: "/src/assets/tech-stack/Playwrite.svg", category: "Testing" },
+  { name: "Playwright", image: "/src/assets/tech-stack/Playwright.svg", category: "Testing" },
   { name: "Storybook", image: "/src/assets/tech-stack/Storybook.svg", category: "Testing" },
   { name: "Jest", image: "/src/assets/tech-stack/Jest.svg", category: "Testing" },
   // 🎨 Design
   { name: "Figma", image: "/src/assets/tech-stack/Figma.svg", category: "Design" },
-  // 🛢️ Data Bases
-  { name: "Postgresql", image: "/src/assets/tech-stack/PostgresSQL.svg", category: "Data Bases" },
-  { name: "MongoDB", image: "/src/assets/tech-stack/MongoDB.svg", category: "Data Bases" },
+  // 🛢️ Databases
+  { name: "Postgresql", image: "/src/assets/tech-stack/PostgresSQL.svg", category: "Databases" },
+  { name: "MongoDB", image: "/src/assets/tech-stack/MongoDB.svg", category: "Databases" },
 ];
 

@@ -20,7 +20,6 @@ function TechStack() {
   return (
     <Card className="w-full rounded-2xl bg-gradient-to-b from-[#f8f8f8] to-[#f0f0f0] py-10 dark:from-gray-950 dark:to-gray-700 sm:-mt-40 md:-mt-60">
       <div className="container flex flex-col gap-8 px-4 md:px-6">
-        {/* grid items-center justify-center gap-4 text-center lg:gap-10 */}
         <div className="grid items-center justify-center space-y-3 text-center ">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
             The Tech Stack
