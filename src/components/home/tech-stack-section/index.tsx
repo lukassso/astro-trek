@@ -20,7 +20,15 @@ function TechStack() {
   return (
     <Card className="w-full rounded-2xl bg-gradient-to-b from-[#f8f8f8] to-[#f0f0f0] py-10 dark:from-gray-950 dark:to-gray-700 sm:-mt-40 md:-mt-60">
       <div className="container flex flex-col gap-8 px-4 md:px-6">
-        <h3 className="text-center text-xl font-semibold">Our Technology Stack</h3>
+        {/* grid items-center justify-center gap-4 text-center lg:gap-10 */}
+        <div className="grid items-center justify-center space-y-3 text-center ">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+            The Tech Stack
+          </h2>
+          <p className="mx-auto max-w-[700px] text-gray-500 dark:text-gray-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+            Technologies that power my work
+          </p>
+        </div>
 
         <Tabs defaultValue={categories[0]} className="w-full">
           <div className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:flex sm:justify-center">
@@ -29,7 +37,7 @@ function TechStack() {
                 <TabsTrigger
                   key={category}
                   value={category}
-                  className="data-[state=active]:bg-background data-[state=active]:text-foreground snap-center whitespace-nowrap rounded-xl"
+                  className="dark:data-[state=active]:bg-background dark:data-[state=active]:text-foreground snap-center whitespace-nowrap rounded-xl data-[state=active]:bg-white data-[state=active]:text-black"
                 >
                   {category}
                 </TabsTrigger>
@@ -40,7 +48,7 @@ function TechStack() {
           <TooltipProvider>
             {categories.map((category) => (
               <TabsContent key={category} value={category}>
-                <div className="mt-6 flex flex-wrap justify-center gap-x-4 gap-y-6">
+                <div className="my-6 flex flex-wrap justify-center gap-x-4 gap-y-6 sm:my-10">
                   {grouped[category].map((tech) => {
                     const isTouch = typeof window !== "undefined" && "ontouchstart" in window;
                     const [tooltipOpen, setTooltipOpen] = useState(false);
