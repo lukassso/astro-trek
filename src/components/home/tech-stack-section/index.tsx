@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { Card } from "@/components/ui/card";
+import { Card } from "@/components/ui/card-spring";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { technologies } from "./technologies";
 
@@ -23,8 +23,8 @@ function TechStack() {
         <h3 className="text-center text-xl font-semibold">Our Technology Stack</h3>
 
         <Tabs defaultValue={categories[0]} className="w-full">
-          <div className="flex justify-center">
-          <TabsList className="flex w-full max-w-full overflow-x-auto scroll-mx-4 pl-4 pr-4 scrollbar-none rounded-xl bg-muted p-1 sm:w-max sm:mx-auto snap-x snap-mandatory">
+          <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:flex sm:justify-center">
+          <TabsList className="inline-flex w-max rounded-xl bg-muted p-1 scrollbar-none">
               {categories.map((category) => (
                 <TabsTrigger
                 key={category}

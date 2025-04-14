@@ -40,7 +40,13 @@
     @apply badge border px-4 py-2 text-xs font-medium;
   }
 }
-
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 .textarea-playground {
   field-sizing: content;
 }
