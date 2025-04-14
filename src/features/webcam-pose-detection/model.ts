@@ -1,7 +1,7 @@
 import * as poseDetection from "@tensorflow-models/pose-detection";
 import * as tf from "@tensorflow/tfjs";
 import "core-js/stable";
-import Webcam from "react-webcam";
+import type Webcam from "react-webcam";
 
 export class PoseDetectionModel {
   detector: poseDetection.PoseDetector | null = null;
@@ -106,11 +106,16 @@ export class PoseDetectionModel {
     });
   }
 
-  async run(webcamRef: React.RefObject<Webcam>, canvasRef: React.RefObject<HTMLCanvasElement>) {
+  async run(
+    webcamRef: React.RefObject<Webcam>,
+    canvasRef: React.RefObject<HTMLCanvasElement>,
+    onModelLoaded: () => void,
+  ) {
     if (!this.detector) await this.loadModel();
 
     const detect = async () => {
       if (webcamRef.current && webcamRef.current.video && canvasRef.current) {
+        onModelLoaded();
         const video = webcamRef.current.video;
         const canvas = canvasRef.current;
         if (video.readyState === 4) {
