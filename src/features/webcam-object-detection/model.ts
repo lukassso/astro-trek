@@ -142,10 +142,11 @@ export class DetectionModel {
     }
   }
 
-  async run(webcamRef: WebcamRef, canvasRef: CanvasRef): Promise<void> {
+  async run(webcamRef: WebcamRef, canvasRef: CanvasRef, onModelLoaded: () => void): Promise<void> {
     try {
       const model = await this.loadModel();
       if (model) {
+        onModelLoaded();
         this.adjustCanvasSize(webcamRef, canvasRef);
         window.addEventListener("resize", () => this.adjustCanvasSize(webcamRef, canvasRef));
         this.detect(model, webcamRef, canvasRef);

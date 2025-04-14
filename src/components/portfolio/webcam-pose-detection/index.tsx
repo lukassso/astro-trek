@@ -61,7 +61,7 @@ const Camera: React.FC = () => {
             <div className="relative rounded-xl border-2 border-gray-300 p-4">
                 {isLoading && (
                     <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black bg-opacity-50 rounded-xl">
-                        <LoadingOverlay />
+                        <div className="loader border-t-4 border-b-4 border-white w-12 h-12 rounded-full animate-spin"/>
                         <p className="mt-4 p-3 text-center text-white text-sm">
                         Kindly enable camera access on your device.<br />
                         Loading the LLM model may require some patience, as it depends on your internet speed.
@@ -76,7 +76,7 @@ const Camera: React.FC = () => {
                 <canvas
                     ref={canvasRef}
                     className="z-3 absolute left-0 top-0 rounded-xl"
-                ></canvas>
+                />
             </div>
         </div>
     );
