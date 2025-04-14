@@ -73,3 +73,4 @@ export const technologies: TechArrayProp[] = [
   { name: "Postgresql", image: "/src/assets/tech-stack/PostgresSQL.svg", category: "Data Bases" },
   { name: "MongoDB", image: "/src/assets/tech-stack/MongoDB.svg", category: "Data Bases" },
 ];
+
