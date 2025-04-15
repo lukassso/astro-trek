@@ -2,49 +2,57 @@
 import { Image } from "astro:assets";
 import Starfield from "./Starfield.astro";
 import lucasFace from "@/assets/logo-to-post.png";
+import Services from "./services-section/Services.astro";
+import ContainerSection from "@/components/common/ContainerSection.astro";
 ---
 
-<section class="relative h-screen">
-  <Starfield />
-  <div class="z-5 relative h-full flex-col place-items-center">
-    <div class="z-5 flex h-full flex-1 flex-col items-center justify-center">
-      <div
-        id="profile-image"
-        class="cc-profile-image z-5 relative flex items-center justify-center"
-      >
+<section class="relative min-h-screen overflow-visible">
+  <div class="absolute inset-0 -z-10">
+    <Starfield />
+  </div>
+  <div class="flex h-screen flex-col items-center justify-center text-center">
+    <div class="mb-8 flex flex-col items-center justify-center gap-4 px-4">
+      <div id="profile-image" class="cc-profile-image relative flex items-center justify-center">
         <Image
-          class="z-5 h-44 w-44 rounded-full object-cover"
+          class="h-44 w-44 rounded-full object-cover"
           src={lucasFace}
           alt="lukas profile picture"
           loading="lazy"
         />
       </div>
       <div
-        class="gradient-text flex flex-col items-center gap-1 px-8 py-4 text-center text-5xl
-      font-bold tracking-tighter md:text-6xl"
+        class="gradient-text flex flex-col items-center gap-1 px-8 py-4 text-5xl font-bold tracking-tighter md:text-6xl"
       >
         <h2>AI Greener Lukasz Zatyka</h2>
-        <h2 class="gradient-text text-sm tracking-wide">Smart Software & Data Solutions</h2>
-        <h3 class="gradient-text pb-1 text-2xl tracking-tight md:text-xl">
+        <h2 class="text-sm tracking-wide">Smart Software & Data Solutions</h2>
+        <h3 class="pb-1 text-2xl tracking-tight md:text-xl">
           Building intelligent software & AI-driven solutions for a greener future
         </h3>
       </div>
-      <div
-        class="mt-4 flex max-w-xs flex-col flex-nowrap gap-4 sm:max-w-md sm:flex-row sm:justify-center"
-      >
-        <div class="flex w-full justify-center sm:w-auto">
-          <a href="https://calendly.com/lukasz-zatyka/discovery-call">
-            <button class="btn btn-primary w-full sm:mb-0">Discovery Call</button>
-          </a>
-        </div>
-        <div class="flex w-full sm:w-auto">
-          <a href="./assets/Lukasz-Zatyka-Resume.pdf">
-            <button class="btn btn-secondary w-full sm:mb-0">Explore my work</button>
-          </a>
-        </div>
+
+      <div class="mt-4 flex max-w-xs flex-col gap-4 sm:max-w-md sm:flex-row sm:justify-center">
+        <a href="https://calendly.com/lukasz-zatyka/discovery-call" class="w-full sm:w-auto">
+          <button class="btn btn-primary w-full">Discovery Call</button>
+        </a>
+        <a href="./assets/Lukasz-Zatyka-Resume.pdf" class="w-full sm:w-auto">
+          <button class="btn btn-secondary w-full">Explore my work</button>
+        </a>
       </div>
     </div>
   </div>
+  <ContainerSection>
+    <div class="mx-auto max-w-full sm:pb-64">
+      <div class="grid items-center justify-center space-y-3 text-center">
+        <h2 class="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">The Services</h2>
+        <p
+          class="mx-auto max-w-[700px] text-gray-500 dark:text-gray-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed"
+        >
+          Services that I offer to power your projects
+        </p>
+      </div>
+      <Services />
+    </div>
+  </ContainerSection>
 </section>
 
 <style>
