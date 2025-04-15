@@ -2,6 +2,8 @@
 import { Image } from "astro:assets";
 import Starfield from "./Starfield.astro";
 import lucasFace from "@/assets/logo-to-post.png";
+import Services from "./services-section/Services.astro";
+
 ---
 
 <section class="relative h-screen">
@@ -43,7 +45,11 @@ import lucasFace from "@/assets/logo-to-post.png";
           </a>
         </div>
       </div>
+      <div class="relative grid gap-10 px-4 text-center md:px-14">
+        <Services />
+      </div>
     </div>
+    
   </div>
 </section>
 

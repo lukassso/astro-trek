@@ -1,0 +1,18 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<div class="service-item text-white text-xl font-bold">
+  #{title} 
+</div>
+
+<style>
+  .service-item {
+    font-family: 'Arial', sans-serif;
+    margin: 10px 0;
+  }
+</style>
