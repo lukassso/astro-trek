@@ -6,7 +6,7 @@ import Services from "./services-section/Services.astro";
 import ContainerSection from "@/components/common/ContainerSection.astro";
 ---
 
-<section class="relative h-[200vh] overflow-hidden">
+<section class="relative min-h-screen overflow-visible">
   <div class="absolute inset-0 -z-10">
     <Starfield />
   </div>
@@ -41,7 +41,7 @@ import ContainerSection from "@/components/common/ContainerSection.astro";
     </div>
   </div>
   <ContainerSection>
-    <div class="mx-auto max-w-full px-4">
+    <div class="mx-auto max-w-full sm:pb-64">
       <div class="grid items-center justify-center space-y-3 text-center">
         <h2 class="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">The Services</h2>
         <p

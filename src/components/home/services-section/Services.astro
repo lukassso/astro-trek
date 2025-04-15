@@ -5,10 +5,12 @@ import ServiceItem from "./ServiceItem.astro";
 interface Service {
   id: number;
   title: string;
+  description: string;
 }
 ---
-<div class="flex flex-col items-start space-y-6 md:space-y-14 mx-auto max-w-full">
+
+<section class="max-w-6xl mx-auto py-20 space-y-8">
   {services.map((service: Service) => (
-    <ServiceItem title={service.title} />
+    <ServiceItem title={service.title} description={service.description} />
   ))}
-</div>
+</section>
