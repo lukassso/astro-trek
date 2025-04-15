@@ -7,7 +7,7 @@ interface Service {
   title: string;
 }
 ---
-<div class="flex flex-col items-start space-y-6 text-white md:space-y-14">
+<div class="flex flex-col items-start space-y-6 md:space-y-14 mx-auto max-w-full">
   {services.map((service: Service) => (
     <ServiceItem title={service.title} />
   ))}
