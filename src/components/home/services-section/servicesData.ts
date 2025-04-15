@@ -6,8 +6,8 @@ export const services = [
   },
   {
     id: 2,
-    title: "Product Management",
-    description: "From idea to launch – I guide the full lifecycle of AI and web-based products. With deep technical insight, I align business goals with engineering realities to deliver impactful solutions."
+    title: "Product Development",
+    description: "I connect product vision with hands-on execution. From process discovery and solution design to coding and rollout — I help shape, build, and stabilize digital products that solve real problems and deliver business value."
   },
   {
     id: 3,
@@ -17,6 +17,6 @@ export const services = [
   {
     id: 4,
     title: "Data Processing",
-    description: "Clean, transform, and enrich your data pipelines. From raw sources to actionable insights, we set the foundation for your intelligent systems."
+    description: "Clean, transform, and enrich your data pipelines. From raw sources to actionable insights, I set the foundation for your intelligent systems."
   }
 ];

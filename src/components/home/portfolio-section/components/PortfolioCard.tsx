@@ -11,13 +11,15 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ app, technologies }) => {
   return (
     <Card className="dark:bg-slate-950">
       <CardHeader>
-        <img
-          src={app.imageUrl}
-          alt={`${app.title} Screenshot`}
-          width={500}
-          height={300}
-          className="w-full rounded-t-lg object-cover"
-        />
+        <a href={app.path}>
+          <img
+            src={app.imageUrl}
+            alt={`${app.title} Screenshot`}
+            width={500}
+            height={300}
+            className="w-full cursor-pointer rounded-t-lg object-cover"
+          />
+        </a>
       </CardHeader>
       <CardContent className="space-y-2 p-4">
         <div className="flex items-center justify-center gap-2 overflow-hidden">
@@ -32,9 +34,9 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ app, technologies }) => {
         </div>
         <h3 className="text-lg font-bold">{app.title}</h3>
         <div className="flex justify-center py-2">
-          <Button asChild variant="outline" className="w-full sm:w-1/2">
-            <a href={app.path}>View App</a>
-          </Button>
+          <a href={app.path} className="w-full sm:w-1/2">
+            <Button className="w-full">View App</Button>
+          </a>
         </div>
       </CardContent>
     </Card>

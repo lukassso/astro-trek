@@ -7,7 +7,7 @@ import type { PortfolioItem } from "@/types";
 
 export default function PortfolioSection() {
   const [items, setItems] = useState<PortfolioItem[]>([]);
-  const [visibleCount, setVisibleCount] = useState(3);
+  const [visibleCount, setVisibleCount] = useState(6);
   const [loading, setLoading] = useState(false);
   const [randomTechnologies, setRandomTechnologies] = useState<Record<string, string[]>>({});
 
@@ -51,7 +51,7 @@ export default function PortfolioSection() {
   };
 
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32">
+    <section className="w-full py-32">
       <div className="grid items-center justify-center gap-4 text-center lg:gap-10">
         <div className="space-y-3">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
