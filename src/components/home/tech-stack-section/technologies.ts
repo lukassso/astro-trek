@@ -63,14 +63,19 @@ export const technologies: TechArrayProp[] = [
     image: "/tech-stack/TensorFlow.svg",
     category: "Data Science & ML",
   },
+  { name: "Keras", image: "/tech-stack/Keras.svg", category: "Data Science & ML" },
+  { name: "PyTorch", image: "/tech-stack/PyTorch.svg", category: "Data Science & ML" },
   // 🧪 Tests
   { name: "Playwright", image: "/tech-stack/Playwright.svg", category: "Testing" },
   { name: "Storybook", image: "/tech-stack/Storybook.svg", category: "Testing" },
   { name: "Jest", image: "/tech-stack/Jest.svg", category: "Testing" },
+  { name: "Cypress", image: "/tech-stack/Cypress.svg", category: "Testing" },
+
   // 🎨 Design
   { name: "Figma", image: "/tech-stack/Figma.svg", category: "Design" },
   // 🛢️ Databases
   { name: "Postgresql", image: "/tech-stack/PostgresSQL.svg", category: "Databases" },
   { name: "MongoDB", image: "/tech-stack/MongoDB.svg", category: "Databases" },
+  { name: "MySQL", image: "/tech-stack/MySQL.svg", category: "Databases" },
 ];
 
