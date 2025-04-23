@@ -1,11 +1,11 @@
 import type { APIRoute } from "astro";
 
+export const prerender = false;
+
 const API_URL = "https://api.openai.com/v1/chat/completions";
 
 export const POST: APIRoute = async ({ request }) => {
-  const apiKey = import.meta.env.DEV
-    ? import.meta.env.PUBLIC_OPENAI_API_KEY
-    : import.meta.env.OPENAI_API_KEY;
+  const apiKey = import.meta.env.OPENAI_API_KEY;
 
   try {
     const { messages, temperature, max_tokens, top_p, frequency_penalty, presence_penalty } =
