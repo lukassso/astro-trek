@@ -10,6 +10,7 @@
 		"check": "astro check"
 	},
 	"dependencies": {
+		"@ai-sdk/react": "^1.2.9",
 		"@astrojs/mdx": "^2.1.1",
 		"@astrojs/netlify": "^5.2.1",
 		"@astrojs/node": "^8.2.5",

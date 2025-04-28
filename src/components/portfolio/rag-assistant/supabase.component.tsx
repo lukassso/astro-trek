@@ -17,7 +17,7 @@ export default function Profiles() {
   useEffect(() => {
     const fetchStocks = async () => {
       const { data, error } = await supabase
-        .from('titanic') // Twoja tabela
+        .from('titanic')
         .select('"name", "age", "ticket", "survived"')
 
       if (error) {

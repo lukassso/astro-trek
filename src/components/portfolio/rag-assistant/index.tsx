@@ -11,6 +11,7 @@ import { useImageUpload } from "./use-image-upload";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import SupabaseComponent from "./supabase.component";
+import TitanicChat from "./titanic-chat";
 
 interface FormProps {
   isLoading: boolean;
@@ -146,7 +147,7 @@ export default function Form({ isLoading, onSubmit, onOpenOptions }: FormProps) 
           {error && <div className="mt-2 text-sm tracking-normal text-red-400">{error}</div>}
         </form>
       </FormProvider>
-      <SupabaseComponent />
+      <TitanicChat />
     </>
   );
 }
