@@ -1,4 +1,3 @@
-// /pages/api/askTitanic.ts
 import { generateSQL } from "../../features/rag-assistant/generate-sql";
 import { supabase } from "@/supabase/client"; 
 import { askOpenAI } from "./ask-open-ai";  
@@ -16,7 +15,18 @@ export async function POST({ request }: { request: Request }) {
   const sqlQuery = await generateSQL(userMessage);
   console.log("Generated SQL:", sqlQuery);
 
-  const { data, error } = await supabase.rpc("execute_sql", { query: sqlQuery });
+  if (!sqlQuery || sqlQuery.trim() === '') {
+    console.error("Błąd: GEnerated empty SQL");
+    return new Response(JSON.stringify({ response: "Error generating SQL query." }), { status: 500 });
+  }
+
+  const { data, error } = await supabase
+  .rpc("execute_sql", { 
+    query: `SELECT name, age, ticket, survived 
+            FROM titanic 
+            WHERE survived = 1 AND age < 30`
+  })
+  .select("*");
 
   if (error) {
     console.error("SQL Error:", error);
