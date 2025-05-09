@@ -10,7 +10,7 @@ export default function UrlScraper() {
     setLoading(true);
     setResult(null);
     try {
-      const res = await fetch(`/api/scraper?url=${encodeURIComponent(url)}`);
+      const res = await fetch(`/api/scrape?url=${encodeURIComponent(url)}`);
       const data = await res.json();
       setResult(JSON.stringify(data, null, 2));
     } catch (err) {

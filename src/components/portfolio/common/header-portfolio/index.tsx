@@ -10,7 +10,7 @@ const HeaderPortfolio: FC<HeaderPorfolioTypes> = (props) => {
   const { title, description, chipsList } = props;
   return (
     <div className="flex-1">
-      <section className="w-full py-32 lg:py-56">
+      <section className="w-full py-32 lg:pt-56 ">
         <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6 lg:gap-10">
           <motion.div
             initial={{ opacity: 0 }}
