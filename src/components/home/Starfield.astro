@@ -5,8 +5,10 @@
 <script>
   import invariant from "tiny-invariant";
 
-  const root = document.documentElement;
-  const isDarkMode = root.getAttribute("data-theme") === "dark" || !root.getAttribute("data-theme");
+  const cleanup = (() => {
+    const root = document.documentElement;
+    const isDarkMode =
+      root.getAttribute("data-theme") === "dark" || !root.getAttribute("data-theme");
 
   const COUNT = 300;
   const SPEED = Math.random() * 0.1 + 0.25;
@@ -65,7 +67,23 @@
   const container = document.querySelector("#starfield") as HTMLElement;
   invariant(container, "container should not be null");
   const resizeObserver = new ResizeObserver(setup);
+  const themeChangeHandler = (event: Event) => {
+    const customEvent = event as CustomEvent;
+    if (customEvent.detail) {
+      const newTheme = customEvent.detail.theme;
+      const isDarkMode = newTheme === "dark";
+      const updatedFillStyleColor = isDarkMode
+        ? "rgba(17,24,39, 0.6)"
+        : "rgba(249, 250, 251, 0.6)";
+      const updatedStrokeStyleColor = isDarkMode ? "rgba(249, 250, 251, 1)" : "rgba(17,24,39, 1)";
+
+      ctx.fillStyle = updatedFillStyleColor;
+      ctx.strokeStyle = updatedStrokeStyleColor;
+    }
+  };
   resizeObserver.observe(container);
+  document.addEventListener("theme-change", themeChangeHandler);
+  setup();
 
   function setup() {
     invariant(ctx, "canvas context should not be null");
@@ -92,20 +110,7 @@
     ctx.fillStyle = fillStyleColor;
     ctx.strokeStyle = strokeStyleColor;
 
-    document.addEventListener("theme-change", (event: Event) => {
-      const customEvent = event as CustomEvent;
-      if (customEvent.detail) {
-        const newTheme = customEvent.detail.theme;
-        const isDarkMode = newTheme === "dark";
-        const updatedFillStyleColor = isDarkMode
-          ? "rgba(17,24,39, 0.6)"
-          : "rgba(249, 250, 251, 0.6)";
-        const updatedStrokeStyleColor = isDarkMode ? "rgba(249, 250, 251, 1)" : "rgba(17,24,39, 1)";
-
-        ctx.fillStyle = updatedFillStyleColor;
-        ctx.strokeStyle = updatedStrokeStyleColor;
-      }
-    });
+    // themeChangeHandler registered outside of setup
 
     rafId = requestAnimationFrame(frame);
   }
@@ -121,5 +126,18 @@
 
     ctx.fillRect(-width / 2, -height / 2, width, height);
     rafId = requestAnimationFrame(frame);
+  }
+
+    const cleanup = () => {
+      resizeObserver.disconnect();
+      document.removeEventListener("theme-change", themeChangeHandler);
+      rafId > 0 && cancelAnimationFrame(rafId);
+    };
+
+    return cleanup;
+  })();
+
+  if (import.meta.hot) {
+    import.meta.hot.dispose(cleanup);
   }
 </script>
