@@ -62,7 +62,7 @@
 
     const canvas = document.querySelector("#starfield-canvas") as HTMLCanvasElement;
     invariant(canvas, "canvas should not be null");
-    const ctx = canvas.getContext("2d");
+    const ctx: CanvasRenderingContext2D | null = canvas.getContext("2d");
 
     const container = document.querySelector("#starfield") as HTMLElement;
     invariant(container, "container should not be null");
@@ -95,7 +95,7 @@
       canvas.height = height * dpr;
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
-      ctx.scale(dpr, dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       for (const star of stars) {
         star.x = Math.random() * width - width / 2;
@@ -128,13 +128,13 @@
       rafId = requestAnimationFrame(frame);
     }
     //  ResizeObserver and theme change handler cleanup
-    const cleanup = () => {
+    const dispose = () => {
       resizeObserver.disconnect();
       document.removeEventListener("theme-change", themeChangeHandler);
       rafId > 0 && cancelAnimationFrame(rafId);
     };
 
-    return cleanup;
+    return dispose;
   })();
 
   if (import.meta.hot) {
