@@ -1,0 +1,26 @@
+---
+import PageLayout from "@/layouts/PageLayout.astro";
+import RagAssistantComponent from "@/components/portfolio/rag-assistant";
+import ContainerSection from "@/components/common/ContainerSection.astro";
+import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
+---
+
+<PageLayout meta={{ title: "Playground AI" }}>
+  <ContainerSection>
+    <HeaderPortfolio
+      client:visible
+      title={"RAG Assistant"}
+      description={"A user-friendly interface for managing AI-driven tasks and insights."}
+      chipsList={[
+        "React",
+        "Typescript",
+        "MobX",
+        "Tailwind CSS",
+        "Shadcn UI",
+        "Radix UI",
+        "OpenAI API",
+      ]}
+    />
+    <RagAssistantComponent client:only />
+  </ContainerSection>
+</PageLayout>

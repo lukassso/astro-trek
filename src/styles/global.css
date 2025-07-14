@@ -6,6 +6,14 @@
   html {
     @apply scroll-smooth;
   }
+
+  body {
+    @apply flex flex-col min-h-screen bg-default text-base text-default selection:bg-secondary selection:text-white;
+  }
+
+  main {
+    @apply flex-1;
+  }
 }
 
 @layer components {

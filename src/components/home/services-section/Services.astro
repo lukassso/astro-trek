@@ -1,0 +1,16 @@
+---
+import { services } from "@/components/home/services-section/servicesData";
+import ServiceItem from "./ServiceItem.astro";
+
+interface Service {
+  id: number;
+  title: string;
+  description: string;
+}
+---
+
+<section class="max-w-6xl mx-auto py-20 space-y-8">
+  {services.map((service: Service) => (
+    <ServiceItem title={service.title} description={service.description} />
+  ))}
+</section>

@@ -22,8 +22,7 @@ const socialImageURL = new URL(ogImage ? ogImage : "/social-card.png", Astro.url
 <title>{siteTitle}</title>
 
 {/* Google Search Console */}
-<meta name="google-site-verification" content="Ofhr2eGZwW3yiUJq69Fp9f-tYMA_ycwAwKvvqwaJTt4" />
-<meta name="google-site-verification" content="4zdTmiaYR4QsC2Dyh_b6MbviK8ZlZIqVLoWfB_qOUs0" />
+<meta name="google-site-verification" content="3P25v26rIZKcdXbSMEBkLXtNE2oBarvmYgf3SXYGPPE" />
 
 {/* Icons / Favicon */}
 <link href="/favicon.ico" rel="icon" sizes="any" />
@@ -66,7 +65,7 @@ const socialImageURL = new URL(ogImage ? ogImage : "/social-card.png", Astro.url
 <meta content={socialImageURL} property="twitter:image" />
 
 {/* Sitemap */}
-<link href="/sitemap-index.xml" rel="sitemap" />
+<link href="/sitemap.xml" rel="sitemap" />
 
 {/* RSS auto-discovery */}
 <link href="/rss.xml" rel="alternate" title={siteConfig.title} type="application/rss+xml" />
@@ -79,3 +78,11 @@ const socialImageURL = new URL(ogImage ? ogImage : "/social-card.png", Astro.url
 <meta name="keywords" content="web development, javascript, react, astro, programming" />
 
 <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-T5NNDNL8');</script>
+  <!-- End Google Tag Manager -->

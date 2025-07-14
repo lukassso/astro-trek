@@ -7,7 +7,7 @@ function TaskForm() {
   const [task, setTask] = useState("");
   const dispatch = useAppDispatch();
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     dispatch(
@@ -39,6 +39,7 @@ function TaskForm() {
         </div>
 
         <button
+          type="submit"
           className="focus:shadow-outline mx-1 mt-2 max-h-[38px] w-full rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none md:mx-0 md:w-1/4"
           aria-label="Add task"
         >
