@@ -1,0 +1,72 @@
+---
+title: "Od Frontend Developera do inżyniera AI"
+publishDate: "16 July 2025"
+updatedDate: "16 July 2025"
+description: "Historia transformacji zawodowej frontend developera, który na studiach podyplomowych odkrywa świat AI, Data Science i uczenia maszynowego. Inspirująca podróż."
+heroImage: "/assets/images/post_img2.svg"
+coverImage:
+  src: "/assets/images/post_img2.svg"
+  alt: "ddd"
+tags: ["AI", "Data Science", "Python", "User story"]
+---
+
+
+W erze, w której technologia musi odpowiedzieć na największe wyzwania naszych czasów, a współpraca ze sztuczną inteligencją staje się standardem, postanowiłem połączyć te światy i rozpocząć nowy etap rozwoju zawodowego. Poniższy tekst jest zapisem mojej transformacji, jaka dokonała się podczas studiów podyplomowych na Polsko-Japońskiej Akademii Technik Komputerowych (PJATK) na przełomie 2024/2025. Było to intensywne i wymagające doświadczenie, ale jednocześnie niezwykle satysfakcjonujące dla mnie.
+
+Postanowiłem napisać ten artykuł, aby ustrukturyzować zdobytą wiedzę, ale również, aby podzielić się moimi doświadczeniami. Jeśli rozważasz poszerzenie swoich kwalifikacji w dziedzinie AI i uczenia maszynowego, być może moja historia okaże się pomocna. Tekst zawiera elementy techniczne, jednak starałem się przedstawić je w przystępny sposób.
+
+---
+
+## I. Wprowadzenie: Od Architektury Frontendowej do Nauki o Danych
+
+Moja niemal dwudziestoletnia podróż przez świat IT była procesem naturalnej ewolucji. Zaczynałem, jako absolwent Wydziału Mechatroniki, od programowania maszyn numerycznych, zafascynowany robotyką i automatyką przemysłową. Następnie przeszedłem przez cyfrowe (sprzedażowe również) aspekty branży turystycznej, by na blisko pięć lat poświęcić się komercyjnemu tworzeniu aplikacji internetowych (tzw. **Frontend Engineering**). Tworząc interfejsy w ekosystemie Node.js, na co dzień mierzyłem się ze złożonymi problemami, które wymagały analitycznego i strukturalnego myślenia.
+
+Kluczowym momentem, który skierował moją uwagę w stronę **Data Science**, była praca nad aplikacją typu _observability_, która koreluje dane z sieci, wykrywa anomalie, potencjalne problemy i upraszcza ich rozwiązywanie. Projekt ten przetwarzał strumień danych i prezentował wyniki w postaci różnorodnych wykresów. Pracując przy nim, zacząłem się zastanawiać, co tak naprawdę kryje się za danymi, które dotychczas jedynie wizualizowałem. Zrozumiałem, że interfejs użytkownika to tylko wierzchołek góry lodowej. Chciałem dowiedzieć się, jak dane mogą służyć do prognozowania, klasyfikacji, generowania rekomendacji i wykrywania anomalii.
+
+Ta ciekawość, połączona z ambicją bycia bardziej konkurencyjnym inżynierem na rynku pracy, zaprowadziła mnie na studia podyplomowe "Python - programowanie sztucznej inteligencji" na PJATK. Chcąc zrozumieć świat AI od podstaw, uznałem, że najlepszą drogą będzie zgłębienie wiedzy o uczeniu maszynowym (**Machine Learning**) – tak rozpoczęła się moja podróż w głąb tej dziedziny.
+
+---
+
+## II. Fundamenty Technologiczne: Warsztat Analityka Danych w Praktyce
+
+Nauka od samego początku miała wymiar praktyczny. Pierwszym krokiem było opanowanie konsoli systemu Linux – fundamentalnego narzędzia w pracy każdego inżyniera. Szczególnie zapadła mi w pamięć anegdota prowadzącego zajęcia. Napisał on na tablicy komendę `man man` (_manual for the manual_), po czym z uśmiechem stwierdził, że na tym właściwie mógłby zakończyć zajęcia. Ten prosty gest doskonale zilustrował kluczową zasadę, która przyświecała całemu kursowi: **umiejętność samodzielnego poszukiwania informacji i biegłego korzystania z dokumentacji jest najważniejszym narzędziem w arsenale specjalisty**. Ta filozofia stała się moim drogowskazem.
+
+Po opanowaniu podstaw systemowych, przyszedł czas na język Python. Mimo że dobrze znałem już dynamicznie typowany JavaScript (oraz jego statycznie typowanego brata, TypeScript), Python urzekł mnie czystością składni i wszechstronnością. Równolegle zgłębiałem tajniki baz danych, ucząc się SQL i algebry relacji.
+
+Oto kluczowe technologie, które opanowałem z zachowaniem kolejności ich wprowadzania:
+- **NumPy**: Mój pierwszy krok w stronę obliczeń numerycznych. Zrozumiałem potęgę wektoryzacji i broadcastingu, które znacząco przewyższają wydajnością tradycyjne pętle Pythona.
+- **Pandas**: Niezastąpione narzędzie analityka. Opanowałem struktury `Series` i `DataFrames`, ucząc się, jak efektywnie zarządzać danymi, przekształcać je i operować na różnych formatach.
+- **Scikit-learn w uczeniu nadzorowanym**: Zbudowałem tu swój pierwszy kompleksowy pipeline uczenia maszynowego – od preprocessingu, przez kodowanie i skalowanie. Zgłębiłem modele regresji (do przewidywania wartości) i klasyfikacji (do kategoryzacji danych), a także nauczyłem się oceniać ich skuteczność za pomocą odpowiednich metryk (m.in. _R²_, _Accuracy_, _ROC/AUC_).
+- **Scikit-learn w uczeniu nienadzorowanym**: Odkryłem, jak wyszukiwać ukryte struktury w danych bez etykiet, wykorzystując techniki klasteryzacji takie jak _K-Means_, klasteryzacja hierarchiczna czy _DBSCAN_.
+- **Keras/TensorFlow w głębokim uczeniu**: To był kolejny poziom zaawansowania. Projektowałem i trenowałem sieci neuronowe, używając warstw `Dense`, `LSTM` (do danych sekwencyjnych) i `Conv2D` (do obrazów), poznając też specjalistyczne architektury, jak autoenkodery.
+
+Moim głównym środowiskiem pracy stał się `VS Code`, zintegrowany z `Conda` i `Pip`. `Jupyter Notebook/Lab` okazały się niezastąpione do interaktywnej eksploracji, a `Google Colaboratory` zapewniło dostęp do mocy obliczeniowej GPU w chmurze.
+
+---
+
+## III. Zderzenie z Rzeczywistością: Projekty i Osobiste Wyzwania
+
+Studia zakończyłem z wynikiem bardzo dobrym, a zwieńczeniem nauki była seria czterech projektów, które pozwoliły mi zastosować wiedzę w praktyce i zmierzyć się z realnymi problemami:
+1. **Prognozowanie wypożyczeń rowerów**: Zastosowałem modele regresji, aby na podstawie danych pogodowych i sezonowych przewidzieć dzienne zapotrzebowanie na rowery miejskie, co jest kluczowe dla optymalizacji floty.
+2. **Klasyfikacja grzybów**: Stworzyłem model klasyfikacyjny, który na podstawie cech fizycznych odróżnia grzyby jadalne od trujących – projekt o bezpośrednim wpływie na bezpieczeństwo ludzi.
+3. **Analiza zanieczyszczeń powietrza**: Wykorzystałem sieci rekurencyjne (LSTM) do analizy szeregów czasowych i prognozowania poziomu zanieczyszczeń w Pekinie, co ma znaczenie dla systemów wczesnego ostrzegania.
+4. **Detekcja anomalii w ruchu sieciowym**: Sięgnąłem po głębokie uczenie i autoenkodery, aby zbudować system zdolny do odróżniania normalnego ruchu sieciowego od potencjalnych cyberataków.
+
+To był intensywnie przepracowany okres. Przed studiami byłem przekonany, że moje doświadczenie deweloperskie będzie wystarczające. Okazało się to poważnym błędem w ocenie. Zderzyłem się z nową rzeczywistością – praca z danymi to nie tylko programowanie, ale również **matematyka, algebra liniowa, statystyka i ścisły zestaw reguł**. Ilość nowej terminologii była przytłaczająca. Był moment, w którym czułem, że nie podołam wyzwaniu. Zacisnąłem jednak zęby i systematycznie wracałem do trudniejszych zagadnień. Projekty końcowe ostatecznie pozwoliły mi uporządkować zdobytą wiedzę i poczuć, że zrobiłem znaczący krok naprzód.
+
+Nieocenionym wsparciem w procesie nauki okazały się duże modele językowe (LLM). Przejęły one ciężar analizowania dokumentacji technicznej, pozwalając mi skupić się na logice i poprawności implementacji. Myślę, że twórcy programu studiów to przewidzieli – w ciągu dwóch semestrów zrealizowałem ponad 400 zadań, które zbudowały solidny fundament.
+
+---
+
+## IV. Synteza i Nowy Rozdział
+
+Tak w skrócie wyglądała moja droga przez studia podyplomowe. Przejście od logiki tworzenia interfejsów do modelowania statystycznego było ogromnym wyzwaniem. Zmieniłem perspektywę z podejścia _"pixel perfect"_, które cechuje pracę inżyniera frontendowego i polega na dążeniu do idealnego odwzorowania projektu graficznego, na _"model robust"_. W świecie danych oznacza to budowanie modeli, które są solidne, niezawodne i dobrze generalizują na nowych, nieznanych danych. Ta zmiana uświadomiła mi, jak fundamentalna jest zasada:
+> "Garbage In, Garbage Out" (śmieci na wejściu, śmieci na wyjściu).
+
+To niepodważalna prawda w nauce o danych, gdzie jakość wyników jest nierozerwalnie związana z jakością danych wejściowych, a ich przygotowanie i czyszczenie stają się kluczowe.
+
+Ta transformująca podróż wciąż trwa. Branża AI i Data Science wymaga ciągłej nauki i łączenia jej ze światem interfejsów użytkownika. Dziś, znając procesy zachodzące w obu tych dziedzinach, czuję, że jestem w unikalnym miejscu, by budować mosty między potężnymi modelami AI a ludźmi, którzy mają z nich korzystać. Jestem przekonany też, że umiejętność prezentacji danych w formie angażującej opowieści (**data storytelling**) jest kluczem do sukcesu, który przyciąga uwagę interesariuszy i wspiera decyzje biznesowe.
+
+Moja rola jako inżyniera ewoluuje. Widzę przyszłość web developera nie tylko w kodowaniu czy projektowaniu, ale również w koordynacji złożonych narzędzi AI. Chodzi o tworzenie inteligentnych, intuicyjnych rozwiązań, które realnie wspierają ludzi w ich pracy. Ta nowa, szersza perspektywa otworzyła przede mną kolejne ścieżki kariery. Jestem przekonany, że zdobyte umiejętności pozwolą mi efektywnie wdrażać innowacyjne rozwiązania jako **Generative AI Developer** lub **Frontend Developer zorientowany na AI**. To jest przyszłość, którą chcę aktywnie współtworzyć.
+
+Pytanie, które zadałem sobie na początku tej drogi – _"Jak mogę wpłynąć na rozwój AI, by miało to szerszy impakt na ekologię?"_ – dziś staje się fundamentem mojej dalszej ścieżki. To już nie jest tylko pytanie, ale misja. Misja, którą zamierzam realizować, tworząc narzędzia wspierające zrównoważony rozwój w ramach projektu **AI Greener**. Ale to już temat na kolejny wpis. Podróż trwa – dla dobra świata i dla przyszłych pokoleń.
