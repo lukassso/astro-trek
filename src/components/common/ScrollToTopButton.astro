@@ -1,0 +1,43 @@
+<button
+  id="scrollToTopBtn"
+  class="fixed bottom-4 right-4 flex hidden
+    size-8 items-center justify-center
+    rounded-full bg-green-500 p-2 text-white shadow-lg sm:size-10 sm:p-3 md:size-12 md:p-4"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="size-5 sm:size-6 md:size-7"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+  </svg>
+</button>
+
+<script>
+  const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+  // Function to show/hide the button based on scroll position
+  const toggleVisibility = () => {
+    if (window.scrollY > 300) {
+      scrollToTopBtn?.classList.remove("hidden");
+    } else {
+      scrollToTopBtn?.classList.add("hidden");
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  window.addEventListener("scroll", toggleVisibility);
+  scrollToTopBtn?.addEventListener("click", scrollToTop);
+</script>

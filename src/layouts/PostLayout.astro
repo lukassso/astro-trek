@@ -4,6 +4,7 @@ import type { CollectionEntry } from "astro:content";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import { Image } from "astro:assets";
+import ScrollToTopButton from "@/components/common/ScrollToTopButton.astro";
 
 interface Props {
   post: CollectionEntry<"post">;
@@ -90,3 +91,4 @@ const socialImage = ogImage ?? `/og-image/${slug}.png`;
     }
   </script>
 </PageLayout>
+<ScrollToTopButton />
