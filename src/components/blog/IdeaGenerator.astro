@@ -1,0 +1,130 @@
+---
+title: "Generator Pomysłów na Projekty AI"
+---
+
+<div class="mt-16 bg-card text-card-foreground rounded-xl border bg-clip-padding shadow-sm w-full mx-auto">
+    <div class="flex flex-col space-y-1.5 p-6">
+        <h3 class="font-semibold tracking-tight text-2xl !mt-2">✨ Generator Pomysłów na Projekty AI</h3>
+        <p class="text-sm text-muted-foreground">Opisz swój pomysł lub wpisz słowa kluczowe (np. "zdrowie", "finanse"), a ja rozwinę to w koncept projektu!</p>
+    </div>
+    <div class="p-6 pt-0">
+        <div class="flex w-full items-center space-x-2">
+            <input
+                type="text"
+                id="projectKeyword"
+                placeholder="np. ekologia, edukacja, transport..."
+                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:text-gray-950"
+            />
+            <button id="generateIdeaBtn" class="bg-slate-900 text-slate-50 hover:bg-slate-900/90 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-50/90 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-slate-950 dark:focus-visible:ring-slate-300 h-10 px-4 py-2">
+                Generuj
+            </button>
+        </div>
+    </div>
+    <div class="p-6 pt-0">
+        <div id="loadingIndicator" class="hidden flex items-center justify-center p-4 text-sm text-muted-foreground">
+            <svg class="animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Generowanie pomysłu...
+        </div>
+        <div id="errorIndicator" class="hidden flex items-center gap-x-2 rounded-md border border-destructive/50 bg-destructive/15 p-4 text-sm text-destructive">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
+                <path d="m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path>
+            </svg>
+            <span id="errorMessage"></span>
+        </div>
+        <div id="ideaOutput" class="min-h-[120px] w-full rounded-md border border-dashed p-4 flex items-center justify-center text-sm text-muted-foreground">
+             <span>Twój pomysł pojawi się tutaj...</span>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const generateIdeaBtn = document.getElementById('generateIdeaBtn') as HTMLButtonElement;
+    const projectKeywordInput = document.getElementById('projectKeyword') as HTMLInputElement;
+    const ideaOutputDiv = document.getElementById('ideaOutput') as HTMLDivElement;
+    const loadingIndicator = document.getElementById('loadingIndicator') as HTMLDivElement;
+    const errorIndicator = document.getElementById('errorIndicator') as HTMLDivElement;
+    const errorMessageSpan = document.getElementById('errorMessage') as HTMLSpanElement;
+    const initialOutputText = ideaOutputDiv.querySelector('span')?.outerHTML || '';
+
+    const showState = (state: 'idle' | 'loading' | 'error' | 'success') => {
+        loadingIndicator.classList.add('hidden');
+        errorIndicator.classList.add('hidden');
+        ideaOutputDiv.classList.add('hidden');
+
+        if (state === 'loading') {
+            loadingIndicator.classList.remove('hidden');
+        } else if (state === 'error') {
+            errorIndicator.classList.remove('hidden');
+        } else if (state === 'success' || state === 'idle') {
+            ideaOutputDiv.classList.remove('hidden');
+        }
+    };
+    
+    const setLoading = (isLoading: boolean) => {
+        generateIdeaBtn.disabled = isLoading;
+        projectKeywordInput.disabled = isLoading;
+        showState(isLoading ? 'loading' : 'idle');
+    };
+
+    const showError = (message: string) => {
+        showState('error');
+        errorMessageSpan.textContent = message;
+    }
+    
+    const handleGeneration = async () => {
+        const keyword = projectKeywordInput.value.trim();
+        if (!keyword) {
+            showError('Proszę wpisać słowo kluczowe.');
+            ideaOutputDiv.innerHTML = initialOutputText;
+            return;
+        }
+        
+        setLoading(true);
+        ideaOutputDiv.innerHTML = initialOutputText;
+
+        try {
+            const response = await fetch('/api/generate-idea', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ keyword: keyword })
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.error || 'Wystąpił nieznany błąd serwera.');
+            }
+            
+            showState('success');
+            const formattedText = result.idea
+                .replace(/\*\*(.*?)\*\*/g, '<strong class="font-medium dark:text-gray-50">$1</strong>')
+                .replace(/\n/g, '<br />');
+
+            ideaOutputDiv.innerHTML = `<div class="prose prose-sm max-w-none text-card-foreground dark:text-gray-50">${formattedText}</div>`;
+
+        } catch (error) {
+            console.error('Błąd wywołania API:', error);
+            showError(error instanceof Error ? error.message : 'Nie udało się połączyć z serwerem.');
+        } finally {
+            setLoading(false);
+            if (document.activeElement === projectKeywordInput) {
+                showState('success');
+            }
+        }
+    };
+
+    generateIdeaBtn.addEventListener('click', handleGeneration);
+
+    projectKeywordInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            generateIdeaBtn.click();
+        }
+    });
+
+    showState('idle');
+</script>

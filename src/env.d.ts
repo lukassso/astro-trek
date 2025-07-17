@@ -38,6 +38,11 @@ interface ImportMetaEnv {
   readonly PUBLIC_OPENAI_PROJECT_ID: string;
 }
 
+interface ImportMetaEnv {
+  readonly PARSERA_API_KEY: string;
+  readonly GEMINI_API_KEY: string;
+}
+
 interface ImportMeta {
   readonly env: ImportMetaEnv
 }
