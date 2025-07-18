@@ -4,25 +4,41 @@ import Footer from "@/components/common/Footer.astro";
 import Header from "@/components/common/Header.astro";
 import BaseHead from "@/components/common/BaseHead.astro";
 import ThemeProvider from "@/components/common/ThemeProvider.astro";
-import { siteConfig, menuLinks } from "@/site.config";
+import { menuLinks } from "@/site.config";
+import { AstroSeo, type Props as SeoProps } from "@astrolib/seo";
+import { seoConfig } from "../seo";
 
 interface Props {
-  meta: SiteMeta;
+  meta: SeoProps;
   heroAnime?: boolean;
 }
 
 const {
-  meta: { articleDate, description = siteConfig.description, ogImage, title },
-  heroAnime,
+  meta, heroAnime,
 } = Astro.props;
 ---
 
-<html lang={siteConfig.lang}>
+<html lang={seoConfig.lang}>
   <head>
-    <BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap.xml" />
+    <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="AIGreener Blog Feed" />
+    
+    <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-T5NNDNL8');</script>
+    
+    <!-- Cała magia SEO - ładuje domyślną konfigurację i nadpisuje ją danymi ze strony -->
+    <AstroSeo {...seoConfig} {...meta} />
+    
+    <slot name="head" />
   </head>
   <body
-    aria-label={title}
+    aria-label={seoConfig.title}
   >
     {heroAnime ? <div class="bg-gradient bg-gradient-mix" /> : undefined}
 

@@ -1,8 +1,10 @@
 ---
-import { menuLinks, siteConfig } from "@/site.config";
+import { menuLinks } from "@/site.config";
 import ThemeToggle from "../common/ThemeToggle.astro";
+import { seoConfig } from "@/seo";
 
 const year = new Date().getFullYear();
+const siteCompany = seoConfig.company || "AIGreener";
 ---
 
 <footer
@@ -29,8 +31,7 @@ const year = new Date().getFullYear();
     sm:font-semibold"
   >
     <div class="order-2 mt-5 text-xs sm:order-none sm:mt-0">
-      &copy; {siteConfig.author}
-      {year}
+      &copy; {siteCompany} {year}.
     </div>
     <ThemeToggle />
     <nav aria-label="More on this site" class="flex gap-x-2 sm:gap-x-4">
