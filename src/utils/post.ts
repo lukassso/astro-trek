@@ -1,9 +1,8 @@
-import { getCollection } from "astro:content";
-import type { CollectionEntry } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 
-export async function getAllPosts() {
-  return await getCollection("post", ({ data }) => {
-    return import.meta.env.PROD ? data.draft !== true : true;
+export async function getAllPosts(): Promise<CollectionEntry<'post'>[]> {
+  return await getCollection("post", (entry: CollectionEntry<'post'>) => {
+    return import.meta.env.PROD ? entry.data.draft !== true : true;
   });
 }
 

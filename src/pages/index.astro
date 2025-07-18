@@ -4,9 +4,15 @@ import Hero from "@/components/home/Hero.astro";
 import ContainerSection from "@/components/common/ContainerSection.astro";
 import PortfolioSection from "@/components/home/portfolio-section";
 import TechStack from "@/components/home/tech-stack-section";
+
+const meta = {
+  title: "Custom Web Apps & AI Product Development | AIGreener",
+  titleTemplate: "%s" // Switch default title template off
+};
 ---
 
-<PageLayout meta={{ title: "Home" }}>
+
+<PageLayout meta={meta}>
   <Hero />
   <div class="py-14">
     <ContainerSection>
