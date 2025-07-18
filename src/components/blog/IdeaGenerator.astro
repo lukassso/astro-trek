@@ -1,130 +1,244 @@
 ---
-title: "Generator Pomysłów na Projekty AI"
+
 ---
 
-<div class="mt-16 bg-card text-card-foreground rounded-xl border bg-clip-padding shadow-sm w-full mx-auto">
-    <div class="flex flex-col space-y-1.5 p-6">
-        <h3 class="font-semibold tracking-tight text-2xl !mt-2">✨ Generator Pomysłów na Projekty AI</h3>
-        <p class="text-sm text-muted-foreground">Opisz swój pomysł lub wpisz słowa kluczowe (np. "zdrowie", "finanse"), a ja rozwinę to w koncept projektu!</p>
+<div
+  class="bg-card text-card-foreground mx-auto mt-16 w-full rounded-xl border bg-clip-padding shadow-sm"
+>
+  <div class="flex flex-col space-y-1.5 p-6">
+    <h3 class="!mt-2 text-2xl font-semibold tracking-tight">✨ Generator Pomysłów na Projekty AI</h3>
+    <p class="text-muted-foreground text-sm">
+      Opisz swój pomysł lub wpisz słowa kluczowe (np. "zdrowie", "finanse"), a ja rozwinę to w koncept projektu Data Science/AI.
+    </p>
+  </div>
+  <div class="p-6 pt-0">
+    <div class="flex w-full items-center space-x-2">
+      <input
+        type="text"
+        id="projectKeyword"
+        placeholder="e.g., smart shopping assistant, weather forecast for farmers..."
+        class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring focus-visible:ring-offset-2 flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 disabled:cursor-not-allowed disabled:opacity-50 dark:text-gray-950"
+      />
+      <button
+        id="generateIdeaBtn"
+        class="ring-offset-white focus-visible:ring-offset-2 dark:ring-offset-slate-950 inline-flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-slate-50 transition-colors hover:bg-slate-900/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-50/90 dark:focus-visible:ring-slate-300"
+      >
+        Generuj
+      </button>
     </div>
-    <div class="p-6 pt-0">
-        <div class="flex w-full items-center space-x-2">
-            <input
-                type="text"
-                id="projectKeyword"
-                placeholder="np. ekologia, edukacja, transport..."
-                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:text-gray-950"
-            />
-            <button id="generateIdeaBtn" class="bg-slate-900 text-slate-50 hover:bg-slate-900/90 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-50/90 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-slate-950 dark:focus-visible:ring-slate-300 h-10 px-4 py-2">
-                Generuj
-            </button>
-        </div>
+  </div>
+  <div class="p-6 pt-0">
+    <div
+      id="loadingIndicator"
+      class="text-muted-foreground flex hidden items-center justify-center p-4 text-sm"
+    >
+      <svg
+        class="-ml-1 mr-3 h-5 w-5 animate-spin"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"
+        ></circle>
+        <path
+          class="opacity-75"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+        ></path>
+      </svg>
+      <span id="loadingMessage">Generating idea...</span>
     </div>
-    <div class="p-6 pt-0">
-        <div id="loadingIndicator" class="hidden flex items-center justify-center p-4 text-sm text-muted-foreground">
-            <svg class="animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-            Generowanie pomysłu...
-        </div>
-        <div id="errorIndicator" class="hidden flex items-center gap-x-2 rounded-md border border-destructive/50 bg-destructive/15 p-4 text-sm text-destructive">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
-                <path d="m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path>
-            </svg>
-            <span id="errorMessage"></span>
-        </div>
-        <div id="ideaOutput" class="min-h-[120px] w-full rounded-md border border-dashed p-4 flex items-center justify-center text-sm text-muted-foreground">
-             <span>Twój pomysł pojawi się tutaj...</span>
-        </div>
+    <div
+      id="errorIndicator"
+      class="border-destructive/50 bg-destructive/15 text-destructive flex hidden items-center gap-x-2 rounded-md border p-4 text-sm"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="h-5 w-5"
+      >
+        <path d="m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"
+        ></path><path d="M12 9v4"></path><path d="M12 17h.01"></path>
+      </svg>
+      <span id="errorMessage"></span>
     </div>
+    <div
+      id="ideaOutput"
+      class="text-muted-foreground flex min-h-[120px] w-full items-center justify-center rounded-md border border-dashed p-4 text-sm"
+    >
+      <span>Twój pomysł pojawi się tutaj...</span>
+    </div>
+  </div>
 </div>
 
-
 <script>
-    const generateIdeaBtn = document.getElementById('generateIdeaBtn') as HTMLButtonElement;
-    const projectKeywordInput = document.getElementById('projectKeyword') as HTMLInputElement;
-    const ideaOutputDiv = document.getElementById('ideaOutput') as HTMLDivElement;
-    const loadingIndicator = document.getElementById('loadingIndicator') as HTMLDivElement;
-    const errorIndicator = document.getElementById('errorIndicator') as HTMLDivElement;
-    const errorMessageSpan = document.getElementById('errorMessage') as HTMLSpanElement;
-    const initialOutputText = ideaOutputDiv.querySelector('span')?.outerHTML || '';
+  // Use an Immediately Invoked Function Expression (IIFE) to create a safe scope
+  // and to cleanly exit if essential DOM elements are missing.
+  (function setupGenerator() {
+    // STEP 1: Safely get all essential DOM elements.
+    const projectKeywordInput = document.getElementById("projectKeyword");
+    const generateIdeaBtn = document.getElementById("generateIdeaBtn");
+    const ideaOutputDiv = document.getElementById("ideaOutput");
+    const loadingIndicator = document.getElementById("loadingIndicator");
+    const loadingMessageSpan = document.getElementById("loadingMessage");
+    const errorIndicator = document.getElementById("errorIndicator");
+    const errorMessageSpan = document.getElementById("errorMessage");
+    const generatorComponent = document.getElementById("generateIdeaBtn")?.closest(".bg-card");
 
-    const showState = (state: 'idle' | 'loading' | 'error' | 'success') => {
-        loadingIndicator.classList.add('hidden');
-        errorIndicator.classList.add('hidden');
-        ideaOutputDiv.classList.add('hidden');
-
-        if (state === 'loading') {
-            loadingIndicator.classList.remove('hidden');
-        } else if (state === 'error') {
-            errorIndicator.classList.remove('hidden');
-        } else if (state === 'success' || state === 'idle') {
-            ideaOutputDiv.classList.remove('hidden');
-        }
-    };
-    
-    const setLoading = (isLoading: boolean) => {
-        generateIdeaBtn.disabled = isLoading;
-        projectKeywordInput.disabled = isLoading;
-        showState(isLoading ? 'loading' : 'idle');
-    };
-
-    const showError = (message: string) => {
-        showState('error');
-        errorMessageSpan.textContent = message;
+    // STEP 2: "Type Guard" - The main validation. If any element is missing, exit gracefully.
+    // This prevents runtime errors and satisfies TypeScript.
+    if (
+      !(projectKeywordInput instanceof HTMLInputElement) ||
+      !(generateIdeaBtn instanceof HTMLButtonElement) ||
+      !ideaOutputDiv ||
+      !loadingIndicator ||
+      !loadingMessageSpan ||
+      !errorIndicator ||
+      !errorMessageSpan ||
+      !generatorComponent
+    ) {
+      console.error(
+        "Generator initialization failed: One or more essential DOM elements were not found.",
+      );
+      return;
     }
-    
-    const handleGeneration = async () => {
-        const keyword = projectKeywordInput.value.trim();
-        if (!keyword) {
-            showError('Proszę wpisać słowo kluczowe.');
-            ideaOutputDiv.innerHTML = initialOutputText;
-            return;
-        }
-        
-        setLoading(true);
-        ideaOutputDiv.innerHTML = initialOutputText;
 
-        try {
-            const response = await fetch('/api/generate-idea', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ keyword: keyword })
-            });
+    // From this point on, TypeScript knows that all these variables are valid HTMLElements.
 
-            const result = await response.json();
+    const initialOutputText = ideaOutputDiv.querySelector("span")?.outerHTML || "";
+    let isFirstCall = true;
+    let hasBeenWarmedUp = false;
 
-            if (!response.ok) {
-                throw new Error(result.error || 'Wystąpił nieznany błąd serwera.');
-            }
-            
-            showState('success');
-            const formattedText = result.idea
-                .replace(/\*\*(.*?)\*\*/g, '<strong class="font-medium dark:text-gray-50">$1</strong>')
-                .replace(/\n/g, '<br />');
-
-            ideaOutputDiv.innerHTML = `<div class="prose prose-sm max-w-none text-card-foreground dark:text-gray-50">${formattedText}</div>`;
-
-        } catch (error) {
-            console.error('Błąd wywołania API:', error);
-            showError(error instanceof Error ? error.message : 'Nie udało się połączyć z serwerem.');
-        } finally {
-            setLoading(false);
-            if (document.activeElement === projectKeywordInput) {
-                showState('success');
-            }
-        }
+    // --- PRE-WARMING LOGIC to combat serverless cold starts ---
+    const warmupFunction = () => {
+      if (hasBeenWarmedUp) return;
+      hasBeenWarmedUp = true;
+      console.log("Sending warmup request to API...");
+      // Send a silent request in the background. We don't care about the response,
+      // we just want to "wake up" the serverless function.
+      fetch("/api/generate-idea", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "warmup" }),
+      }).catch((err) => {
+        // Silently swallow the error, as this is just an optimization.
+        console.warn("Warmup request failed, this is not critical.", err);
+      });
     };
 
-    generateIdeaBtn.addEventListener('click', handleGeneration);
+    // Trigger warmup when user focuses the input (strong signal of intent).
+    projectKeywordInput.addEventListener("focus", warmupFunction, { once: true });
 
-    projectKeywordInput.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            generateIdeaBtn.click();
+    // Trigger warmup when the component becomes visible in the viewport.
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        warmupFunction();
+        observer.disconnect(); // Observe only once.
+      }
+    });
+    observer.observe(generatorComponent);
+
+    // --- UI STATE MANAGEMENT LOGIC ---
+
+    // This function ONLY handles showing/hiding the appropriate content containers.
+    const showState = (state) => {
+      loadingIndicator.classList.add("hidden");
+      errorIndicator.classList.add("hidden");
+      ideaOutputDiv.classList.add("hidden");
+
+      if (state === "loading") {
+        loadingIndicator.classList.remove("hidden");
+      } else if (state === "error") {
+        errorIndicator.classList.remove("hidden");
+      } else if (state === "success" || state === "idle") {
+        ideaOutputDiv.classList.remove("hidden");
+      }
+    };
+
+    // This function ONLY handles the loading state of the controls (button/input).
+    const setControlsLoading = (isLoading) => {
+      generateIdeaBtn.disabled = isLoading;
+      projectKeywordInput.disabled = isLoading;
+    };
+
+    const showError = (message) => {
+      errorMessageSpan.textContent = message;
+      showState("error");
+    };
+
+    // --- MAIN APPLICATION LOGIC ---
+    const handleGeneration = async () => {
+      const keyword = projectKeywordInput.value.trim();
+      if (!keyword) {
+        showError("Proszę wpisać słowo kluczowe.");
+        return;
+      }
+
+      setControlsLoading(true);
+      if (isFirstCall) {
+        loadingMessageSpan.textContent = "Waking up the AI engine... This might take a moment.";
+      } else {
+        loadingMessageSpan.textContent = "Generuję pomysł...";
+      }
+      ideaOutputDiv.innerHTML = initialOutputText;
+      showState("loading");
+
+      // Use AbortController to manage request timeout.
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30-second timeout
+
+      try {
+        const response = await fetch("/api/generate-idea", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ keyword: keyword }),
+          signal: controller.signal,
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.error || "An unknown server error occurred.");
         }
+
+        isFirstCall = false;
+
+        const formattedText = result.idea
+          .replace(/\*\*(.*?)\*\*/g, '<strong class="font-medium dark:text-gray-50">$1</strong>')
+          .replace(/\n/g, "<br />");
+
+        ideaOutputDiv.innerHTML = `<div class="prose prose-sm max-w-none text-card-foreground dark:text-gray-50">${formattedText}</div>`;
+        showState("success");
+      } catch (error) {
+        if (error.name === "AbortError") {
+          showError("The server took too long to respond. Please try again in a moment.");
+        } else {
+          showError(error instanceof Error ? error.message : "Failed to connect to the server.");
+        }
+      } finally {
+        // Always clear the timeout and re-enable controls, regardless of outcome.
+        clearTimeout(timeoutId);
+        setControlsLoading(false);
+      }
+    };
+
+    // --- EVENT LISTENERS ---
+    generateIdeaBtn.addEventListener("click", handleGeneration);
+    projectKeywordInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        generateIdeaBtn.click();
+      }
     });
 
-    showState('idle');
+    // Set the initial UI state.
+    showState("idle");
+  })();
 </script>
