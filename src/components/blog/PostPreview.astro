@@ -31,8 +31,8 @@ import defaultImage from "@/assets/post_img.png";
           <div class="flex">
             <p class="py-1 text-xs">publish date: <span class="font-medium">{publishDate}</span></p>
           </div>
-          <div class="flex md:-mt-1 md:ml-4 mt-4">
-            {tags && tags.map((tag: string) => <a class="badge badge-outline mr-1">{tag}</a>)}
+          <div class="flex flex-wrap md:-mt-1 md:ml-4 mt-4">
+            {tags && tags.map((tag: string) => <a class="badge badge-outline mr-1 uppercase mb-1">{tag}</a>)}
           </div>
         </div>
       </div>
