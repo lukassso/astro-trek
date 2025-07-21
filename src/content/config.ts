@@ -24,7 +24,7 @@ const post = defineCollection({
           alt: z.string(),
         })
         .optional(),
-      tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
+      tags: z.array(z.string()).default([]),
     }),
 });
 

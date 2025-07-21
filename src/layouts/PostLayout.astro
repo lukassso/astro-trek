@@ -53,7 +53,7 @@ const articleLastUpdate = updatedDate ? dayjs(updatedDate).format("ll") : null;
             }
           </h1>
           <div class="py-2">
-            {tags && tags.map((tag) => <a class="badge badge-outline mr-2 no-underline">{tag}</a>)}
+            {tags && tags.map((tag) => <a class="badge badge-outline mr-2 mb-1 no-underline uppercase">{tag}</a>)}
           </div>
           {
             updatedDate && (
