@@ -2,20 +2,6 @@ import type { SiteConfig } from "@/types";
 import type { AstroExpressiveCodeOptions } from "astro-expressive-code";
 import type { PortfolioItem, MenuLink } from "@/types";
 
-// export const siteConfig: SiteConfig = {
-//  // Used as both a meta property & the generated satori png
-//   author: "Lukasz Zatyka",
-//   // Meta property used to construct the meta title property
-//   title: "Custom Web Apps & AI Product Development | AI Greener",
-//   // Meta property used as the default description meta property
-//   description:
-//     "I help businesses build & scale ambitious digital products. Specializing in web apps and rapid AI prototyping. Let's discuss your project.",
-//   // HTML lang property, found in src/layouts/Base.astro L:18
-//   lang: "en-GB",
-//   // Meta property, found in src/components/BaseHead.astro L:42
-//   ogLocale: "en_GB",
-// };
-
 export const portfolioItems: PortfolioItem[] = [
 	{
 		title: "Object Detection",
