@@ -13,7 +13,7 @@ dotenv.config();
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://zetkolek.netlify.app/",
+  site: "https://aigreener.com",
   integrations: [
     sitemap({
       changefreq: "weekly",

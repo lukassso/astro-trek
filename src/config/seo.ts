@@ -1,14 +1,14 @@
 import type { Props as SeoConfig } from "@astrolib/seo";
 
 export const SITE_URL = "https://aigreener.com";
-const SITE_TITLE = "Custom Web Apps & AI Product Development | AIGreener";
+const SITE_TITLE = "Custom Web Apps & AI Product Development";
 export const SITE_AUTHOR_NAME = "Lukasz Zatyka";
 export const SITE_BRAND_NAME = "AIGreener";
 const SITE_DESCRIPTION =
   "I help businesses build & scale ambitious digital products. Specializing in Next.js web apps and rapid AI prototyping. Let's discuss your project.";
 export const GITHUB_URL = "https://github.com/lukassso";
 export const LINKEDIN_URL = "https://www.linkedin.com/in/lukasz-zatyka/";
-const DEFAULT_OG_IMAGE_URL = new URL("/og-image.png", SITE_URL).href;
+export const DEFAULT_OG_IMAGE_URL = new URL("/og-image.png", SITE_URL).href;
 const LOGO_URL = new URL("/logo.png", SITE_URL).href;
 
 export const seoConfig: SeoConfig = {
@@ -26,7 +26,7 @@ export const seoConfig: SeoConfig = {
         url: DEFAULT_OG_IMAGE_URL,
         width: 1200,
         height: 630,
-        alt: `${SITE_BRAND_NAME} - ${SITE_TITLE}`,
+        alt: `${SITE_BRAND_NAME}`,
       },
     ],
     site_name: SITE_BRAND_NAME,

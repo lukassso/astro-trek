@@ -4,9 +4,12 @@ import PageLayout from "@/layouts/PageLayout.astro";
 import PlaygroundAiAppComponent from "@/components/portfolio/dashboards/playground-ai";
 import ContainerSection from "@/components/common/ContainerSection.astro";
 import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
+import { pagesSeo } from "@/config/pages";
+
+const meta = pagesSeo["playground-ai"];
 ---
 
-<PageLayout meta={{ title: "Playground AI" }}>
+<PageLayout meta={meta}>
   <ContainerSection>
     <HeaderPortfolio
       client:visible

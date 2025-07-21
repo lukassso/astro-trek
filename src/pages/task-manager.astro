@@ -3,9 +3,12 @@ import PageLayout from "@/layouts/PageLayout.astro";
 import ContainerSection from "@/components/common/ContainerSection.astro";
 import TaskRoot from "@/components/portfolio/task-manager";
 import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
+import { pagesSeo } from "@/config/pages";
+
+const meta = pagesSeo["task-manager"];
 ---
 
-<PageLayout meta={{ title: "Task Manager App" }}>
+<PageLayout meta={meta}>
   <ContainerSection maxWidth="max-w-2xl">
     <HeaderPortfolio
       client:visible

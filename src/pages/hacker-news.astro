@@ -3,9 +3,12 @@ import PageLayout from "@/layouts/PageLayout.astro";
 import ContainerSection from "@/components/common/ContainerSection.astro";
 import HackerNewsRoot from "@/components/portfolio/hacker-news";
 import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
+import { pagesSeo } from "@/config/pages";
+
+const meta = pagesSeo["hacker-news"];
 ---
 
-<PageLayout meta={{ title: "Hacker News" }}>
+<PageLayout meta={meta}>
   <ContainerSection maxWidth="max-w-2xl">
     <HeaderPortfolio
       client:visible

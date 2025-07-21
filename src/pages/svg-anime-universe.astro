@@ -2,12 +2,12 @@
 import SvgAnimeUniverseRoot from "@/components/portfolio/svg-anime-universe";
 import PageLayout from "@/layouts/PageLayout.astro";
 import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
+import { pagesSeo } from "@/config/pages";
+
+const meta = pagesSeo["svg-anime-universe"];
 ---
 
-<PageLayout
-  heroAnime
-  meta={{ title: "SVG Anime Universe", description: "Homepage teaser with a parallax effect" }}
->
+<PageLayout heroAnime meta={meta}>
   <div class="w-full overflow-hidden pb-20 pt-32">
     <HeaderPortfolio
       client:visible

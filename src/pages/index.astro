@@ -4,11 +4,10 @@ import Hero from "@/components/home/Hero.astro";
 import ContainerSection from "@/components/common/ContainerSection.astro";
 import PortfolioSection from "@/components/home/portfolio-section";
 import TechStack from "@/components/home/tech-stack-section";
+import { pagesSeo } from "@/config/pages";
 
-const meta = {
-  title: "Custom Web Apps & AI Product Development | AIGreener",
-  titleTemplate: "%s" // Switch default title template off
-};
+const meta = pagesSeo["index"];
+
 ---
 
 

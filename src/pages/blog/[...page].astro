@@ -8,18 +8,15 @@ import ContainerSection from "@/components/common/ContainerSection.astro";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import Pagination from "@/components/common/Paginator.astro";
+import { pagesSeo } from "@/config/pages";
+
+const meta = pagesSeo["blog"];
 
 export const getStaticPaths = (async ({ paginate }) => {
   const allPosts = await getAllPosts();
   const allPostsByDate = sortMDByDate(allPosts);
   return paginate(allPostsByDate, { pageSize: 8 });
 }) satisfies GetStaticPaths;
-
-const meta = {
-  description:
-    "Discover in-depth articles on web development, coding challenges, and general programming. Stay updated with the latest tutorials and insights to boost your programming skills",
-  title: "Blog posts",
-};
 
 interface Props {
   page: Page<CollectionEntry<"post">>;

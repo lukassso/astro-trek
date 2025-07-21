@@ -3,9 +3,12 @@ import Layout from "../../layouts/PageLayout.astro";
 import ContainerSection from "@/components/common/ContainerSection.astro";
 import DashboardComponent from "@/components/portfolio/firebase-auth/Dashboard.component";
 import HeaderFirebaseAuth from "@/components/portfolio/firebase-auth/HeaderFirebaseAuth.astro";
+import { pagesSeo } from "@/config/pages";
+
+const meta = pagesSeo["firebase-auth"];
 ---
 
-<Layout meta={{ title: "Dashboard" }}>
+<Layout meta={meta}>
   <ContainerSection>
     <HeaderFirebaseAuth />
     <DashboardComponent client:visible />

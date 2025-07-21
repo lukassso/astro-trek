@@ -3,6 +3,9 @@ import PageLayout from "@/layouts/PageLayout.astro";
 import ContainerSection from "@/components/common/ContainerSection.astro";
 import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
 import MoviesAppComponent from "@/components/portfolio/movie-app";
+import { pagesSeo } from "@/config/pages";
+
+const meta = pagesSeo["movie-app"];
 
 const {
   geo: { city },
@@ -11,7 +14,7 @@ const {
 export const prerender = false;
 ---
 
-<PageLayout meta={{ title: "Movie App" }}>
+<PageLayout meta={meta}>
   <ContainerSection>
     <HeaderPortfolio
       client:visible

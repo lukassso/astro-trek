@@ -3,9 +3,12 @@ import PageLayout from "@/layouts/PageLayout.astro";
 import ContainerSection from "@/components/common/ContainerSection.astro";
 import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
 import NbpCurrencyExplorerComponent from "@/components/portfolio/nbp-currency-explorer";
+import { pagesSeo } from "@/config/pages";
+
+const meta = pagesSeo["nbp-currency-explorer"];
 ---
 
-<PageLayout meta={{ title: "NBP Currency Explorer" }}>
+<PageLayout meta={meta}>
   <ContainerSection>
     <HeaderPortfolio
       client:visible
