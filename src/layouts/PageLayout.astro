@@ -1,29 +1,58 @@
 ---
-import type { SiteMeta } from "@/types";
 import Footer from "@/components/common/Footer.astro";
 import Header from "@/components/common/Header.astro";
-import BaseHead from "@/components/common/BaseHead.astro";
 import ThemeProvider from "@/components/common/ThemeProvider.astro";
-import { siteConfig, menuLinks } from "@/site.config";
+import { menuLinks } from "@/site.config";
+import { AstroSeo, type Props as SeoProps } from "@astrolib/seo";
+import { seoConfig } from "../config/seo";
+import "@/styles/index.css";
 
 interface Props {
-  meta: SiteMeta;
+  meta: SeoProps;
+  jsonLd?: object;
   heroAnime?: boolean;
 }
 
-const {
-  meta: { articleDate, description = siteConfig.description, ogImage, title },
-  heroAnime,
-} = Astro.props;
+const { meta, heroAnime, jsonLd } = Astro.props;
 ---
 
-<html lang={siteConfig.lang}>
+<html lang="en-GB">
   <head>
-    <BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#4ade80" />
+
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <link rel="sitemap" href="/sitemap.xml" />
+    <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="AIGreener Blog Feed" />
+    
+    <meta name="google-site-verification" content="3P25v26rIZKcdXbSMEBkLXtNE2oBarvmYgf3SXYGPPE" />
+    <script is:inline>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-T5NNDNL8");
+    </script>
+
+    <AstroSeo {...seoConfig} {...meta} />
+
+     {jsonLd && (
+      <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    )}
+
+    <slot name="head" />
   </head>
-  <body
-    aria-label={title}
-  >
+  <body aria-label={seoConfig.title}>
     {heroAnime ? <div class="bg-gradient bg-gradient-mix" /> : undefined}
 
     <ThemeProvider />

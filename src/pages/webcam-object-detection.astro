@@ -3,9 +3,12 @@ import PageLayout from "@/layouts/PageLayout.astro";
 import ContainerSection from "@/components/common/ContainerSection.astro";
 import WebcamObjectDetectionComponent from "@/components/portfolio/webcam-object-detection";
 import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
+import { pagesSeo } from "@/config/pages";
+
+const meta = pagesSeo["webcam-object-detection"];
 ---
 
-<PageLayout meta={{ title: "Webcam Object Detection App" }}>
+<PageLayout meta={meta}>
   <ContainerSection maxWidth="max-w-2xl">
     <HeaderPortfolio
       client:visible

@@ -1,8 +1,8 @@
 ---
 import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
-
 import PostLayout from "@/layouts/PostLayout.astro";
 import { getAllPosts } from "../../utils/post.ts";
+import type { CollectionEntry } from "astro:content";
 
 export const getStaticPaths = (async () => {
   const blogEntries = await getAllPosts();
@@ -12,12 +12,30 @@ export const getStaticPaths = (async () => {
   }));
 }) satisfies GetStaticPaths;
 
-type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+interface Props {
+  entry: CollectionEntry<'post'>;
+}
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+
+const meta = {
+  title: entry.data.title,
+  description: entry.data.description,
+  openGraph: {
+    images: [
+      {
+        url: new URL(entry.data.ogImage || entry.data.heroImage || '/og-image.png', Astro.site).href,
+        width: 1200,
+        height: 630,
+        alt: entry.data.title,
+      }
+    ]
+  }
+};
+
 ---
 
-<PostLayout post={entry}>
+<PostLayout post={entry} meta={meta}>
   <Content />
 </PostLayout>

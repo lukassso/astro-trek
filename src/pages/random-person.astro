@@ -3,9 +3,12 @@ import PageLayout from "@/layouts/PageLayout.astro";
 import ContainerSection from "@/components/common/ContainerSection.astro";
 import RandomPersonComponent from "../components/portfolio/random-person";
 import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
+import { pagesSeo } from "@/config/pages";
+
+const meta = pagesSeo["random-person"];
 ---
 
-<PageLayout meta={{ title: "Random Person App" }}>
+<PageLayout meta={meta}>
   <ContainerSection maxWidth="max-w-2xl">
     <HeaderPortfolio
       client:visible

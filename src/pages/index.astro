@@ -4,9 +4,14 @@ import Hero from "@/components/home/Hero.astro";
 import ContainerSection from "@/components/common/ContainerSection.astro";
 import PortfolioSection from "@/components/home/portfolio-section";
 import TechStack from "@/components/home/tech-stack-section";
+import { pagesSeo } from "@/config/pages";
+
+const meta = pagesSeo["index"];
+
 ---
 
-<PageLayout meta={{ title: "Home" }}>
+
+<PageLayout meta={meta}>
   <Hero />
   <div class="py-14">
     <ContainerSection>

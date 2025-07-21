@@ -3,10 +3,13 @@ import PageLayout from "@/layouts/PageLayout.astro";
 import ContainerSection from "@/components/common/ContainerSection.astro";
 import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
 import UrlScraper from "@/components/portfolio/url-scraper";
+import { pagesSeo } from "@/config/pages";
+
+const meta = pagesSeo["url-scraper"];
 
 ---
 
-<PageLayout meta={{ title: "Playground AI" }}>
+<PageLayout meta={meta}>
   <ContainerSection>
     <HeaderPortfolio
       client:visible

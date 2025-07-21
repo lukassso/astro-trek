@@ -1,6 +1,9 @@
 ---
+// src/layouts/PostLayout.astro
+
 import PageLayout from "./PageLayout.astro";
 import type { CollectionEntry } from "astro:content";
+import type { Props as SeoProps } from "@astrolib/seo";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import { Image } from "astro:assets";
@@ -8,22 +11,21 @@ import ScrollToTopButton from "@/components/common/ScrollToTopButton.astro";
 
 interface Props {
   post: CollectionEntry<"post">;
+  meta: SeoProps;
 }
 
-const { post } = Astro.props;
+const { post, meta } = Astro.props;
 const {
-  data: { tags, draft, description, heroImage, ogImage, publishDate, title, updatedDate },
-  slug,
+  data: { tags, draft, heroImage, publishDate, title, updatedDate },
 } = post;
 
 dayjs.extend(localizedFormat);
 const articleDate = dayjs(publishDate).format("ll");
-const articleLastUpdate = dayjs(updatedDate).format("ll");
-
-const socialImage = ogImage ?? `/og-image/${slug}.png`;
+const articleLastUpdate = updatedDate ? dayjs(updatedDate).format("ll") : null;
 ---
 
-<PageLayout meta={{ articleDate, description, ogImage: socialImage, title }}>
+<PageLayout meta={meta}>
+
   <div class="mx-auto max-w-screen-md px-4 py-24 text-default md:px-6 md:py-32 lg:py-40">
     {
       heroImage && (
@@ -56,7 +58,7 @@ const socialImage = ogImage ?? `/og-image/${slug}.png`;
           {
             updatedDate && (
               <time class="text-xs">
-                Last updated on <time>{articleLastUpdate}</time>{" "}
+                Last updated on <time>{articleLastUpdate}</time>
               </time>
             )
           }
@@ -77,18 +79,5 @@ const socialImage = ogImage ?? `/og-image/${slug}.png`;
       </div>
     </article>
   </div>
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      "headline": "{title}",
-      "datePublished": "{publishDate}",
-      "dateModified": "{updatedDate}",
-      "author": {
-        "@type": "Person",
-        "name": "{siteConfig.author}"
-      }
-    }
-  </script>
 </PageLayout>
 <ScrollToTopButton />

@@ -3,9 +3,12 @@ import PageLayout from "@/layouts/PageLayout.astro";
 import ContainerSection from "@/components/common/ContainerSection.astro";
 import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
 import MultiSelectComponent from "@/components/portfolio/multi-select-component";
+import { pagesSeo } from "@/config/pages";
+
+const meta = pagesSeo["multi-select"];
 ---
 
-<PageLayout meta={{ title: "Multi Select Component" }}>
+<PageLayout meta={meta}>
 	<ContainerSection>
 		<HeaderPortfolio
 			client:visible
