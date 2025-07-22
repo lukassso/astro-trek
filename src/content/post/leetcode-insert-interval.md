@@ -3,10 +3,10 @@ title: "Insert Interval: A deep dive into a Common Coding Challenge"
 publishDate: "16 April 2024"
 updatedDate: "16 April 2024"
 description: "Let's explore the solution for the Insert Interval problem, a popular and interesting coding challenge frequently encountered during coding interviews."
-heroImage: "/assets/images/post_img2.svg"
+heroImage: "/assets/images/blog-post-img-bcg-2.svg"
 coverImage:
-  src: "/assets/images/post_img2.svg"
-  alt: "ddd"
+  src: "/assets/images/blog-post-img-bcg-2.svg"
+  alt: "insert interval blog post image"
 tags: ["intermediate", "Array Methods"]
 ---
 

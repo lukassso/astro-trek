@@ -4,9 +4,9 @@ description: "This post with listing of different markdown elements"
 publishDate: "27 Feb 2024"
 updatedDate: "27 Feb 2024"
 draft: true
-heroImage: "/assets/images/post_img2.svg"
+heroImage: "/assets/images/blog-post-img-bcg-2.svg"
 coverImage:
-  src: "/assets/images/post_img2.svg"
+  src: "/assets/images/blog-post-img-bcg-2.svg"
   alt: "markdown-elements"
 ---
 

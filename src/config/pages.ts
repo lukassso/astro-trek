@@ -17,7 +17,7 @@ const pagesData: Record<string, PageData> = {
     title: "Custom Web Apps & AI Product Development",
     description: "I help businesses build & scale ambitious digital products. Specializing in Next.js web apps and rapid AI prototyping. Let's discuss your project.",
     og: {
-      imageUrl: "/assets/images/blog-posts.webp",
+      imageUrl: "/assets/images/og-main-page.png",
       title: "Check out the portfolio of AIGreener",
       description: "Explore my portfolio of custom web apps and AI projects. From full JS applications to AI prototypes, see how I can help your business grow.",
       alt: "AIGreener Portfolio"
@@ -29,7 +29,7 @@ const pagesData: Record<string, PageData> = {
     og: {
       title: "Writing about web development and AI",
       description: "Web development insights, programming tutorials, and experiments with AI. Explore articles on modern web technologies.",
-      imageUrl: "/assets/images/post_img.webp",
+      imageUrl: "/assets/images/og-blog-posts.png",
       alt: "AIGreener Blog"
     }
   },

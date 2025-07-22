@@ -3,10 +3,10 @@ title: "Understanding JavaScript Methods (Cheat Sheet)"
 publishDate: "11 April 2024"
 updatedDate: "11 April 2024"
 description: "JavaScript offers versatile methods for data manipulation, object interaction, and operations. Learn how these methods streamline development."
-heroImage: "/assets/images/js-methods-cheet-sheet.webp"
+heroImage: "/assets/images/blog-js-methods-cheet-sheet.png"
 coverImage:
-  src: "/assets/images/js-methods-cheet-sheet.webp"
-  alt: "ddd"
+  src: "/assets/images/blog-js-methods-cheet-sheet.png"
+  alt: "js methods blog post image"
 tags: ["begginer", "Array Methods", "String Manipulation"]
 ---
 
