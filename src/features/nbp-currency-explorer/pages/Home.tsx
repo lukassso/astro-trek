@@ -5,7 +5,7 @@ import Spinner from "@/components/portfolio/nbp-currency-explorer/components/Spi
 import CurrencyConverter from "@/components/portfolio/nbp-currency-explorer/components/CurrencyConverter";
 import { fetchCurrencyRates } from "../fetchCurrencyRates";
 import styles from "@/components/portfolio/nbp-currency-explorer/components/table/table.module.scss";
-import { useMediaQuery } from "@/utils/hooks/use-media-query";
+import { useMediaQuery } from "@/hooks/use-media-query";
 import CurrencyTable from "@/components/portfolio/nbp-currency-explorer/components/table/CurrencyTable";
 import CurrencyCards from "@/components/portfolio/nbp-currency-explorer/components/currency-cards/CurrencyCards";
 

@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
-import { useMediaQuery } from "@/utils/hooks/use-media-query";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 interface MultiSelectProps {
 	options: {
