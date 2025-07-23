@@ -1,14 +1,19 @@
 import type { APIRoute } from "astro";
+import { useTranslations } from "@/i18n/utils";
+import type { Language } from "@/types";
 
 // KEY DIRECTIVE: This tells Astro not to pre-render this endpoint at build time.
 // It must be treated as a dynamic, server-side resource.
 export const prerender = false;
 
+// Interface for type-checking the expected response structure from the Gemini API.
+// Using optional chaining (`?`) makes it robust against missing fields.
 interface GeminiResponse {
   candidates?: Array<{ content?: { parts?: Array<{ text: string }> } }>;
-  error?: { message: string };
+  error?: { message:string };
 }
 
+// The main API route handler, triggered by a POST request.
 export const POST: APIRoute = async ({ request }) => {
   // Use a try...catch block to handle any potential errors gracefully,
   // such as invalid JSON in the request body or network issues.
@@ -25,13 +30,18 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // STEP 3: If it's not a warmup, proceed with the normal logic.
-    // Validate the incoming 'keyword'.
-    const { keyword } = body;
+    // Securely extract and validate the client-provided inputs.
+    const { keyword, lang } = body as { keyword: string; lang: Language['lang'] };
+
     if (!keyword || typeof keyword !== "string") {
       return new Response(JSON.stringify({ error: "Keyword is required." }), { status: 400 });
     }
+    // Validate that the language is one of the supported ones.
+    if (!lang || (lang !== 'en' && lang !== 'pl')) {
+      return new Response(JSON.stringify({ error: "A valid language ('en' or 'pl') is required." }), { status: 400 });
+    }
 
-    // STEP 4: Securely get the API key from environment variables.
+    // STEP 4: Securely get the API key from server-side environment variables.
     // This key is NEVER exposed to the client.
     const apiKey = import.meta.env.GEMINI_API_KEY;
     if (!apiKey) {
@@ -41,9 +51,14 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    // STEP 5: Prepare the request to the Gemini API.
+    // STEP 5: Prepare the language-specific request for the Gemini API.
+    // Initialize the translation function for the language provided by the client.
+    const t = useTranslations(lang);
+    
+    // Generate the translated prompt using the `t` function and placeholder replacement.
+    const prompt = t('api.gemini.prompt', { keyword: keyword });
+
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
-    const prompt = `Zaproponuj krótki, kreatywny pomysł na projekt z dziedziny Data Science/AI, związany z "${keyword}". Skup się na problemie do rozwiązania, potencjalnych danych i modelu ML/DL. Odpowiedź sformułuj zwięźle i profesjonalnie, jako gotowy tekst do wyświetlenia.`;
 
     // STEP 6: Call the external Gemini API. This is another potential failure point.
     const geminiResponse = await fetch(apiUrl, {
@@ -54,7 +69,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     const result: GeminiResponse = await geminiResponse.json();
 
-    // Handle non-200 responses from the Gemini API.
+    // Handle non-200 responses from the Gemini API (e.g., 400, 429, 500).
     if (!geminiResponse.ok) {
       console.error("Error response from Gemini API:", result);
       const errorMessage = result?.error?.message || "Error communicating with the AI.";
@@ -63,12 +78,14 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    // STEP 7: Extract the generated text and send it back to the client.
+    // STEP 7: Safely extract the generated text and send it back to the client.
+    // Optional chaining (`?.`) prevents runtime errors if the structure is unexpected.
     const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
 
     if (text) {
       return new Response(JSON.stringify({ idea: text.trim() }), { status: 200 });
     } else {
+      // This case handles a 200 OK response that has an unexpected body structure.
       console.error("Unexpected response structure from Gemini API:", result);
       return new Response(
         JSON.stringify({ error: "Failed to generate an idea from the AI response." }),

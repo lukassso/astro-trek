@@ -8,9 +8,15 @@ coverImage:
   src: "/assets/images/blog-postgraduade-ai-journey.png"
   alt: "blog post image"
 tags: ["AI", "Data Science", "Python", "User story"]
+lang: "pl"
+translations:
+  en: "postgraduade-ai-journey"
 ---
 
-import IdeaGenerator from "../../../components/blog/IdeaGenerator.astro";
+import IdeaGenerator from "@/components/blog/IdeaGenerator.astro";
+import LanguageSwitcher from "@/components/blog/LanguageSwitcher.astro";
+
+<LanguageSwitcher currentLang={frontmatter.lang} translations={frontmatter.translations} />
 
 Jako inżynier oprogramowania specjalizujący się we frontendzie, stanąłem w obliczu rewolucji. Sztuczna inteligencja, dotychczas odległa koncepcja, zaczęła realnie kształtować moją dziedzinę. W zeszłym roku zaczęło do mnie docierać, że znajduję się na rozdrożu: mogłem pozostać obserwatorem lub stać się aktywnym uczestnikiem tej zmiany. Wybrałem to drugie, rozpoczynając podróż, która może na nowo zdefiniować moją karierę.
 

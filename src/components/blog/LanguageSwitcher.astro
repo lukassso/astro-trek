@@ -1,0 +1,57 @@
+---
+import { Icon } from "astro-icon/components";
+import type { Language } from "@/types";
+import { languages, ui } from "@/i18n/ui";
+import { useTranslations } from "@/i18n/utils";
+
+export interface Props {
+  currentLang: Language['lang'];
+  translations: Partial<Record<Language['lang'], string>>;
+}
+
+const { currentLang, translations } = Astro.props;
+const t = useTranslations(currentLang);
+---
+
+<div class="my-10 flex items-center gap-4 rounded-lg border border-dashed border-brcolor px-4 py-3">
+  <Icon name="tabler:language" class="h-6 w-6 text-accent" />
+  <span class="text-sm font-medium text-default/90">{t('switcher.availableIn')}</span>
+  <div class="flex items-center gap-2">
+    {
+      Object.entries(languages).map(([langCode, langName]) => {
+        const targetLang = langCode as Language['lang'];
+        const translationSlug = translations[targetLang];
+
+        if (targetLang === currentLang) {
+          return (
+            <span class="cursor-default rounded-full px-3 py-1 text-sm font-bold text-accent">
+              {langName}
+            </span>
+          );
+        }
+
+        if (translationSlug) {
+          const urlPrefix = targetLang === 'en' ? '' : `/${targetLang}`;
+          const href = `${urlPrefix}/blog/${translationSlug}`;
+          return (
+            <a
+              href={href}
+              class="rounded-full bg-bg-secondary px-3 py-1 text-sm font-medium text-default/80 transition-colors hover:bg-bg-tertiary hover:text-default"
+            >
+              {langName}
+            </a>
+          );
+        }
+
+        return (
+          <span
+            class="cursor-not-allowed rounded-full px-3 py-1 text-sm text-default/40"
+            title={`Tłumaczenie na ${langName} niedostępne`}
+          >
+            {langName}
+          </span>
+        );
+      })
+    }
+  </div>
+</div>

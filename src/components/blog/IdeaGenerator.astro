@@ -1,5 +1,9 @@
 ---
+import { useTranslations } from "@/i18n/utils";
+import type { Language } from "@/types";
 
+const lang = Astro.currentLocale as Language["lang"];
+const t = useTranslations(lang);
 ---
 
 <div
@@ -7,11 +11,10 @@
 >
   <div class="flex flex-col space-y-1.5 p-6">
     <h3 class="!mt-2 text-2xl font-semibold tracking-tight">
-      ✨ Generator Pomysłów na Projekty AI
+      ✨ {t("blog.ideaGenerator.title")}
     </h3>
     <p class="text-muted-foreground text-sm">
-      Opisz swój pomysł lub wpisz słowa kluczowe (np. "zdrowie", "finanse"), a ja rozwinę to w
-      koncept projektu Data Science/AI.
+      {t("blog.ideaGenerator.description")}
     </p>
   </div>
   <div class="p-6 pt-0">
@@ -26,7 +29,7 @@
         id="generateIdeaBtn"
         class="ring-offset-white focus-visible:ring-offset-2 dark:ring-offset-slate-950 inline-flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-slate-50 transition-colors hover:bg-slate-900/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-50/90 dark:focus-visible:ring-slate-300"
       >
-        Generuj
+        {t("blog.ideaGenerator.button")}
       </button>
     </div>
   </div>
@@ -49,7 +52,7 @@
           d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
         ></path>
       </svg>
-      <span id="loadingMessage">Generating idea...</span>
+      <span id="loadingMessage">{t("blog.ideaGenerator.loading")}</span>
     </div>
     <div
       id="errorIndicator"
@@ -76,12 +79,12 @@
       id="ideaOutput"
       class="text-muted-foreground flex min-h-[120px] w-full items-center justify-center rounded-md border border-dashed p-4 text-sm"
     >
-      <span>Twój pomysł pojawi się tutaj...</span>
+      <span>{t("blog.ideaGenerator.output")}</span>
     </div>
   </div>
 </div>
 
-<script>
+<script define:vars={{ lang }}>
   // Use an Immediately Invoked Function Expression (IIFE) to create a safe scope
   // and to cleanly exit if essential DOM elements are missing.
   (function setupGenerator() {
@@ -201,7 +204,7 @@
         const response = await fetch("/api/generate-idea", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ keyword: keyword }),
+          body: JSON.stringify({ keyword: keyword, lang: lang }),
           signal: controller.signal,
         });
 
