@@ -30,7 +30,7 @@ function TechStack() {
         </div>
 
         <Tabs defaultValue={categories[0]} className="w-full">
-          <div className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:flex sm:justify-center scrollbar-hide">
+          <div className="-mx-4 overflow-x-auto px-4 scrollbar-hide sm:mx-0 sm:flex sm:justify-center">
             <TabsList className="bg-muted scrollbar-none inline-flex w-max rounded-xl p-1">
               {categories.map((category) => (
                 <TabsTrigger

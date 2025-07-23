@@ -1,7 +1,7 @@
 import { OpenAI } from "openai";
 
 const openai = new OpenAI({
-  apiKey: import.meta.env.PUBLIC_OPENAI_API_KEY
+  apiKey: import.meta.env.PUBLIC_OPENAI_API_KEY,
 });
 
 export async function askOpenAI(prompt: string, context: string) {
@@ -17,5 +17,3 @@ export async function askOpenAI(prompt: string, context: string) {
 
   return completion.choices[0].message?.content;
 }
-
-

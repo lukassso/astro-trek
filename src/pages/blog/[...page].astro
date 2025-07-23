@@ -7,8 +7,7 @@ export const getStaticPaths: GetStaticPaths = (opts) => getBlogStaticPaths({ ...
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
-const { page } = Astro.props
-
+const { page } = Astro.props;
 ---
 
 <BlogListPage page={page} />

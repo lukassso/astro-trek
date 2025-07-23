@@ -21,18 +21,18 @@ export default function UrlScraper() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-cente p-4">
+    <div className="justify-cente flex min-h-screen flex-col items-center p-4">
       <div className="w-full max-w-xl">
         <input
           type="text"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           placeholder="Paste address URL..."
-          className="w-full p-3 text-gray-700 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full rounded-lg border p-3 text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <button
           onClick={handleScrape}
-          className="mt-4 w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition"
+          className="mt-4 w-full rounded-lg bg-blue-600 p-3 text-white transition hover:bg-blue-700"
           disabled={loading}
         >
           {loading ? "Scraping..." : "Scrape URL"}
@@ -40,11 +40,9 @@ export default function UrlScraper() {
       </div>
 
       {result && (
-        <div className="mt-6 w-full max-w-3xl bg-white p-4 rounded-lg shadow">
-          <h2 className="text-lg text-gray-700 font-semibold mb-2">Result:</h2>
-          <pre className="whitespace-pre-wrap break-words text-sm text-gray-800">
-            {result}
-          </pre>
+        <div className="mt-6 w-full max-w-3xl rounded-lg bg-white p-4 shadow">
+          <h2 className="mb-2 text-lg font-semibold text-gray-700">Result:</h2>
+          <pre className="whitespace-pre-wrap break-words text-sm text-gray-800">{result}</pre>
         </div>
       )}
     </div>

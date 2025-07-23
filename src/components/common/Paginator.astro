@@ -7,7 +7,7 @@ interface Props {
   prevUrl?: PaginationLink;
 }
 
-const { nextUrl, prevUrl} = Astro.props;
+const { nextUrl, prevUrl } = Astro.props;
 const lang = Astro.currentLocale as Language["lang"];
 const t = useTranslations(lang);
 ---

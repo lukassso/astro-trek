@@ -17,9 +17,9 @@ export async function GET({ request }: { request: Request }) {
       body: JSON.stringify({
         url,
         attributes: {
-          "title": "Extract the title of the page or article.",
-          "data": "Capture the most important data points presented on the page.",
-          "summary": "Generate a summary of the content in bullet points."
+          title: "Extract the title of the page or article.",
+          data: "Capture the most important data points presented on the page.",
+          summary: "Generate a summary of the content in bullet points.",
         },
       }),
     });

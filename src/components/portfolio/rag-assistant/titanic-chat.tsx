@@ -19,7 +19,7 @@ export default function TitanicChat() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask about Titanic data..."
-          className="border p-2 rounded w-full"
+          className="w-full rounded border p-2"
         />
         <button type="submit">Send</button>
       </form>

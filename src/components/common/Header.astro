@@ -32,7 +32,7 @@ z-50 flex w-full" id="main-header">
           id="navigation-menu"
         >
           <ul
-            class="flex w-full flex-col gap-2 rounded-lg sm:bg-transparent bg-bgcolor sm:border-none border px-4 py-4 font-medium sm:flex-row md:w-auto"
+            class="flex w-full flex-col gap-2 rounded-lg border bg-bgcolor px-4 py-4 font-medium sm:flex-row sm:border-none sm:bg-transparent md:w-auto"
           >
             {
               menuLinks.map(({ title, path, subLinks }) => (
@@ -46,7 +46,7 @@ z-50 flex w-full" id="main-header">
                           class="icon-chevron ml-0.5 hidden h-3.5 w-3.5 transition-transform duration-500 ease-in-out sm:visible md:inline"
                         />
                       </a>
-                      <ul class="dropdown-menu sm:border rounded-lg bg-bgcolor m-0 py-0 font-medium sm:hidden sm:py-4 md:absolute md:min-w-[200px]">
+                      <ul class="dropdown-menu m-0 rounded-lg bg-bgcolor py-0 font-medium sm:hidden sm:border sm:py-4 md:absolute md:min-w-[200px]">
                         {subLinks.map(({ title, path }) => (
                           <li>
                             <a

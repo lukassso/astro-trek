@@ -1,4 +1,4 @@
-import type { APIRoute } from 'astro';
+import type { APIRoute } from "astro";
 
 // KEY DIRECTIVE: This tells Astro not to pre-render this endpoint at build time.
 // It must be treated as a dynamic, server-side resource.
@@ -19,16 +19,16 @@ export const POST: APIRoute = async ({ request }) => {
     // STEP 2: Handle the special "warmup" action.
     // This allows the client to "wake up" the serverless function without
     // making a costly API call to Gemini.
-    if (body.action === 'warmup') {
-      console.log('🔥 Warmup request received. Function is now warm.');
-      return new Response(JSON.stringify({ status: 'warmed-up' }), { status: 200 });
+    if (body.action === "warmup") {
+      console.log("🔥 Warmup request received. Function is now warm.");
+      return new Response(JSON.stringify({ status: "warmed-up" }), { status: 200 });
     }
 
     // STEP 3: If it's not a warmup, proceed with the normal logic.
     // Validate the incoming 'keyword'.
     const { keyword } = body;
-    if (!keyword || typeof keyword !== 'string') {
-      return new Response(JSON.stringify({ error: 'Keyword is required.' }), { status: 400 });
+    if (!keyword || typeof keyword !== "string") {
+      return new Response(JSON.stringify({ error: "Keyword is required." }), { status: 400 });
     }
 
     // STEP 4: Securely get the API key from environment variables.
@@ -36,7 +36,9 @@ export const POST: APIRoute = async ({ request }) => {
     const apiKey = import.meta.env.GEMINI_API_KEY;
     if (!apiKey) {
       console.error("Critical Server Error: GEMINI_API_KEY is not set.");
-      return new Response(JSON.stringify({ error: 'Server configuration error.' }), { status: 500 });
+      return new Response(JSON.stringify({ error: "Server configuration error." }), {
+        status: 500,
+      });
     }
 
     // STEP 5: Prepare the request to the Gemini API.
@@ -45,8 +47,8 @@ export const POST: APIRoute = async ({ request }) => {
 
     // STEP 6: Call the external Gemini API. This is another potential failure point.
     const geminiResponse = await fetch(apiUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }),
     });
 
@@ -54,9 +56,11 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Handle non-200 responses from the Gemini API.
     if (!geminiResponse.ok) {
-        console.error('Error response from Gemini API:', result);
-        const errorMessage = result?.error?.message || 'Error communicating with the AI.';
-        return new Response(JSON.stringify({ error: errorMessage }), { status: geminiResponse.status });
+      console.error("Error response from Gemini API:", result);
+      const errorMessage = result?.error?.message || "Error communicating with the AI.";
+      return new Response(JSON.stringify({ error: errorMessage }), {
+        status: geminiResponse.status,
+      });
     }
 
     // STEP 7: Extract the generated text and send it back to the client.
@@ -65,14 +69,19 @@ export const POST: APIRoute = async ({ request }) => {
     if (text) {
       return new Response(JSON.stringify({ idea: text.trim() }), { status: 200 });
     } else {
-      console.error('Unexpected response structure from Gemini API:', result);
-      return new Response(JSON.stringify({ error: 'Failed to generate an idea from the AI response.' }), { status: 500 });
+      console.error("Unexpected response structure from Gemini API:", result);
+      return new Response(
+        JSON.stringify({ error: "Failed to generate an idea from the AI response." }),
+        { status: 500 },
+      );
     }
-
   } catch (error) {
     // The catch block will handle any errors from the steps above,
     // including parsing the request body or network failures.
     console.error("Critical error in the API endpoint:", error);
-    return new Response(JSON.stringify({ error: 'Internal Server Error.', details: error.message }), { status: 500 });
+    return new Response(
+      JSON.stringify({ error: "Internal Server Error.", details: error.message }),
+      { status: 500 },
+    );
   }
 };
