@@ -1,17 +1,16 @@
 ---
 import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 import PostLayout from "@/layouts/PostLayout.astro";
-import { getAllPosts } from "../../utils/page-helpers.ts";
 import { getCollection, type CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
   const englishPosts = await getCollection("post", ({ id }) => {
-    return id.startsWith("en/");
+    return id.startsWith("pl/");
   });
 
   return englishPosts.map((entry) => ({
     params: {
-      slug: entry.slug.replace(/^en\//, ""),
+      slug: entry.slug.replace(/^pl\//, ""),
     },
     props: { entry },
   }));

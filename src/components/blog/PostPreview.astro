@@ -2,6 +2,12 @@
 const { title, img, desc, url, draft, alt, publishDate, tags, target = "_blank" } = Astro.props;
 import { Image } from "astro:assets";
 import defaultImage from "@/assets/post_img.png";
+import { useTranslations } from "@/i18n/utils";
+import type { Language } from "@/types";
+
+const lang = Astro.currentLocale as Language["lang"];
+
+const t = useTranslations(lang);
 ---
 
 <div class="rounded-lg transition ease-in-out hover:scale-[102%] hover:shadow-xl">
@@ -27,12 +33,19 @@ import defaultImage from "@/assets/post_img.png";
           }
         </h1>
         <p class="text-1xl py-1">{desc}</p>
-        <div class="mt-2 flex md:flex-row flex-col">
+        <div class="mt-2 flex flex-col md:flex-row">
           <div class="flex">
-            <p class="py-1 text-xs">publish date: <span class="font-medium">{publishDate}</span></p>
+            <p class="py-1 text-xs">
+              {t("blog.publishDate")}: <span class="font-medium">{publishDate}</span>
+            </p>
           </div>
-          <div class="flex flex-wrap md:-mt-1 md:ml-4 mt-4">
-            {tags && tags.map((tag: string) => <a class="badge badge-outline mr-1 uppercase mb-1 text-[10px] py-2">{tag}</a>)}
+          <div class="mt-4 flex flex-wrap md:-mt-1 md:ml-4">
+            {
+              tags &&
+                tags.map((tag: string) => (
+                  <a class="badge badge-outline mb-1 mr-1 py-2 text-[10px] uppercase">{tag}</a>
+                ))
+            }
           </div>
         </div>
       </div>

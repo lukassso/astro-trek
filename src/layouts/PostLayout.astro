@@ -1,6 +1,4 @@
 ---
-// src/layouts/PostLayout.astro
-
 import PageLayout from "./PageLayout.astro";
 import type { CollectionEntry } from "astro:content";
 import type { Props as SeoProps } from "@astrolib/seo";
@@ -25,14 +23,12 @@ const articleLastUpdate = updatedDate ? dayjs(updatedDate).format("ll") : null;
 ---
 
 <PageLayout meta={meta}>
-
   <div class="mx-auto max-w-screen-md px-4 py-24 text-default md:px-6 md:py-32 lg:py-40">
     {
       heroImage && (
         <Image
           width={750}
           height={422}
-          format="webp"
           src={heroImage}
           alt={title}
           class="mb-6 w-full rounded-lg"
@@ -53,7 +49,12 @@ const articleLastUpdate = updatedDate ? dayjs(updatedDate).format("ll") : null;
             }
           </h1>
           <div class="py-2">
-            {tags && tags.map((tag) => <a class="badge badge-outline mr-2 mb-1 no-underline uppercase">{tag}</a>)}
+            {
+              tags &&
+                tags.map((tag: string) => (
+                  <a class="badge badge-outline mb-1 mr-2 uppercase no-underline">{tag}</a>
+                ))
+            }
           </div>
           {
             updatedDate && (

@@ -1,0 +1,59 @@
+---
+import type { Page } from "astro";
+import type { PostWithUrl } from "@/utils/page-helpers";
+import type { Language } from "@/types";
+import { useTranslations } from "@/i18n/utils";
+import { pagesSeo } from "@/config/pages";
+import PageLayout from "@/layouts/PageLayout.astro";
+import PostPreview from "@/components/blog/PostPreview.astro";
+import Pagination from "@/components/common/Paginator.astro";
+
+export interface Props {
+  page: Page<PostWithUrl>;
+}
+
+const { page } = Astro.props;
+
+const lang = Astro.currentLocale as Language['lang'];
+const t = useTranslations(lang);
+
+const meta = lang === 'pl' ? (pagesSeo["blog-pl"] || pagesSeo["blog"]) : pagesSeo["blog"];
+
+const paginationProps = {
+  ...(page.url.prev && { prevUrl: { text: t('pagination.prev'), url: page.url.prev } }),
+  ...(page.url.next && { nextUrl: { text: t('pagination.next'), url: page.url.next } }),
+};
+
+const dateLocale = lang === 'pl' ? 'pl-PL' : 'en-GB';
+---
+
+<PageLayout meta={meta}>
+  <div class="mx-auto max-w-6xl px-4 py-24 text-default md:px-6 md:py-32 lg:py-40">
+    <h1 class="mb-6 text-3xl font-bold">{t('blog.title')}</h1>
+    <section aria-label="Blog post list" class="mb-24">
+      <ul class="space-y-8 text-start">
+        {
+          page.data.map((post) => (
+            <>
+              <PostPreview
+                title={post.data.title}
+                img={post.data.coverImage?.src}
+                desc={post.data.description}
+                target="_self"
+                alt={post.data.coverImage?.alt}
+                url={post.url}
+                publishDate={post.data.publishDate.toLocaleDateString(dateLocale, {
+                  dateStyle: "long",
+                })}
+                tags={post.data.tags}
+                draft={post.data.draft}
+              />
+              <div class="border border-y border-brcolor" />
+            </>
+          ))
+        }
+      </ul>
+      <Pagination {...paginationProps} />
+    </section>
+  </div>
+</PageLayout>

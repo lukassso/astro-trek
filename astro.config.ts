@@ -13,6 +13,13 @@ dotenv.config();
 
 // https://astro.build/config
 export default defineConfig({
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "pl"],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
   site: "https://aigreener.com",
   integrations: [
     sitemap({
@@ -120,4 +127,3 @@ export default defineConfig({
     },
   },
 });
-

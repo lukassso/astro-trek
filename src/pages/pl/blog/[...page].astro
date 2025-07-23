@@ -3,12 +3,11 @@ import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 import { getBlogStaticPaths } from "@/utils/page-helpers";
 import BlogListPage from "@/components/blog/BlogListPage.astro";
 
-export const getStaticPaths: GetStaticPaths = (opts) => getBlogStaticPaths({ ...opts, lang: "en" });
+export const getStaticPaths: GetStaticPaths = (opts) => getBlogStaticPaths({ ...opts, lang: "pl" });
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
-const { page } = Astro.props
-
+const { page } = Astro.props;
 ---
 
 <BlogListPage page={page} />
