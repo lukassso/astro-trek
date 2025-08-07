@@ -9,7 +9,7 @@ const SITE_DESCRIPTION =
 export const GITHUB_URL = "https://github.com/lukassso";
 export const LINKEDIN_URL = "https://www.linkedin.com/in/lukasz-zatyka/";
 export const DEFAULT_OG_IMAGE_URL = new URL("/og-image.png", SITE_URL).href;
-const LOGO_URL = new URL("/logo.png", SITE_URL).href;
+export const LOGO_URL = new URL("/logo.png", SITE_URL).href;
 
 export const seoConfig: SeoConfig = {
   title: SITE_TITLE,

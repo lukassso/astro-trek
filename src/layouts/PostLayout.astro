@@ -12,9 +12,10 @@ import ScrollToTopButton from "@/components/common/ScrollToTopButton.astro";
 interface Props {
   post: CollectionEntry<"post">;
   meta: SeoProps;
+  jsonLd?: object;
 }
 
-const { post, meta } = Astro.props;
+const { post, meta, jsonLd } = Astro.props;
 const {
   data: { tags, draft, heroImage, publishDate, title, updatedDate },
 } = post;
@@ -24,8 +25,7 @@ const articleDate = dayjs(publishDate).format("ll");
 const articleLastUpdate = updatedDate ? dayjs(updatedDate).format("ll") : null;
 ---
 
-<PageLayout meta={meta}>
-
+<PageLayout meta={meta} jsonLd={jsonLd}>
   <div class="mx-auto max-w-screen-md px-4 py-24 text-default md:px-6 md:py-32 lg:py-40">
     {
       heroImage && (

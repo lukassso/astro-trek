@@ -3,6 +3,13 @@ import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 import PostLayout from "@/layouts/PostLayout.astro";
 import { getAllPosts } from "../../utils/post.ts";
 import type { CollectionEntry } from "astro:content";
+import {
+  SITE_AUTHOR_NAME,
+  SITE_URL,
+  LINKEDIN_URL,
+  SITE_BRAND_NAME,
+  LOGO_URL,
+} from "../../config/seo.ts";
 
 export const getStaticPaths = (async () => {
   const blogEntries = await getAllPosts();
@@ -19,23 +26,63 @@ interface Props {
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 
+const imageUrl = new URL(
+  entry.data.ogImage || entry.data.heroImage || "/og-image.png",
+  Astro.site,
+).href;
+const postUrl = new URL(Astro.url.pathname, Astro.site).href;
+
 const meta = {
   title: entry.data.title,
   description: entry.data.description,
   openGraph: {
+    type: "article",
+    url: postUrl,
     images: [
       {
-        url: new URL(entry.data.ogImage || entry.data.heroImage || '/og-image.png', Astro.site).href,
+        url: imageUrl,
         width: 1200,
         height: 630,
         alt: entry.data.title,
-      }
-    ]
-  }
+      },
+    ],
+    article: {
+      publishedTime: entry.data.publishDate.toISOString(),
+      modifiedTime: entry.data.updatedDate?.toISOString(),
+      authors: [SITE_AUTHOR_NAME],
+      tags: entry.data.tags,
+    },
+  },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": postUrl,
+  },
+  headline: entry.data.title,
+  description: entry.data.description,
+  image: imageUrl,
+  author: {
+    "@type": "Person",
+    name: SITE_AUTHOR_NAME,
+    url: LINKEDIN_URL,
+  },
+  publisher: {
+    "@type": "Organization",
+    name: SITE_BRAND_NAME,
+    logo: {
+      "@type": "ImageObject",
+      url: LOGO_URL,
+    },
+  },
+  datePublished: entry.data.publishDate.toISOString(),
+  dateModified: entry.data.updatedDate?.toISOString(),
+};
 ---
 
-<PostLayout post={entry} meta={meta}>
+<PostLayout post={entry} meta={meta} jsonLd={jsonLd}>
   <Content />
 </PostLayout>
