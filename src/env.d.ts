@@ -31,8 +31,8 @@ interface ImportMetaEnv {
 }
 
 interface ImportMetaEnv {
-  readonly SUPABASE_URL: string;
-  readonly SUPABASE_KEY: string;
+  readonly SUPABASE_URL: string
+  readonly SUPABASE_KEY: string
   readonly OPENAI_API_KEY: string;
   readonly OPENAI_ORG_ID: string;
   readonly PUBLIC_OPENAI_PROJECT_ID: string;
@@ -44,5 +44,5 @@ interface ImportMetaEnv {
 }
 
 interface ImportMeta {
-  readonly env: ImportMetaEnv;
+  readonly env: ImportMetaEnv
 }

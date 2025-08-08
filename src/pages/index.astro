@@ -7,13 +7,15 @@ import TechStack from "@/components/home/tech-stack-section";
 import { pagesSeo } from "@/config/pages";
 
 const meta = pagesSeo["index"];
+
 ---
+
 
 <PageLayout meta={meta}>
   <Hero />
   <div class="py-14">
     <ContainerSection>
-      <TechStack client:visible />
+      <TechStack client:visible/>
       <PortfolioSection client:visible />
     </ContainerSection>
   </div>

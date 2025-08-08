@@ -2,7 +2,7 @@ import ButtonPrimary from "./components/ButtonPrimary.tsx";
 import ButtonSecondary from "./components/ButtonSecondary.tsx";
 import HeroAnimeComponent from "./components/HeroAnimeComponent.tsx";
 import HeroImageSvg from "./components/HeroImage.tsx";
-import { useMediaQuery } from "@/hooks/use-media-query.tsx";
+import { useMediaQuery } from "@/utils/hooks/use-media-query.tsx";
 
 const SvgAnimeUniverseRoot = () => {
   const mobile = useMediaQuery("(min-width: 900px)");

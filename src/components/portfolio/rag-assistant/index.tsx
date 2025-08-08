@@ -6,7 +6,7 @@ import { ImageIcon, SlidersHorizontal, ArrowUp } from "lucide-react";
 import AutoResizeTextarea from "./auto-resize-text-area";
 import ImageUploadArea from "./image-upload-area";
 import { cn } from "@/utils/shadcn";
-import { useMediaQuery } from "@/hooks/use-media-query";
+import { useMediaQuery } from "@/utils/hooks/use-media-query";
 import { useImageUpload } from "./use-image-upload";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";

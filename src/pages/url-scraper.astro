@@ -6,6 +6,7 @@ import UrlScraper from "@/components/portfolio/url-scraper";
 import { pagesSeo } from "@/config/pages";
 
 const meta = pagesSeo["url-scraper"];
+
 ---
 
 <PageLayout meta={meta}>
@@ -14,7 +15,14 @@ const meta = pagesSeo["url-scraper"];
       client:visible
       title={"URL Scraper"}
       description={"A tool for extracting data from web pages."}
-      chipsList={["React", "Typescript", "Tailwind CSS", "Shadcn UI", "Radix UI", "Web Scraping"]}
+      chipsList={[
+        "React",
+        "Typescript",
+        "Tailwind CSS",
+        "Shadcn UI",
+        "Radix UI",
+        "Web Scraping",  
+      ]}
     />
     <UrlScraper client:only />
   </ContainerSection>

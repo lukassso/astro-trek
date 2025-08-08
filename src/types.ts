@@ -37,7 +37,3 @@ export interface MenuLink {
   path?: string;
   subLinks?: MenuSubLink[];
 }
-
-export interface Language {
-  lang: "en" | "pl";
-}

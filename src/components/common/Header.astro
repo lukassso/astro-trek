@@ -27,26 +27,25 @@ z-50 flex w-full" id="main-header">
 				  sm:static
 				  sm:mt-1
 				  sm:flex
-      
 				  sm:flex-row"
           id="navigation-menu"
         >
           <ul
-            class="flex w-full flex-col gap-2 rounded-lg border bg-bgcolor px-4 py-4 font-medium sm:flex-row sm:border-none sm:bg-transparent md:w-auto"
+            class="flex w-full flex-col gap-2 rounded bg-bgcolor px-4 py-4 font-medium shadow-lg sm:flex-row sm:bg-transparent sm:shadow-none md:w-auto"
           >
             {
               menuLinks.map(({ title, path, subLinks }) => (
-                <li class={subLinks ? "dropdown" : "px-3 py-1"}>
+                <li class={subLinks ? "dropdown " : "px-3 py-1"}>
                   {subLinks ? (
                     <>
-                      <a class="btn-nav-link text-accent flex items-center px-3 py-1 ">
+                      <button class="btn-nav-link text-accent flex items-center px-3 py-1 ">
                         {title}
                         <Icon
                           name="tabler:chevron-down"
                           class="icon-chevron ml-0.5 hidden h-3.5 w-3.5 transition-transform duration-500 ease-in-out sm:visible md:inline"
                         />
-                      </a>
-                      <ul class="dropdown-menu m-0 rounded-lg bg-bgcolor py-0 font-medium sm:hidden sm:border sm:py-4 md:absolute md:min-w-[200px]">
+                      </button>
+                      <ul class="dropdown-menu m-0 rounded py-0 font-medium drop-shadow-xl sm:hidden sm:bg-bgcolor sm:py-4 md:absolute md:min-w-[200px]">
                         {subLinks.map(({ title, path }) => (
                           <li>
                             <a

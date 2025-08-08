@@ -3,9 +3,9 @@ title: "A Deep Dive into Hydration and Resumability"
 description: "In the dynamic world of web development, the drive for better performance has led to significant changes in how we build and deliver web applications."
 publishDate: "June 12 2024"
 coverImage:
-  src: "/assets/images/blog-hydration-and-resumability.svg"
-  alt: "hydration blog post image"
-heroImage: "/assets/images/blog-hydration-and-resumability.svg"
+  src: "/assets/images/hydration-and-resumability.svg"
+  alt: "hydration"
+heroImage: "/assets/images/hydration-and-resumability.svg"
 tags: ["Hydration", "Performance"]
 ---
 

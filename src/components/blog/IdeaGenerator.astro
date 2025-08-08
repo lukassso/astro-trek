@@ -1,20 +1,14 @@
 ---
-import { useTranslations } from "@/i18n/utils";
-import type { Language } from "@/types";
 
-const lang = Astro.currentLocale as Language["lang"];
-const t = useTranslations(lang);
 ---
 
 <div
   class="bg-card text-card-foreground mx-auto mt-16 w-full rounded-xl border bg-clip-padding shadow-sm"
 >
   <div class="flex flex-col space-y-1.5 p-6">
-    <h3 class="!mt-2 text-2xl font-semibold tracking-tight">
-      ✨ {t("blog.ideaGenerator.title")}
-    </h3>
+    <h3 class="!mt-2 text-2xl font-semibold tracking-tight">✨ Generator Pomysłów na Projekty AI</h3>
     <p class="text-muted-foreground text-sm">
-      {t("blog.ideaGenerator.description")}
+      Opisz swój pomysł lub wpisz słowa kluczowe (np. "zdrowie", "finanse"), a ja rozwinę to w koncept projektu Data Science/AI.
     </p>
   </div>
   <div class="p-6 pt-0">
@@ -29,7 +23,7 @@ const t = useTranslations(lang);
         id="generateIdeaBtn"
         class="ring-offset-white focus-visible:ring-offset-2 dark:ring-offset-slate-950 inline-flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-slate-50 transition-colors hover:bg-slate-900/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-50/90 dark:focus-visible:ring-slate-300"
       >
-        {t("blog.ideaGenerator.button")}
+        Generuj
       </button>
     </div>
   </div>
@@ -52,7 +46,7 @@ const t = useTranslations(lang);
           d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
         ></path>
       </svg>
-      <span id="loadingMessage">{t("blog.ideaGenerator.loading")}</span>
+      <span id="loadingMessage">Generating idea...</span>
     </div>
     <div
       id="errorIndicator"
@@ -79,12 +73,12 @@ const t = useTranslations(lang);
       id="ideaOutput"
       class="text-muted-foreground flex min-h-[120px] w-full items-center justify-center rounded-md border border-dashed p-4 text-sm"
     >
-      <span>{t("blog.ideaGenerator.output")}</span>
+      <span>Twój pomysł pojawi się tutaj...</span>
     </div>
   </div>
 </div>
 
-<script define:vars={{ lang }}>
+<script>
   // Use an Immediately Invoked Function Expression (IIFE) to create a safe scope
   // and to cleanly exit if essential DOM elements are missing.
   (function setupGenerator() {
@@ -204,7 +198,7 @@ const t = useTranslations(lang);
         const response = await fetch("/api/generate-idea", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ keyword: keyword, lang: lang }),
+          body: JSON.stringify({ keyword: keyword }),
           signal: controller.signal,
         });
 

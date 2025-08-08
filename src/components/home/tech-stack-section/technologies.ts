@@ -78,3 +78,4 @@ export const technologies: TechArrayProp[] = [
   { name: "MongoDB", image: "/tech-stack/MongoDB.svg", category: "Databases" },
   { name: "MySQL", image: "/tech-stack/MySQL.svg", category: "Databases" },
 ];
+

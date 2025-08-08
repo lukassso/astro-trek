@@ -1,13 +1,76 @@
 ---
-import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
-import { getBlogStaticPaths } from "@/utils/page-helpers";
-import BlogListPage from "@/components/blog/BlogListPage.astro";
+import PageLayout from "@/layouts/PageLayout.astro";
+import PostPreview from "@/components/blog/PostPreview.astro";
+import type { GetStaticPaths, Page } from "astro";
+import { getAllPosts, sortMDByDate } from "../../utils/post.ts";
+import type { CollectionEntry } from "astro:content";
+import ContainerSection from "@/components/common/ContainerSection.astro";
+import dayjs from "dayjs";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+import Pagination from "@/components/common/Paginator.astro";
+import { pagesSeo } from "@/config/pages";
 
-export const getStaticPaths: GetStaticPaths = (opts) => getBlogStaticPaths({ ...opts, lang: "en" });
+const meta = pagesSeo["blog"];
 
-type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+export const getStaticPaths = (async ({ paginate }) => {
+  const allPosts = await getAllPosts();
+  const allPostsByDate = sortMDByDate(allPosts);
+  return paginate(allPostsByDate, { pageSize: 8 });
+}) satisfies GetStaticPaths;
+
+interface Props {
+  page: Page<CollectionEntry<"post">>;
+}
 
 const { page } = Astro.props;
+
+dayjs.extend(localizedFormat);
+
+const previewData = (a: Date) => {
+  return dayjs(a).format("ll");
+};
+
+const paginationProps = {
+  ...(page.url.prev && {
+    prevUrl: {
+      text: `← Previous Posts`,
+      url: page.url.prev,
+    },
+  }),
+  ...(page.url.next && {
+    nextUrl: {
+      text: `Next Posts →`,
+      url: page.url.next,
+    },
+  }),
+};
 ---
 
-<BlogListPage page={page} />
+<PageLayout meta={meta}>
+  <div class="mx-auto max-w-6xl px-4 py-24 text-default md:px-6 md:py-32 lg:py-40">
+    <h1 class="mb-6 text-3xl font-bold">The Blog</h1>
+    <section aria-label="Blog post list" class="mb-24">
+      <ul class="space-y-8 text-start">
+        {
+          page.data.map((post) => (
+            <>
+              <PostPreview
+                title={post.data.title}
+                img={post.data.coverImage?.src}
+                desc={post.data.description}
+                target="_self"
+                alt={post.data.coverImage?.alt}
+                draft={post.data.draft}
+                url={`/blog/${post.slug}`}
+                publishDate={previewData(post.data.publishDate)}
+                tags={post.data.tags}
+              />
+              <div class="border border-y border-brcolor" />
+            </>
+          ))
+        }
+      </ul>
+      <Pagination {...paginationProps} />
+    </section>
+  </div>
+</PageLayout>

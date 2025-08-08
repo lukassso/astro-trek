@@ -14,11 +14,9 @@ interface Props {
 }
 
 const { meta, heroAnime, jsonLd } = Astro.props;
-
-const seoLang = Astro.currentLocale === "pl" ? "pl-PL" : "en-US";
 ---
 
-<html lang={seoLang}>
+<html lang="en-GB">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -31,7 +29,7 @@ const seoLang = Astro.currentLocale === "pl" ? "pl-PL" : "en-US";
 
     <link rel="sitemap" href="/sitemap.xml" />
     <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="AIGreener Blog Feed" />
-
+    
     <meta name="google-site-verification" content="3P25v26rIZKcdXbSMEBkLXtNE2oBarvmYgf3SXYGPPE" />
     <script is:inline>
       (function (w, d, s, l, i) {
@@ -48,7 +46,9 @@ const seoLang = Astro.currentLocale === "pl" ? "pl-PL" : "en-US";
 
     <AstroSeo {...seoConfig} {...meta} />
 
-    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+     {jsonLd && (
+      <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    )}
 
     <slot name="head" />
   </head>
