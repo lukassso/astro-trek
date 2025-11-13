@@ -4,6 +4,7 @@ import Hero from "@/components/home/Hero.astro";
 import ContainerSection from "@/components/common/ContainerSection.astro";
 import PortfolioSection from "@/components/home/portfolio-section";
 import TechStack from "@/components/home/tech-stack-section";
+import Clients from "@/components/home/clients-section";
 import { pagesSeo } from "@/config/pages";
 
 const meta = pagesSeo["index"];
@@ -14,6 +15,9 @@ const meta = pagesSeo["index"];
   <div class="py-14">
     <ContainerSection>
       <TechStack client:visible />
+    </ContainerSection>
+    <Clients client:visible />
+    <ContainerSection>
       <PortfolioSection client:visible />
     </ContainerSection>
   </div>
