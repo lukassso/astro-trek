@@ -47,7 +47,6 @@ const LogoGrid: React.FC = () => {
             <motion.a
               key={logo.alt}
               href={logo.url}
-              target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center"
               variants={itemVariants}
