@@ -1,7 +1,7 @@
-import React from 'react';
-import { motion, type Variants } from 'framer-motion';
-import { logos } from './logos';
-import {useAstroTheme} from '@/hooks/use-app-theme';
+import React from "react";
+import { motion, type Variants } from "framer-motion";
+import { logos } from "./logos";
+import { useAstroTheme } from "@/hooks/use-app-theme";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -28,19 +28,17 @@ const LogoGrid: React.FC = () => {
   const { isDarkMode, mounted } = useAstroTheme();
 
   return (
-    <div className="container flex flex-col gap-8 px-4 md:px-6 pt-32">
+    <div className="container flex flex-col gap-8 px-4 pb-12 pt-60 sm:pb-48 md:px-6">
       <div className="grid items-center justify-center space-y-3 text-center ">
-        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-          The Clients
-        </h2>
+        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">The Clients</h2>
         <p className="mx-auto max-w-[700px] text-gray-500 dark:text-gray-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-          Pleasure to work with these amazing clients
+          Trusted by these amazing clients
         </p>
       </div>
 
       {mounted && (
         <motion.div
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 md:gap-12 p-8"
+          className="grid grid-cols-2 gap-8 p-8 sm:grid-cols-3 md:grid-cols-4 md:gap-12"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -51,7 +49,7 @@ const LogoGrid: React.FC = () => {
               href={logo.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex justify-center items-center"
+              className="flex items-center justify-center"
               variants={itemVariants}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
