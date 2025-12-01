@@ -120,6 +120,13 @@ export const portfolioItems: PortfolioItem[] = [
     imageUrl: "assets/images/portfolio-framer-parallax.png",
     path: "/framer-parallax",
   },
+	{
+		title: "Digital Sales Panel",
+		description: "A comprehensive dashboard for analyzing digital sales data and trends.",
+		technologies: ["React", "Typescript", "Data Visualization", "Analytics Tools"],
+		imageUrl: "assets/images/portfolio-digital-sales-panel.png",
+		path: "/dashboards/digital-sales-panel"
+	}
 ];
 
 // Used to generate links in both the Header & Footer.
