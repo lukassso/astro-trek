@@ -10,7 +10,7 @@ export const prerender = false;
 // Using optional chaining (`?`) makes it robust against missing fields.
 interface GeminiResponse {
   candidates?: Array<{ content?: { parts?: Array<{ text: string }> } }>;
-  error?: { message:string };
+  error?: { message: string };
 }
 
 // The main API route handler, triggered by a POST request.
@@ -54,11 +54,12 @@ export const POST: APIRoute = async ({ request }) => {
     // STEP 5: Prepare the language-specific request for the Gemini API.
     // Initialize the translation function for the language provided by the client.
     const t = useTranslations(lang);
-    
+
     // Generate the translated prompt using the `t` function and placeholder replacement.
     const prompt = t('api.gemini.prompt', { keyword: keyword });
 
-    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
+    // Ensure we use the :generateContent endpoint for POST requests
+    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
     // STEP 6: Call the external Gemini API. This is another potential failure point.
     const geminiResponse = await fetch(apiUrl, {
@@ -67,16 +68,24 @@ export const POST: APIRoute = async ({ request }) => {
       body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }),
     });
 
-    const result: GeminiResponse = await geminiResponse.json();
-
-    // Handle non-200 responses from the Gemini API (e.g., 400, 429, 500).
+    // Handle non-200 responses properly, even if they aren't JSON
     if (!geminiResponse.ok) {
-      console.error("Error response from Gemini API:", result);
-      const errorMessage = result?.error?.message || "Error communicating with the AI.";
+      const errorText = await geminiResponse.text();
+      console.error(`Gemini API Error (${geminiResponse.status}):`, errorText);
+      let errorMessage = "Error communicating with the AI.";
+      try {
+        const errorJson = JSON.parse(errorText);
+        errorMessage = errorJson?.error?.message || errorMessage;
+      } catch (e) {
+        // Response was not JSON, use the raw text if it's short
+        if (errorText.length < 200) errorMessage = errorText;
+      }
       return new Response(JSON.stringify({ error: errorMessage }), {
         status: geminiResponse.status,
       });
     }
+
+    const result: GeminiResponse = await geminiResponse.json();
 
     // STEP 7: Safely extract the generated text and send it back to the client.
     // Optional chaining (`?.`) prevents runtime errors if the structure is unexpected.
