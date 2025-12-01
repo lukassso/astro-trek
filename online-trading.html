@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notowania online - Czas rzeczywisty</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #4CAF50, #808080, #f44336);
+            height: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .market-info {
+            background: white;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .market-status {
+            font-weight: bold;
+        }
+        
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #4CAF50;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .search-container {
+            margin-bottom: 15px;
+        }
+        
+        .search-input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 300px;
+            font-size: 12px;
+        }
+        
+        .table-container {
+            background: white;
+            border: 1px solid #ddd;
+            overflow-x: auto;
+        }
+        
+        .quotes-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+        
+        .quotes-table th {
+            background: #333;
+            color: white;
+            padding: 8px 6px;
+            text-align: center;
+            border-right: 1px solid #555;
+            font-weight: bold;
+            font-size: 10px;
+            white-space: nowrap;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .quotes-table th:hover {
+            background: #555;
+        }
+        
+        .quotes-table td {
+            padding: 6px 4px;
+            text-align: center;
+            border-right: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            white-space: nowrap;
+        }
+        
+        .quotes-table tbody tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .quotes-table tbody tr:hover {
+            background: #e6f3ff;
+        }
+        
+        .stock-symbol {
+            font-weight: bold;
+            cursor: pointer;
+            color: #333;
+        }
+        
+        .stock-symbol:hover {
+            color: #0066cc;
+        }
+        
+        .change-positive {
+            background: #4CAF50;
+            color: white;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        
+        .change-negative {
+            background: #f44336;
+            color: white;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        
+        .change-neutral {
+            background: #9e9e9e;
+            color: white;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        
+        .flag {
+            font-size: 14px;
+        }
+        
+        .chart-mini {
+            width: 40px;
+            height: 20px;
+            background: #e8f5e8;
+            border: 1px solid #ccc;
+            display: inline-block;
+            position: relative;
+        }
+        
+        .chart-line {
+            position: absolute;
+            bottom: 2px;
+            left: 2px;
+            right: 2px;
+            height: 16px;
+            background: linear-gradient(45deg, #4CAF50 30%, #81C784 70%);
+            border-radius: 1px;
+        }
+        
+        .volume-bar {
+            width: 100%;
+            height: 3px;
+            background: #e0e0e0;
+            border-radius: 2px;
+            margin-top: 2px;
+        }
+        
+        .volume-fill {
+            height: 100%;
+            background: #2196F3;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        
+        .price-highlight {
+            animation: highlight 1s ease-in-out;
+        }
+        
+        @keyframes highlight {
+            0% { background-color: #ffeb3b; }
+            100% { background-color: transparent; }
+        }
+        
+        .currency-pln {
+            color: #1976d2;
+            font-weight: bold;
+        }
+        
+        .currency-usd {
+            color: #388e3c;
+            font-weight: bold;
+        }
+        
+        .time-display {
+            font-family: monospace;
+            font-size: 10px;
+            color: #666;
+        }
+        
+        .expand-btn {
+            cursor: pointer;
+            color: #666;
+            font-size: 10px;
+            margin-right: 5px;
+        }
+        
+        .expand-btn:hover {
+            color: #333;
+        }
+        
+        .sort-asc::after {
+            content: " ↑";
+            color: #4CAF50;
+        }
+        
+        .sort-desc::after {
+            content: " ↓";
+            color: #f44336;
+        }
+        
+        @media (max-width: 768px) {
+            .quotes-table {
+                font-size: 10px;
+            }
+            
+            .quotes-table th,
+            .quotes-table td {
+                padding: 4px 2px;
+            }
+            
+            .search-input {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header"></div>
+    
+    <div class="market-info">
+        <div>
+            <span class="market-status">Notowania online (14) 10:37:06</span>
+            <div style="font-size: 10px; color: #666; margin-top: 2px;">
+                Notowania papierów zagranicznych pochodzą z platformy CBOE. Twoje zlecenia mogą być zrealizowane na innych rynkach niż CBOE.
+            </div>
+        </div>
+        <div class="live-indicator">
+            <div class="live-dot"></div>
+            <span style="font-size: 11px;">Na żywo</span>
+            <span id="current-time" style="margin-left: 15px; font-family: monospace; font-size: 11px;"></span>
+        </div>
+    </div>
+    
+    <div class="search-container">
+        <input type="text" class="search-input" id="searchInput" placeholder="Wyszukaj papier wartościowy..." />
+    </div>
+    
+    <div class="table-container">
+        <table class="quotes-table" id="quotesTable">
+            <thead>
+                <tr>
+                    <th onclick="sortTable('papier')">PAPIER</th>
+                    <th>F</th>
+                    <th onclick="sortTable('waluta')">WALUTA</th>
+                    <th>WYKRES</th>
+                    <th onclick="sortTable('zm_percent')">ZM%</th>
+                    <th onclick="sortTable('wol_k')">WOL K</th>
+                    <th onclick="sortTable('wols')">WOLS</th>
+                    <th onclick="sortTable('limit_k')">LIMIT K</th>
+                    <th onclick="sortTable('limit_s')">LIMIT S</th>
+                    <th onclick="sortTable('kurs_wol_ost')">KURS WOL OST</th>
+                    <th>CZAS WOLUMEN</th>
+                    <th onclick="sortTable('obrot')">OBRÓT</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- Data will be populated by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Stock data
+        const stockData = [
+            {"papier": "ALLEGRO", "waluta": "PLN", "zm_percent": -0.04, "wol_k": 51, "wols": 122, "kurs_wol_ost": 35.6750, "limit_k": 35.6850, "limit_s": 35.6850, "czas_wolumen": "10:37:01", "obrot": 221449, "flag": "🇵🇱"},
+            {"papier": "AMD", "waluta": "USD", "zm_percent": 0.00, "wol_k": 0, "wols": 0, "kurs_wol_ost": 142.85, "limit_k": 143.20, "limit_s": 142.90, "czas_wolumen": "10:35:22", "obrot": 0, "flag": "🇺🇸"},
+            {"papier": "BARRICK GOLD", "waluta": "USD", "zm_percent": 0.00, "wol_k": 0, "wols": 0, "kurs_wol_ost": 19.45, "limit_k": 19.50, "limit_s": 19.40, "czas_wolumen": "10:30:15", "obrot": 0, "flag": "🇺🇸"},
+            {"papier": "BLOOBER", "waluta": "PLN", "zm_percent": 0.00, "wol_k": 157, "wols": 77, "kurs_wol_ost": 28.70, "limit_k": 29.10, "limit_s": 29.10, "czas_wolumen": "10:32:06", "obrot": 1865, "flag": "🇵🇱"},
+            {"papier": "CDPROJEKT", "waluta": "PLN", "zm_percent": -0.35, "wol_k": 28, "wols": 89, "kurs_wol_ost": 256.90, "limit_k": 257.10, "limit_s": 257.00, "czas_wolumen": "10:37:05", "obrot": 163668, "flag": "🇵🇱"},
+            {"papier": "DIAG", "waluta": "PLN", "zm_percent": -0.89, "wol_k": 3, "wols": 11, "kurs_wol_ost": 155.40, "limit_k": 155.60, "limit_s": 155.60, "czas_wolumen": "10:36:56", "obrot": 14607, "flag": "🇵🇱"},
+            {"papier": "KETY", "waluta": "PLN", "zm_percent": -0.06, "wol_k": 7, "wols": 13, "kurs_wol_ost": 873.50, "limit_k": 875.00, "limit_s": 875.00, "czas_wolumen": "10:36:30", "obrot": 906, "flag": "🇵🇱"},
+            {"papier": "LOCKHEED MAR", "waluta": "USD", "zm_percent": 0.25, "wol_k": 15, "wols": 25, "kurs_wol_ost": 428.75, "limit_k": 429.00, "limit_s": 428.50, "czas_wolumen": "10:35:45", "obrot": 6420, "flag": "🇺🇸"},
+            {"papier": "MOBRUK", "waluta": "PLN", "zm_percent": 0.00, "wol_k": 32, "wols": 39, "kurs_wol_ost": 266.00, "limit_k": 267.00, "limit_s": 267.00, "czas_wolumen": "10:36:32", "obrot": 1204, "flag": "🇵🇱"},
+            {"papier": "NIO INC", "waluta": "USD", "zm_percent": 1.25, "wol_k": 89, "wols": 156, "kurs_wol_ost": 4.85, "limit_k": 4.90, "limit_s": 4.82, "czas_wolumen": "10:36:18", "obrot": 431, "flag": "🇺🇸"},
+            {"papier": "NOVINA", "waluta": "PLN", "zm_percent": 3.86, "wol_k": 558, "wols": 5000, "kurs_wol_ost": 0.7640, "limit_k": 0.7820, "limit_s": 0.7800, "czas_wolumen": "10:31:46", "obrot": 124440, "flag": "🇵🇱"},
+            {"papier": "PGMSA", "waluta": "PLN", "zm_percent": 18.71, "wol_k": 706, "wols": 161, "kurs_wol_ost": 14.18, "limit_k": 14.34, "limit_s": 14.34, "czas_wolumen": "10:36:58", "obrot": 438147, "flag": "🇵🇱"},
+            {"papier": "QUALCOMM INC", "waluta": "USD", "zm_percent": -0.75, "wol_k": 125, "wols": 234, "kurs_wol_ost": 165.42, "limit_k": 166.00, "limit_s": 165.20, "czas_wolumen": "10:36:42", "obrot": 20658, "flag": "🇺🇸"},
+            {"papier": "ZABKA", "waluta": "PLN", "zm_percent": 1.55, "wol_k": 1120, "wols": 1688, "kurs_wol_ost": 22.3400, "limit_k": 22.3600, "limit_s": 22.3400, "czas_wolumen": "10:36:59", "obrot": 118084, "flag": "🇵🇱"}
+        ];
+
+        let sortDirection = {};
+        let currentData = [...stockData];
+
+        // Format number with appropriate decimals and thousand separators
+        function formatNumber(num, decimals = 2) {
+            if (num === 0) return "0";
+            return Number(num).toLocaleString('pl-PL', {
+                minimumFractionDigits: decimals,
+                maximumFractionDigits: decimals
+            });
+        }
+
+        // Format large numbers (e.g., turnover)
+        function formatLargeNumber(num) {
+            if (num === 0) return "0";
+            if (num >= 1000000) return (num / 1000000).toFixed(1) + "M";
+            if (num >= 1000) return (num / 1000).toFixed(0) + "K";
+            return num.toString();
+        }
+
+        // Create change percentage cell with colored background
+        function createChangeCell(change) {
+            let className = "change-neutral";
+            if (change > 0) className = "change-positive";
+            else if (change < 0) className = "change-negative";
+            
+            return `<span class="${className}">${change > 0 ? '+' : ''}${change.toFixed(2)}</span>`;
+        }
+
+        // Create mini chart
+        function createMiniChart(change) {
+            const isPositive = change >= 0;
+            const height = Math.min(Math.abs(change) * 2 + 3, 16);
+            const color = isPositive ? '#4CAF50' : '#f44336';
+            
+            return `<div class="chart-mini">
+                        <div class="chart-line" style="height: ${height}px; background: ${color};"></div>
+                    </div>`;
+        }
+
+        // Populate table with data
+        function populateTable(data = currentData) {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+
+            data.forEach((stock, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>
+                        <span class="expand-btn">▼</span>
+                        <span class="stock-symbol">${stock.papier}</span>
+                    </td>
+                    <td class="flag">${stock.flag}</td>
+                    <td class="currency-${stock.waluta.toLowerCase()}">${stock.waluta}</td>
+                    <td>${createMiniChart(stock.zm_percent)}</td>
+                    <td>${createChangeCell(stock.zm_percent)}</td>
+                    <td>${formatNumber(stock.wol_k, 0)}</td>
+                    <td>${formatNumber(stock.wols, 0)}</td>
+                    <td>${formatNumber(stock.limit_k, 4)}</td>
+                    <td>${formatNumber(stock.limit_s, 4)}</td>
+                    <td class="price-cell">${formatNumber(stock.kurs_wol_ost, 4)}</td>
+                    <td class="time-display">${stock.czas_wolumen}</td>
+                    <td>${formatLargeNumber(stock.obrot)}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Sort table by column
+        function sortTable(column) {
+            const direction = sortDirection[column] === 'asc' ? 'desc' : 'asc';
+            sortDirection = {}; // Reset all directions
+            sortDirection[column] = direction;
+
+            currentData.sort((a, b) => {
+                let aVal = a[column];
+                let bVal = b[column];
+
+                // Handle string sorting
+                if (typeof aVal === 'string') {
+                    aVal = aVal.toLowerCase();
+                    bVal = bVal.toLowerCase();
+                }
+
+                if (direction === 'asc') {
+                    return aVal > bVal ? 1 : -1;
+                } else {
+                    return aVal < bVal ? 1 : -1;
+                }
+            });
+
+            // Update header indicators
+            document.querySelectorAll('th').forEach(th => {
+                th.classList.remove('sort-asc', 'sort-desc');
+            });
+            
+            const clickedHeader = document.querySelector(`th[onclick="sortTable('${column}')"]`);
+            if (clickedHeader) {
+                clickedHeader.classList.add(direction === 'asc' ? 'sort-asc' : 'sort-desc');
+            }
+
+            populateTable();
+        }
+
+        // Search functionality
+        function filterTable() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const filteredData = stockData.filter(stock => 
+                stock.papier.toLowerCase().includes(searchTerm)
+            );
+            currentData = filteredData;
+            populateTable();
+        }
+
+        // Update current time
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('pl-PL');
+            document.getElementById('current-time').textContent = timeString;
+        }
+
+        // Simulate real-time updates
+        function updatePrices() {
+            stockData.forEach(stock => {
+                // Simulate small price changes
+                const change = (Math.random() - 0.5) * 0.1;
+                const oldPrice = stock.kurs_wol_ost;
+                stock.kurs_wol_ost = Math.max(0.01, oldPrice + change * oldPrice);
+                
+                // Update related fields
+                const priceChange = stock.kurs_wol_ost - oldPrice;
+                stock.zm_percent = stock.zm_percent + (priceChange / oldPrice) * 100;
+                
+                // Update time randomly
+                if (Math.random() > 0.8) {
+                    const now = new Date();
+                    stock.czas_wolumen = now.toLocaleTimeString('pl-PL', {hour: '2-digit', minute: '2-digit', second: '2-digit'});
+                    
+                    // Simulate volume changes
+                    stock.wol_k = Math.floor(stock.wol_k + Math.random() * 5);
+                    stock.wols = Math.floor(stock.wols + Math.random() * 5);
+                    
+                    // Update turnover
+                    stock.obrot += Math.floor(Math.random() * 100);
+                }
+            });
+            
+            // Update table
+            populateTable();
+            
+            // Highlight changed cells
+            document.querySelectorAll('.price-cell').forEach(cell => {
+                cell.classList.add('price-highlight');
+                setTimeout(() => {
+                    cell.classList.remove('price-highlight');
+                }, 1000);
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial population
+            populateTable();
+            
+            // Set up search
+            document.getElementById('searchInput').addEventListener('input', filterTable);
+            
+            // Start time updates
+            updateTime();
+            setInterval(updateTime, 1000);
+            
+            // Start price updates
+            setInterval(updatePrices, 5000);
+        });
+    </script>
+</body>
+</html>
