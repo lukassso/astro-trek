@@ -7,9 +7,14 @@ export const GET: APIRoute = async ({ url }) => {
   const searchParam = url.searchParams.get("s") || "robot";
   const id = url.searchParams.get("i");
   const page = url.searchParams.get("page") || "1";
-  const apiKey = import.meta.env.DEV
-    ? import.meta.env.PUBLIC_MOVIE_API_KEY
-    : import.meta.env.MOVIE_API_KEY;
+  const apiKey = import.meta.env.MOVIE_API_KEY;
+
+  if (!apiKey) {
+    return new Response(
+      JSON.stringify({ error: "Server configuration error" }),
+      { status: 500 }
+    );
+  }
 
   let apiUrl = `${API_ENDPOINT}?apikey=${apiKey}`;
 
