@@ -1,10 +1,10 @@
 import type { Handler } from "@netlify/functions";
 import { getAuth } from "firebase-admin/auth";
-import { app } from "../../src/firebase/server";
+import { getApp } from "../../src/firebase/server";
 import querystring from "querystring";
 
 const handler: Handler = async (event) => {
-  const auth = getAuth(app);
+  const auth = getAuth(getApp());
   let data: { [key: string]: string } = {};
 
   const contentType = event.headers["content-type"] || event.headers["Content-Type"];

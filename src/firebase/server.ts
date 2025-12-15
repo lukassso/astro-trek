@@ -1,8 +1,6 @@
 import type { ServiceAccount } from "firebase-admin";
 import { initializeApp, cert, getApps } from "firebase-admin/app";
 
-const activeApps = getApps();
-
 const serviceAccount = {
   projectId: process.env.VITE_FIREBASE_PROJECT_ID,
   privateKey: process.env.VITE_FIREBASE_PRIVATE_KEY,
@@ -16,6 +14,11 @@ const serviceAccount = {
 };
 
 const initApp = () => {
+  const activeApps = getApps();
+  if (activeApps.length > 0) {
+    return activeApps[0];
+  }
+
   console.info(`Project ID: ${serviceAccount.projectId}`);
 
   if (!serviceAccount.projectId) {
@@ -28,6 +31,11 @@ const initApp = () => {
   });
 };
 
-const app = activeApps.length === 0 ? initApp() : activeApps[0];
+let appInstance: ReturnType<typeof initializeApp> | null = null;
 
-export { app };
+export const getApp = () => {
+  if (!appInstance) {
+    appInstance = initApp();
+  }
+  return appInstance;
+};

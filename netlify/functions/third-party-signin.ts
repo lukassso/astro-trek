@@ -1,10 +1,10 @@
 import type { Handler } from "@netlify/functions";
 import { getAuth } from "firebase-admin/auth";
-import { app } from "../../src/firebase/server";
+import { getApp } from "../../src/firebase/server";
 import cookie from "cookie";
 
 const handler: Handler = async (event) => {
-  const auth = getAuth(app);
+  const auth = getAuth(getApp());
   const data = JSON.parse(event.body || "{}");
 
   if (!data.idToken) {
