@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -11,6 +12,20 @@ const MovieDetails = () => {
   const { id = `${DEFAULT_ID}` } = useParams<{ id: string }>();
   const { data: movie, isLoading, error } = useMovieDetails(id);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (movie?.Title) {
+      document.title = `${movie.Title} (${movie.Year}) - Movie App`;
+
+      const metaDescription = document.querySelector("meta[name='description']");
+      if (metaDescription) {
+        metaDescription.setAttribute(
+          "content",
+          `${movie.Title} (${movie.Year}) - ${movie.Genre}. ${movie.Plot?.substring(0, 150)}...`,
+        );
+      }
+    }
+  }, [movie]);
 
   const handleBackClick = () => {
     navigate(-1);
