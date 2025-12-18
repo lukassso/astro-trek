@@ -42,6 +42,20 @@ export default function CurrencyDetailsPage() {
     fetchCurrencyDetails();
   }, [fetchCurrencyDetails]);
 
+  useEffect(() => {
+    if (currencyData) {
+      document.title = `${currencyData.currency} (${currencyData.code}) - NBP Currency Explorer`;
+
+      const metaDescription = document.querySelector("meta[name='description']");
+      if (metaDescription) {
+        metaDescription.setAttribute(
+          "content",
+          `Check the latest exchange rates and history for ${currencyData.currency} (${currencyData.code}).`,
+        );
+      }
+    }
+  }, [currencyData]);
+
   return (
     <section className="mx-auto w-full max-w-5xl px-4 py-12 md:px-6 md:py-16">
       <h1 className="text-3xl font-bold">Details for {currencyData?.currency}</h1>
