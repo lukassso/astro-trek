@@ -30,4 +30,23 @@ const post = defineCollection({
     }),
 });
 
-export const collections = { post: post };
+const note = defineCollection({
+  type: "content",
+  schema: () =>
+    z.object({
+      publishDate: z.coerce.date(),
+      image: z
+        .object({
+          src: z.string(),
+          alt: z.string(),
+        })
+        .optional(),
+      likes: z.number().default(0),
+      authorName: z.string().default("Lukasz Zatyka"),
+      authorHandle: z.string().default(""),
+      lang: z.string().default("en"),
+      draft: z.boolean().default(false),
+    }),
+});
+
+export const collections = { post: post, note: note };

@@ -1,0 +1,90 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+import NoteLikeButton from "./NoteLikeButton";
+import defaultAvatar from "@/assets/logo-to-post.png";
+
+interface Props {
+  note: CollectionEntry<"note">;
+}
+
+const { note } = Astro.props;
+const { Content } = await note.render();
+
+// Extract language from folder path (e.g., "pl/first-note" -> "pl")
+const noteLang = note.id.split("/")[0] || "en";
+const dateLocale = noteLang === "pl" ? "pl-PL" : "en-GB";
+const formattedDate = note.data.publishDate.toLocaleDateString(dateLocale, {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+});
+---
+
+<article class="note-card">
+  <div class="flex gap-3">
+    <!-- Avatar -->
+    <div class="flex-shrink-0">
+      <Image
+        src={defaultAvatar}
+        width={48}
+        height={48}
+        alt={note.data.authorName}
+        class="h-12 w-12 rounded-full object-cover"
+        loading="lazy"
+      />
+    </div>
+
+    <!-- Content -->
+    <div class="min-w-0 flex-1">
+      <!-- Header: Author info -->
+      <div class="flex items-center gap-1 text-sm">
+        <span class="font-semibold text-default">{note.data.authorName}</span>
+        <span class="text-gray-500">@{note.data.authorHandle}</span>
+        <span class="text-gray-500">·</span>
+        <time class="text-gray-500" datetime={note.data.publishDate.toISOString()}>
+          {formattedDate}
+        </time>
+      </div>
+
+      <!-- Note content -->
+      <div class="prose prose-sm mt-2 max-w-none text-default">
+        <Content />
+      </div>
+
+      <!-- Optional image (using img for public folder paths) -->
+      {
+        note.data.image && (
+          <div class="mt-3 overflow-hidden rounded-xl md:max-w-md">
+            <img
+              src={note.data.image.src}
+              alt={note.data.image.alt}
+              class="w-full rounded-xl object-cover"
+              loading="lazy"
+            />
+          </div>
+        )
+      }
+
+      <!-- Action toolbar -->
+      <div class="note-card-toolbar mt-3 flex items-center justify-end">
+        <NoteLikeButton client:load noteId={note.id} initialLikes={note.data.likes} />
+      </div>
+    </div>
+  </div>
+</article>
+
+<style>
+  .note-card {
+    position: relative;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(128, 128, 128, 0.3);
+    background-color: rgba(128, 128, 128, 0.08);
+    padding: 1rem;
+  }
+
+  [data-theme="dark"] .note-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+</style>
