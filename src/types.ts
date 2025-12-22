@@ -25,6 +25,7 @@ export interface PortfolioItem {
   technologies?: string[];
   imageUrl?: string;
   path?: string;
+  externalUrl?: string;
 }
 
 export interface MenuSubLink {

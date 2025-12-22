@@ -8,10 +8,16 @@ interface PortfolioCardProps {
 }
 
 const PortfolioCard: React.FC<PortfolioCardProps> = ({ app, technologies }) => {
+  const isExternal = !!app.externalUrl;
+  const href = app.externalUrl || app.path;
+  const linkProps = isExternal
+    ? { target: "_self", rel: "noopener noreferrer" }
+    : {};
+
   return (
     <Card className="dark:bg-slate-950">
       <CardHeader>
-        <a href={app.path}>
+        <a href={href} {...linkProps}>
           <img
             src={app.imageUrl}
             alt={`${app.title} Screenshot`}
@@ -34,8 +40,31 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({ app, technologies }) => {
         </div>
         <h3 className="text-lg font-bold">{app.title}</h3>
         <div className="flex justify-center py-2">
-          <a href={app.path} className="w-full sm:w-1/2">
-            <Button className="w-full">View App</Button>
+          <a href={href} {...linkProps} className="w-full sm:w-1/2">
+            <Button className="w-full flex items-center justify-center gap-2">
+              {isExternal ? (
+                <>
+                  Visit Site
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                </>
+              ) : (
+                "View App"
+              )}
+            </Button>
           </a>
         </div>
       </CardContent>

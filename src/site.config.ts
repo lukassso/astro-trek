@@ -32,13 +32,7 @@ export const portfolioItems: PortfolioItem[] = [
     imageUrl: "assets/images/portfolio-nbp-currency-explorer.gif",
     path: "/nbp-currency-explorer",
   },
-  {
-    title: "Multi Select Component",
-    description: "A component for displaying and selecting multiple options.",
-    technologies: ["React", "Typescript", "Cmdk", "Tailwind CSS", "Radix UI", "React Select"],
-    imageUrl: "assets/images/portfolio-multi-select.png",
-    path: "/multi-select",
-  },
+  
   {
     title: "Bank Transactions",
     description:
@@ -55,6 +49,21 @@ export const portfolioItems: PortfolioItem[] = [
     ],
     imageUrl: "assets/images/portfolio-bank-transaction.png",
     path: "/dashboards/bank-transactions",
+  },
+  {
+    title: "Sushi AI Assistant",
+    description:
+      "An AI-powered sushi catering assistant that generates personalized menu recommendations for your events in just 2 minutes.",
+    technologies: ["Next.js", "Gemini AI", "Tailwind CSS", "Radix UI"],
+    imageUrl: "assets/images/portfolio-fugu-sushi.gif",
+    externalUrl: "https://fugu-catering.vercel.app/",
+  },
+  {
+    title: "Multi Select Component",
+    description: "A component for displaying and selecting multiple options.",
+    technologies: ["React", "Typescript", "Cmdk", "Tailwind CSS", "Radix UI", "React Select"],
+    imageUrl: "assets/images/portfolio-multi-select.png",
+    path: "/multi-select",
   },
   {
     title: "Movie App",
@@ -74,7 +83,6 @@ export const portfolioItems: PortfolioItem[] = [
     imageUrl: "assets/images/portfolio-movie-app.png",
     path: "/movie-app",
   },
-
   {
     title: "Task Manager",
     description:
