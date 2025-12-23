@@ -4,6 +4,7 @@ import { Image } from "astro:assets";
 import defaultImage from "@/assets/post_img.png";
 import { useTranslations } from "@/i18n/utils";
 import type { Language } from "@/types";
+import TagBadge from "@/components/common/TagBadge.astro";
 
 const lang = Astro.currentLocale as Language["lang"];
 
@@ -33,19 +34,14 @@ const t = useTranslations(lang);
           }
         </h1>
         <p class="text-1xl py-1">{desc}</p>
-        <div class="mt-2 flex flex-col md:flex-row">
-          <div class="flex">
-            <p class="py-1 text-xs">
-              {t("blog.publishDate")}: <span class="font-medium">{publishDate}</span>
-            </p>
+        <div class="mt-2 flex flex-col md:flex-row md:items-center">
+          <div class="flex items-center">
+            <span class="text-sm text-gray-500">
+              {t("blog.publishDate")}: {publishDate}
+            </span>
           </div>
-          <div class="mt-4 flex flex-wrap md:-mt-1 md:ml-4">
-            {
-              tags &&
-                tags.map((tag: string) => (
-                  <a class="badge badge-outline mb-1 mr-1 py-2 text-[10px] uppercase">{tag}</a>
-                ))
-            }
+          <div class="mt-3 flex flex-wrap md:ml-4 md:mt-0">
+            {tags && tags.map((tag: string) => <TagBadge tag={tag} />)}
           </div>
         </div>
       </div>

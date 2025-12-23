@@ -1,5 +1,4 @@
 ---
-
 import PageLayout from "./PageLayout.astro";
 import type { CollectionEntry } from "astro:content";
 import type { Props as SeoProps } from "@astrolib/seo";
@@ -7,6 +6,7 @@ import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import { Image } from "astro:assets";
 import ScrollToTopButton from "@/components/common/ScrollToTopButton.astro";
+import TagBadge from "@/components/common/TagBadge.astro";
 import type { Language } from "@/types";
 import { useTranslations } from "@/i18n/utils";
 
@@ -54,12 +54,7 @@ const t = useTranslations(Astro.currentLocale as Language["lang"]);
             }
           </h1>
           <div class="py-2">
-            {
-              tags &&
-                tags.map((tag: string) => (
-                  <a class="badge badge-outline mb-1 mr-2 uppercase no-underline">{tag}</a>
-                ))
-            }
+            {tags && tags.map((tag: string) => <TagBadge tag={tag} />)}
           </div>
           {
             updatedDate && (
