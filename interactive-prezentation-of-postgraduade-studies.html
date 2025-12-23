@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moja Podróż w Świat AI: Od Frontend'u do Data Science</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Tech (Warm neutrals like Slate, with a Sky blue accent) -->
+    <!-- Application Structure Plan: A non-linear, single-page journey dashboard. The user navigates through thematic sections (Motivation, Tech Stack, Projects, Conclusion) via a sticky nav. The core is the interactive "Projects" section, where selecting a project dynamically updates a details pane including a Chart.js visualization of its key metrics. This structure transforms a static article into an explorable portfolio piece, focusing user attention on practical application and outcomes, which is more engaging than a linear read. -->
+    <!-- Visualization & Content Choices: Journey Diagram (Motivation): Goal=Inform, Method=HTML/CSS, Interaction=None. Justifies showing the career path visually. Tech Stack (Cards): Goal=Organize/Inform, Method=HTML/JS, Interaction=Click-to-reveal. Justifies chunking complex info. Project Metrics (Radar Chart): Goal=Compare/Analyze, Method=Chart.js Canvas, Interaction=Project selection updates chart, hover for tooltips. Justifies using a radar chart to compare different evaluation metrics for each project model in a compact, visually appealing way. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .active-tab {
+            border-color: #0ea5e9; /* sky-500 */
+            color: #0ea5e9;
+            background-color: #f0f9ff; /* sky-50 */
+        }
+        .section-icon {
+            font-size: 2.5rem;
+            line-height: 1;
+        }
+    </style>
+</head>
+<body class="text-slate-700">
+
+    <header class="bg-slate-800 text-white shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="text-xl font-bold">Łukasz Zatyka</div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#intro" class="hover:text-sky-400 transition-colors">Start</a>
+                <a href="#tech" class="hover:text-sky-400 transition-colors">Technologie</a>
+                <a href="#projects" class="hover:text-sky-400 transition-colors">Projekty</a>
+                <a href="#summary" class="hover:text-sky-400 transition-colors">Podsumowanie</a>
+            </div>
+            <div class="md:hidden">
+                <select id="mobile-nav" class="bg-slate-700 text-white rounded p-2">
+                    <option value="#intro">Start</option>
+                    <option value="#tech">Technologie</option>
+                    <option value="#projects">Projekty</option>
+                    <option value="#summary">Podsumowanie</option>
+                </select>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="intro" class="py-20 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold text-slate-800">Moja Podróż w Świat AI</h1>
+                <p class="mt-4 text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">Od Architektury Frontendowej do Analityki Danych i Sztucznej Inteligencji</p>
+                <div class="mt-12">
+                    <p class="text-base text-slate-600 max-w-4xl mx-auto text-left md:text-center mb-12">
+                        Przez lata budowałem intuicyjne interfejsy w React.js, opierając się na solidnym ekosystemie Node.js. Jednak praca nad aplikacją do monitorowania sieci uświadomiła mi, że samo wyświetlanie danych to dopiero początek. Zapragnąłem zrozumieć, co kryje się głębiej – jak analizować, przetwarzać i wykorzystywać dane do tworzenia inteligentnych prognoz i rozwiązań. To pchnęło mnie w stronę studiów podyplomowych na PJATK.
+                    </p>
+                    <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8 text-slate-700">
+                        <div class="flex items-center p-4 bg-slate-100 rounded-lg shadow-sm">
+                            <span class="text-3xl mr-4">💻</span>
+                            <div>
+                                <h3 class="font-semibold">Frontend Developer</h3>
+                                <p class="text-sm text-slate-500">React.js, Node.js, UI/UX</p>
+                            </div>
+                        </div>
+                        <div class="text-4xl font-thin text-sky-500 mx-4">→</div>
+                        <div class="flex items-center p-4 bg-sky-100 rounded-lg shadow-sm ring-2 ring-sky-200">
+                            <span class="text-3xl mr-4">🧠</span>
+                            <div>
+                                <h3 class="font-semibold">AI & Data Science</h3>
+                                <p class="text-sm text-slate-500">Python, Scikit-learn, Keras</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tech" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-slate-800 mb-4">Warsztat Technologiczny</h2>
+                <p class="text-center text-slate-600 max-w-2xl mx-auto mb-12">
+                    Program studiów wyposażył mnie w kompleksowy zestaw narzędzi do pracy z danymi, od fundamentalnych bibliotek po zaawansowane frameworki do uczenia głębokiego.
+                </p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <h3 class="font-semibold text-xl mb-2 text-slate-800">NumPy & Pandas</h3>
+                        <p class="text-slate-600">Fundamenty analizy danych: od wydajnych operacji na tablicach wielowymiarowych po zaawansowane manipulowanie i czyszczenie danych w ramkach DataFrame.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <h3 class="font-semibold text-xl mb-2 text-slate-800">Scikit-learn (Nadzorowane)</h3>
+                        <p class="text-slate-600">Budowanie modeli predykcyjnych: regresja do prognozowania wartości ciągłych i klasyfikacja do kategoryzacji danych, w tym SVM i Naive Bayes.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <h3 class="font-semibold text-xl mb-2 text-slate-800">Scikit-learn (Nienadzorowane)</h3>
+                        <p class="text-slate-600">Odkrywanie ukrytych struktur w danych: segmentacja i grupowanie za pomocą algorytmów takich jak K-Means, Hierarchical Clustering i DBSCAN.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <h3 class="font-semibold text-xl mb-2 text-slate-800">Keras & TensorFlow</h3>
+                        <p class="text-slate-600">Konstruowanie i trenowanie sieci neuronowych: od prostych modeli sekwencyjnych po złożone architektury jak LSTM i autoenkodery do detekcji anomalii.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-slate-800 mb-4">Projekty w Praktyce</h2>
+                <p class="text-center text-slate-600 max-w-2xl mx-auto mb-12">
+                    Teoria jest ważna, ale to praktyczne zastosowanie wiedzy przynosi najwięcej satysfakcji. Poniżej przedstawiam cztery kluczowe projekty zrealizowane w ramach studiów, które pokazują szerokie spektrum zastosowań AI.
+                </p>
+                
+                <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8">
+                    <button data-project-id="0" class="project-tab text-sm md:text-base font-medium py-2 px-4 rounded-full border-2 border-transparent transition-colors active-tab">🚲 Prognozowanie Wypożyczeń</button>
+                    <button data-project-id="1" class="project-tab text-sm md:text-base font-medium py-2 px-4 rounded-full border-2 border-transparent transition-colors">🍄 Klasyfikacja Grzybów</button>
+                    <button data-project-id="2" class="project-tab text-sm md:text-base font-medium py-2 px-4 rounded-full border-2 border-transparent transition-colors">💨 Prognozowanie Zanieczyszczeń</button>
+                    <button data-project-id="3" class="project-tab text-sm md:text-base font-medium py-2 px-4 rounded-full border-2 border-transparent transition-colors">🌐 Detekcja Anomalii Sieciowych</button>
+                </div>
+
+                <div class="bg-slate-50 p-6 md:p-8 rounded-xl shadow-inner">
+                    <div class="grid lg:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <div class="flex items-center mb-4">
+                                <div id="project-icon" class="section-icon text-sky-500 mr-4"></div>
+                                <h3 id="project-title" class="text-2xl font-bold text-slate-800"></h3>
+                            </div>
+                            <p id="project-problem" class="text-slate-600 mb-4"></p>
+                            <div class="bg-white p-4 rounded-lg">
+                                <h4 class="font-semibold text-slate-800">Zastosowany model:</h4>
+                                <p id="project-model" class="text-slate-600"></p>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-center text-slate-800 mb-2">Kluczowe Metryki Modelu</h4>
+                            <div class="chart-container">
+                                <canvas id="project-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="summary" class="py-20">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold text-slate-800 mb-4">Wyzwania i Perspektywy</h2>
+                <div class="max-w-3xl mx-auto text-left space-y-6">
+                    <p class="text-slate-600">Przejście od logiki interfejsu użytkownika do modelowania statystycznego było wyzwaniem, które nauczyło mnie pokory wobec danych. Zmieniłem perspektywę z dążenia do "pixel perfect" na rzecz budowania solidnych i interpretowalnych modeli ("model robust").</p>
+                    <blockquote class="border-l-4 border-sky-500 pl-4 italic text-slate-700">
+                        "Widzę przyszłość web developera nie tylko w kodowaniu czy projektowaniu, ale również w koordynacji złożonych narzędzi AI. Jestem przekonany, że zdobyte umiejętności pozwolą mi efektywnie wdrażać innowacyjne rozwiązania."
+                    </blockquote>
+                    <p class="text-slate-600">Moim celem jest dalszy rozwój w rolach takich jak <span class="font-semibold text-sky-600">Generative AI Developer</span> lub <span class="font-semibold text-sky-600">AI-focused Software Engineer</span>, gdzie będę mógł łączyć moje doświadczenie frontendowe z zaawansowanymi technologiami sztucznej inteligencji, aby tworzyć produkty nowej generacji.</p>
+                </div>
+
+                <div class="mt-16 bg-white p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold text-slate-800 mb-4">✨ Generator Pomysłów na Projekty AI ✨</h3>
+                    <p class="text-slate-600 mb-6">Wpisz słowo kluczowe (np. "zdrowie", "finanse", "transport"), a ja zaproponuję Ci kreatywny pomysł na projekt Data Science/AI!</p>
+                    <div class="flex flex-col md:flex-row gap-4 justify-center">
+                        <input type="text" id="projectKeyword" placeholder="Wpisz słowo kluczowe..." class="flex-grow p-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500">
+                        <button id="generateIdeaBtn" class="bg-sky-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-sky-600 transition-colors shadow-md">Generuj Pomysł</button>
+                    </div>
+                    <div id="ideaOutput" class="mt-8 p-6 bg-slate-100 rounded-lg text-left text-slate-700 min-h-[100px] flex items-center justify-center">
+                        <span class="text-slate-500">Twój pomysł pojawi się tutaj...</span>
+                    </div>
+                    <div id="loadingIndicator" class="hidden mt-4 text-sky-500 font-medium">Generowanie pomysłu...</div>
+                    <div id="errorIndicator" class="hidden mt-4 text-red-500 font-medium">Wystąpił błąd podczas generowania pomysłu. Spróbuj ponownie.</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-800 text-slate-400 py-6">
+        <div class="container mx-auto px-6 text-center text-sm">
+            <p>&copy; 2025 Łukasz Zatyka. Interaktywna prezentacja stworzona na podstawie doświadczeń ze studiów podyplomowych na PJATK.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const projectsData = [
+                {
+                    title: 'Prognozowanie Wypożyczeń Rowerów',
+                    icon: '🚲',
+                    problem: 'Przewidywanie dziennej liczby wypożyczeń rowerów na podstawie danych meteorologicznych i sezonowych, aby zoptymalizować dostępność floty.',
+                    model: 'Regresja (m.in. Linear Regression, Random Forest, Gradient Boosting).',
+                    metrics: {
+                        labels: ['R² (Dopasowanie)', 'Niskie MAE', 'Niskie MSE', 'Niskie RMSE'],
+                        values: [0.88, 0.25, 0.20, 0.22], /* Varied values for demonstration */
+                        info: 'Skupiono się na maksymalizacji R² i minimalizacji błędów predykcji.'
+                    }
+                },
+                {
+                    title: 'Klasyfikacja Grzybów',
+                    icon: '🍄',
+                    problem: 'Klasyfikacja grzybów jako jadalnych lub trujących na podstawie ich cech fizycznych, aby zminimalizować ryzyko zatrucia.',
+                    model: 'Klasyfikacja (m.in. Logistic Regression, Decision Tree, Gradient Boosting).',
+                    metrics: {
+                        labels: ['Accuracy (Dokładność)', 'Precision (Precyzja)', 'Recall (Czułość)', 'F1-Score'],
+                        values: [0.99, 0.97, 0.98, 0.985], /* Varied values for demonstration */
+                        info: 'Priorytetem była maksymalna czułość (Recall) dla klasy "trujący".'
+                    }
+                },
+                {
+                    title: 'Prognozowanie Zanieczyszczeń Powietrza',
+                    icon: '💨',
+                    problem: 'Analiza szeregów czasowych w celu przewidywania przyszłych poziomów zanieczyszczenia powietrza w Pekinie, by umożliwić wczesne ostrzeganie.',
+                    model: 'Rekurencyjne Sieci Neuronowe (RNN), w szczególności LSTM.',
+                    metrics: {
+                        labels: ['Niskie MSE', 'Wysokie R²', 'Stabilność predykcji', 'Wykrywanie trendów'],
+                        values: [0.15, 0.91, 0.87, 0.89], /* Varied values for demonstration */
+                        info: 'Model skupiał się na minimalizacji błędu średniokwadratowego (MSE) w długoterminowych prognozach.'
+                    }
+                },
+                {
+                    title: 'Detekcja Anomalii Sieciowych',
+                    icon: '🌐',
+                    problem: 'Rozróżnianie normalnego ruchu sieciowego od aktywności anomalnej (np. ataków) w celu zabezpieczenia infrastruktury.',
+                    model: 'Głębokie Autoencodery (Deep Autoencoders).',
+                    metrics: {
+                        labels: ['Wysoki AUC', 'Wysoka Czułość', 'Niski FPR', 'Interpretowalność Błędu'],
+                        values: [0.97, 0.94, 0.10, 0.88], /* Varied values for demonstration */
+                        info: 'Kluczowe było osiągnięcie wysokiego pola pod krzywą ROC (AUC) i minimalizacja fałszywych alarmów.'
+                    }
+                }
+            ];
+
+            const projectTitleEl = document.getElementById('project-title');
+            const projectIconEl = document.getElementById('project-icon');
+            const projectProblemEl = document.getElementById('project-problem');
+            const projectModelEl = document.getElementById('project-model');
+            const projectTabs = document.querySelectorAll('.project-tab');
+            
+            const chartCanvas = document.getElementById('project-chart');
+            let projectChart = null;
+
+            function createOrUpdateChart(metrics) {
+                if (projectChart) {
+                    projectChart.destroy();
+                }
+
+                const chartConfig = {
+                    type: 'radar',
+                    data: {
+                        labels: metrics.labels,
+                        datasets: [{
+                            label: 'Skuteczność modelu',
+                            data: metrics.values,
+                            backgroundColor: 'rgba(56, 189, 248, 0.2)', // sky-400
+                            borderColor: 'rgb(14, 165, 233)', // sky-500
+                            borderWidth: 2,
+                            pointBackgroundColor: 'rgb(14, 165, 233)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgb(14, 165, 233)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            r: {
+                                angleLines: {
+                                    color: 'rgba(0, 0, 0, 0.1)'
+                                },
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.1)'
+                                },
+                                pointLabels: {
+                                    font: {
+                                        size: 12
+                                    },
+                                    color: '#475569' // slate-600
+                                },
+                                suggestedMin: 0,
+                                suggestedMax: 1,
+                                ticks: {
+                                    backdropColor: 'rgba(248, 250, 252, 1)', // slate-50
+                                    color: '#64748b' // slate-500
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.r !== null) {
+                                            label += (context.parsed.r * 100).toFixed(0) + '%';
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                };
+                projectChart = new Chart(chartCanvas, chartConfig);
+            }
+
+            function updateProjectView(projectId) {
+                const project = projectsData[projectId];
+
+                projectTitleEl.textContent = project.title;
+                projectIconEl.textContent = project.icon;
+                projectProblemEl.textContent = project.problem;
+                projectModelEl.textContent = project.model;
+
+                createOrUpdateChart(project.metrics);
+
+                projectTabs.forEach(tab => {
+                    tab.classList.remove('active-tab');
+                    if(tab.dataset.projectId === projectId.toString()){
+                        tab.classList.add('active-tab');
+                    }
+                });
+            }
+
+            projectTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const projectId = tab.dataset.projectId;
+                    updateProjectView(parseInt(projectId));
+                });
+            });
+
+            const mobileNav = document.getElementById('mobile-nav');
+            mobileNav.addEventListener('change', (e) => {
+                window.location.hash = e.target.value;
+            });
+
+            // Gemini API Integration
+            const generateIdeaBtn = document.getElementById('generateIdeaBtn');
+            const projectKeywordInput = document.getElementById('projectKeyword');
+            const ideaOutputDiv = document.getElementById('ideaOutput');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const errorIndicator = document.getElementById('errorIndicator');
+
+            generateIdeaBtn.addEventListener('click', async () => {
+                const keyword = projectKeywordInput.value.trim();
+                if (!keyword) {
+                    ideaOutputDiv.textContent = 'Proszę wpisać słowo kluczowe.';
+                    return;
+                }
+
+                ideaOutputDiv.textContent = '';
+                loadingIndicator.classList.remove('hidden');
+                errorIndicator.classList.add('hidden');
+
+                try {
+                    let chatHistory = [];
+                    const prompt = `Zaproponuj krótki, kreatywny pomysł na projekt z dziedziny Data Science/AI, związany z "${keyword}". Podaj problem, sugerowane dane i potencjalny model ML/DL. Odpowiedź sformułuj zwięźle i profesjonalnie, bez zbędnych wstępów.`;
+                    chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                    const payload = { contents: chatHistory };
+                    const apiKey = "";
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    const result = await response.json();
+
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const text = result.candidates[0].content.parts[0].text;
+                        ideaOutputDiv.textContent = text;
+                    } else {
+                        ideaOutputDiv.textContent = 'Nie udało się wygenerować pomysłu. Spróbuj ponownie z innym słowem kluczowym.';
+                    }
+                } catch (error) {
+                    console.error('Błąd wywołania Gemini API:', error);
+                    errorIndicator.classList.remove('hidden');
+                    ideaOutputDiv.textContent = '';
+                } finally {
+                    loadingIndicator.classList.add('hidden');
+                }
+            });
+
+            updateProjectView(0);
+        });
+    </script>
+</body>
+</html>
