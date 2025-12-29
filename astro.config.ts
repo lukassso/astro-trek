@@ -41,7 +41,7 @@ export default defineConfig({
   ],
   output: "hybrid",
   adapter: netlify({
-    edgeMiddleware: true,
+    edgeMiddleware: false,
   }),
   vite: {
     optimizeDeps: {
