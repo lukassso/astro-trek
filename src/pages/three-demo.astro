@@ -1,0 +1,25 @@
+---
+import PageLayout from "@/layouts/PageLayout.astro";
+import ContainerSection from "@/components/common/ContainerSection.astro";
+import ThreePresentation from '@/components/portfolio/ThreePresentation';
+import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
+
+const meta = {
+  title: "Three.js 3D Portfolio Demo",
+  description: "A demonstration of 3D elements using Three.js and React Three Fiber.",
+};
+---
+
+<PageLayout meta={meta}>
+  <ThreePresentation client:only="react" />
+  <ContainerSection maxWidth="max-w-2xl">
+    <div class="relative z-10 mt-10">
+      <HeaderPortfolio
+        client:visible
+        title={"3D Quantum Portfolio"}
+        description={"A demonstration of 3D interactive elements using Three.js and React Three Fiber, featuring a quantum particle simulation."}
+        chipsList={["React", "Typescript", "Three.js", "@react-three/fiber", "@react-three/drei"]}
+      />
+    </div>
+  </ContainerSection>
+</PageLayout>
