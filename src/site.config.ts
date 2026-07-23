@@ -32,7 +32,21 @@ export const portfolioItems: PortfolioItem[] = [
     imageUrl: "assets/images/portfolio-nbp-currency-explorer.gif",
     path: "/nbp-currency-explorer",
   },
-  
+    {
+    title: "3D Quantum Portfolio",
+    description: "A demonstration of 3D interactive elements using Three.js and React Three Fiber, featuring a quantum particle simulation and cryostat visualization.",
+    technologies: ["React", "Typescript", "Three.js", "@react-three/fiber", "@react-three/drei"],
+    imageUrl: "assets/images/portfolio-three-demo.png",
+    path: "/three-demo",
+  },
+  {
+    title: "Sushi AI Assistant",
+    description:
+      "An AI-powered sushi catering assistant that generates personalized menu recommendations for your events in just 2 minutes.",
+    technologies: ["Next.js", "Gemini AI", "Tailwind CSS", "Radix UI"],
+    imageUrl: "assets/images/portfolio-fugu-sushi.gif",
+    externalUrl: "https://fugu-catering.vercel.app/",
+  },
   {
     title: "Bank Transactions",
     description:
@@ -49,14 +63,6 @@ export const portfolioItems: PortfolioItem[] = [
     ],
     imageUrl: "assets/images/portfolio-bank-transaction.png",
     path: "/dashboards/bank-transactions",
-  },
-  {
-    title: "Sushi AI Assistant",
-    description:
-      "An AI-powered sushi catering assistant that generates personalized menu recommendations for your events in just 2 minutes.",
-    technologies: ["Next.js", "Gemini AI", "Tailwind CSS", "Radix UI"],
-    imageUrl: "assets/images/portfolio-fugu-sushi.gif",
-    externalUrl: "https://fugu-catering.vercel.app/",
   },
   {
     title: "Multi Select Component",
