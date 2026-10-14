@@ -4,11 +4,13 @@ import ContainerSection from "@/components/common/ContainerSection.astro";
 import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
 import MultiSelectComponent from "@/components/portfolio/multi-select-component";
 import { pagesSeo } from "@/config/pages";
+import { generateExperimentJsonLd } from "@/utils/jsonLd";
 
 const meta = pagesSeo["multi-select"];
+const jsonLd = generateExperimentJsonLd("multi-select");
 ---
 
-<PageLayout meta={meta}>
+<PageLayout meta={meta} jsonLd={jsonLd}>
   <ContainerSection>
     <HeaderPortfolio
       client:visible

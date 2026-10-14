@@ -3,11 +3,13 @@ import SvgAnimeUniverseRoot from "@/components/portfolio/svg-anime-universe";
 import PageLayout from "@/layouts/PageLayout.astro";
 import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
 import { pagesSeo } from "@/config/pages";
+import { generateExperimentJsonLd } from "@/utils/jsonLd";
 
 const meta = pagesSeo["svg-anime-universe"];
+const jsonLd = generateExperimentJsonLd("svg-anime-universe");
 ---
 
-<PageLayout heroAnime meta={meta}>
+<PageLayout heroAnime meta={meta} jsonLd={jsonLd}>
   <div class="w-full overflow-hidden pb-20 pt-32">
     <HeaderPortfolio
       client:visible

@@ -4,11 +4,13 @@ import ContainerSection from "@/components/common/ContainerSection.astro";
 import WebcamPoseDetectionComponent from "@/components/portfolio/webcam-pose-detection";
 import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
 import { pagesSeo } from "@/config/pages";
+import { generateExperimentJsonLd } from "@/utils/jsonLd";
 
 const meta = pagesSeo["webcam-pose-detection"];
+const jsonLd = generateExperimentJsonLd("webcam-pose-detection");
 ---
 
-<PageLayout meta={meta}>
+<PageLayout meta={meta} jsonLd={jsonLd}>
   <ContainerSection maxWidth="max-w-2xl">
     <HeaderPortfolio
       client:visible

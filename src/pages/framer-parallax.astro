@@ -3,11 +3,13 @@ import PageLayout from "@/layouts/PageLayout.astro";
 import FramerParallaxComponent from "@/components/portfolio/framer-parallax";
 import Content from "@/components/portfolio/framer-parallax/components/Content.astro";
 import { pagesSeo } from "@/config/pages";
+import { generateExperimentJsonLd } from "@/utils/jsonLd";
 
 const meta = pagesSeo["framer-parallax"];
+const jsonLd = generateExperimentJsonLd("framer-parallax");
 ---
 
-<PageLayout meta={meta}>
+<PageLayout meta={meta} jsonLd={jsonLd}>
   <div>
     <FramerParallaxComponent client:visible />
     <Content />

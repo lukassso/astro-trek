@@ -4,13 +4,17 @@ import ContainerSection from "@/components/common/ContainerSection.astro";
 import ThreePresentation from '@/components/portfolio/ThreePresentation';
 import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
 
+import { generateExperimentJsonLd } from "@/utils/jsonLd";
+
 const meta = {
   title: "Three.js 3D Portfolio Demo",
   description: "A demonstration of 3D elements using Three.js and React Three Fiber.",
 };
+
+const jsonLd = generateExperimentJsonLd("three-demo", "3D Quantum Portfolio", meta.description);
 ---
 
-<PageLayout meta={meta}>
+<PageLayout meta={meta} jsonLd={jsonLd}>
   <ThreePresentation client:only="react" />
   <ContainerSection maxWidth="max-w-2xl">
     <div class="relative z-10 mt-10">

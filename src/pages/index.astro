@@ -6,11 +6,13 @@ import PortfolioSection from "@/components/home/portfolio-section";
 import TechStack from "@/components/home/tech-stack-section";
 import Clients from "@/components/home/clients-section";
 import { pagesSeo } from "@/config/pages";
+import { generateHomeJsonLd } from "@/utils/jsonLd";
 
 const meta = pagesSeo["index"];
+const jsonLd = generateHomeJsonLd();
 ---
 
-<PageLayout meta={meta}>
+<PageLayout meta={meta} jsonLd={jsonLd}>
   <Hero />
   <div class="py-14">
     <ContainerSection>

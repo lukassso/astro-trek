@@ -5,11 +5,13 @@ import PlaygroundAiAppComponent from "@/components/portfolio/dashboards/playgrou
 import ContainerSection from "@/components/common/ContainerSection.astro";
 import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
 import { pagesSeo } from "@/config/pages";
+import { generateExperimentJsonLd } from "@/utils/jsonLd";
 
 const meta = pagesSeo["playground-ai"];
+const jsonLd = generateExperimentJsonLd("playground-ai");
 ---
 
-<PageLayout meta={meta}>
+<PageLayout meta={meta} jsonLd={jsonLd}>
   <ContainerSection>
     <HeaderPortfolio
       client:visible

@@ -4,8 +4,10 @@ import ContainerSection from "@/components/common/ContainerSection.astro";
 import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
 import MoviesAppComponent from "@/components/portfolio/movie-app";
 import { pagesSeo } from "@/config/pages";
+import { generateExperimentJsonLd } from "@/utils/jsonLd";
 
 const meta = pagesSeo["movie-app"];
+const jsonLd = generateExperimentJsonLd("movie-app");
 
 const {
   geo: { city },
@@ -14,7 +16,7 @@ const {
 export const prerender = false;
 ---
 
-<PageLayout meta={meta}>
+<PageLayout meta={meta} jsonLd={jsonLd}>
   <ContainerSection>
     <HeaderPortfolio
       client:visible

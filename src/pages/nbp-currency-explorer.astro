@@ -4,11 +4,13 @@ import ContainerSection from "@/components/common/ContainerSection.astro";
 import HeaderPortfolio from "@/components/portfolio/common/header-portfolio";
 import NbpCurrencyExplorerComponent from "@/components/portfolio/nbp-currency-explorer";
 import { pagesSeo } from "@/config/pages";
+import { generateExperimentJsonLd } from "@/utils/jsonLd";
 
 const meta = pagesSeo["nbp-currency-explorer"];
+const jsonLd = generateExperimentJsonLd("nbp-currency-explorer");
 ---
 
-<PageLayout meta={meta}>
+<PageLayout meta={meta} jsonLd={jsonLd}>
   <ContainerSection>
     <HeaderPortfolio
       client:visible
