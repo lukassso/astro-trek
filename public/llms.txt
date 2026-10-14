@@ -1,0 +1,46 @@
+# AI Greener
+
+> A living laboratory where lightweight AI and web experiments grow. AI Greener combines a technical blog, portfolio, and accessible micro-applications demonstrating in-browser AI, WebGL hardware acceleration, and the Astro Islands architecture.
+
+AI Greener is authored by Lukasz Zatyka and hosted at https://aigreener.com. The site operates on Astro 4.x in hybrid mode (SSG + SSR), utilizing client-side React 18 islands for interactivity with zero bloat.
+
+## Interactive AI & Machine Learning Experiments
+
+- [Real-Time Object Detection](https://aigreener.com/webcam-object-detection): In-browser computer vision using TensorFlow.js and the COCO-SSD model. Runs entirely on the user's GPU via WebGL without server dependencies.
+- [Real-Time Pose Detection](https://aigreener.com/webcam-pose-detection): Human pose and body keypoint estimation (MoveNet) running at 30+ FPS directly in the browser via webcam feed.
+- [Playground AI](https://aigreener.com/dashboards/playground-ai): Interactive ChatGPT/LLM interface with adjustable temperature and token limits, demonstrating a secure serverless BFF proxy pattern.
+- [RAG Assistant](https://aigreener.com/rag-assistant): Retrieval-Augmented Generation assistant leveraging Supabase (PostgreSQL), RPC execution, and Gemini AI for contextual answering over the Titanic dataset.
+
+## Data Visualization & Exploration
+
+- [NBP Currency Explorer](https://aigreener.com/nbp-currency-explorer): Interactive time-series exchange rate analysis using the public National Bank of Poland REST API and Chart.js.
+- [Movie App](https://aigreener.com/movie-app): Feature-rich movie catalog featuring MobX reactive state management, React Query caching, search, and pagination.
+- [Random Person Generator](https://aigreener.com/random-person): Simple REST API profile generator with contact details and avatars.
+
+## State Management & UI Experiments
+
+- [Bank Transactions Dashboard](https://aigreener.com/dashboards/bank-transactions): Comprehensive transaction CRUD dashboard demonstrating React Hook Form, Yup validation, and Context API + useReducer state machines.
+- [Task Manager](https://aigreener.com/task-manager): Modern task organizer demonstrating Redux Toolkit (RTK) slices, selectors, and dispatch flows.
+- [Hacker News Reader](https://aigreener.com/hacker-news): Minimalist reader utilizing pure Context API + useReducer without third-party state libraries.
+- [Multi Select Component](https://aigreener.com/multi-select): Keyboard-navigable, accessible multi-select based on the cmdk pattern and Radix UI primitives.
+- [SVG Anime Universe](https://aigreener.com/svg-anime-universe): Programmatic SVG canvas manipulation and CSS keyframe animations with zero external animation libraries.
+- [Framer Parallax](https://aigreener.com/framer-parallax): Physics-based scroll-driven parallax animations utilizing Framer Motion.
+- [Firebase Authentication](https://aigreener.com/firebase-auth/signin): Full authentication workflow with Firebase Auth (client) and Firebase Admin SDK (server-side session verification via Netlify Functions).
+- [3D Quantum Portfolio](https://aigreener.com/three-demo): Interactive 3D WebGL particle simulation and cryostat visualization built with Three.js and React Three Fiber.
+
+## Technical Blog
+
+- [AI Greener Blog](https://aigreener.com/blog): In-depth articles covering modern web development, Astro, TypeScript, in-browser AI, and software engineering in both English and Polish.
+
+## Architecture & Technology Stack
+
+- **Framework**: Astro 4.x (Hybrid SSG + Netlify Serverless Functions)
+- **UI & Islands**: React 18 with selective hydration (`client:visible`, `client:only="react"`)
+- **Styling**: Tailwind CSS 3.4, Radix UI headless primitives (25 Shadcn components), DaisyUI
+- **In-Browser ML**: TensorFlow.js (WebGL backend), COCO-SSD, MoveNet
+- **Databases & Auth**: Supabase (PostgreSQL), Firebase Auth, Firebase Admin SDK
+- **Deployment**: Netlify Edge CDN & Serverless Functions
+
+## Optional & Deep Documentation
+
+- [Full LLM Knowledge Base](https://aigreener.com/llms-full.txt): Comprehensive technical architecture, API schema details, and implementation guides.

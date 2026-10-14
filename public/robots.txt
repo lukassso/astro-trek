@@ -1,0 +1,54 @@
+# robots.txt for https://aigreener.com
+# AI Greener — Living laboratory for lightweight AI and web experiments
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# -------------------------------------------------------------
+# Explicit permissions for AI & Generative Search Engines (AEO/GEO)
+# -------------------------------------------------------------
+User-agent: GPTBot
+Allow: /
+Disallow: /api/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /api/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /api/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /api/
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /api/
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /api/
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /api/
+
+User-agent: cohere-ai
+Allow: /
+Disallow: /api/
+
+User-agent: Diffbot
+Allow: /
+Disallow: /api/
+
+# -------------------------------------------------------------
+# Sitemaps & Machine-Readable AI Knowledge
+# -------------------------------------------------------------
+Sitemap: https://aigreener.com/sitemap-index.xml
+
+# LLMs / Generative Engine Documentation:
+# https://aigreener.com/llms.txt
+# https://aigreener.com/llms-full.txt

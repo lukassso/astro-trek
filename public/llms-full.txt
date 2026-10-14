@@ -1,0 +1,135 @@
+# AI Greener — Complete Technical Documentation for LLMs
+
+> Extended reference document for language models, generative search engines, and AI agents.
+> Website: https://aigreener.com
+> Author: Lukasz Zatyka
+> Canonical Repository: https://github.com/lukassso/astro-trek
+
+---
+
+## 1. Project Philosophy & System Architecture
+
+AI Greener is an experimental web laboratory and technical portfolio engineered to prove that complex, modern web technologies—especially AI and machine learning—can be delivered with minimal computational overhead and zero initial JavaScript bloat.
+
+### Core Architectural Pillars
+
+1. **Astro Islands Architecture**:
+   - The document layout, landing page, portfolio showcases, and MDX blog posts are pre-rendered at build time (SSG) as zero-JavaScript static HTML and CSS.
+   - Interactive micro-applications are embedded as isolated React 18 component trees that hydrate on demand based on visibility (`client:visible`) or load strictly in browser environments (`client:only="react"`).
+   - This ensures ultra-fast Time to First Byte (TTFB), pristine Core Web Vitals, and effortless crawlability by both traditional web crawlers and AI search agents.
+
+2. **In-Browser / Edge AI (No Inference Backend)**:
+   - Deep learning computer vision models (COCO-SSD and MoveNet) run directly on the client's device using TensorFlow.js with the WebGL hardware acceleration backend.
+   - Raw video frames captured from the user's webcam are processed in memory on an HTML5 canvas without uploading sensitive camera streams to any remote server.
+
+3. **Secure BFF (Backend for Frontend) Pattern**:
+   - For cloud LLM interactions (OpenAI ChatGPT, Google Gemini) and external data aggregators, client-side React islands never hold secret API keys.
+   - Requests are routed to Astro SSR endpoints (`/api/*`) executing as Netlify serverless functions where environment variables (`OPENAI_API_KEY`, `SUPABASE_KEY`, etc.) remain secure.
+
+---
+
+## 2. Comprehensive Directory of Micro-Applications
+
+### AI & Machine Learning
+
+#### 1. Real-Time Object Detection
+- **URL**: `https://aigreener.com/webcam-object-detection`
+- **Key Technologies**: TensorFlow.js (`@tensorflow/tfjs`), `@tensorflow-models/coco-ssd`, `react-webcam`.
+- **Functionality**: Captures live webcam feed, runs inference on every frame using WebGL, detects 80 classes of objects (people, laptops, cups, chairs, phones), and draws labeled bounding boxes in real-time.
+- **Hydration Mode**: `client:only="react"` (browser-only camera APIs).
+
+#### 2. Real-Time Pose Detection
+- **URL**: `https://aigreener.com/webcam-pose-detection`
+- **Key Technologies**: TensorFlow.js, `@tensorflow-models/pose-detection`, MoveNet.
+- **Functionality**: Tracks 17 human body keypoints (shoulders, elbows, wrists, hips, knees, ankles, eyes, ears) in real-time at 30+ FPS, connecting skeleton lines on an HTML5 overlay.
+- **Hydration Mode**: `client:only="react"`.
+
+#### 3. Playground AI
+- **URL**: `https://aigreener.com/dashboards/playground-ai`
+- **Key Technologies**: OpenAI SDK, `@ai-sdk/react`, Radix UI, Tailwind CSS.
+- **Functionality**: Interactive interface for testing prompt completions with dynamic sliders for temperature, max tokens, and system messages.
+- **API Endpoint**: `POST /api/ask-open-ai` (server-side proxy).
+
+#### 4. RAG Assistant (Retrieval-Augmented Generation)
+- **URL**: `https://aigreener.com/rag-assistant`
+- **Key Technologies**: Supabase (PostgreSQL), Gemini AI / OpenAI, RPC functions.
+- **Functionality**: Converts natural language questions into relational SQL queries, executes them against the Titanic passenger dataset via a secure RPC procedure (`execute_sql`), and enriches the AI's prompt with retrieved database records.
+- **API Endpoint**: `POST /api/ask-titanic`.
+
+---
+
+### Data Visualization & External APIs
+
+#### 5. NBP Currency Explorer
+- **URL**: `https://aigreener.com/nbp-currency-explorer`
+- **Key Technologies**: Chart.js, React Router, `date-fns`, SCSS.
+- **Functionality**: Fetches historical exchange rate time-series data from the National Bank of Poland (NBP) public REST API and plots interactive line charts with date filtering.
+
+#### 6. Movie App
+- **URL**: `https://aigreener.com/movie-app`
+- **Key Technologies**: TMDB API, MobX (UI state), TanStack React Query (server-cache), Playwright.
+- **Functionality**: Movie catalog with live search, detail drawer, genre filters, and pagination.
+- **API Endpoint**: `GET /api/movies-api`.
+
+#### 7. Random Person Generator
+- **URL**: `https://aigreener.com/random-person`
+- **Key Technologies**: `randomuser.me` REST API, Tailwind CSS, Lucide React.
+- **Functionality**: Generates randomized fictional user profiles with avatars, contact info, and addresses for testing and prototyping.
+
+---
+
+### State Management & UI Design Systems
+
+#### 8. Bank Transactions Dashboard
+- **URL**: `https://aigreener.com/dashboards/bank-transactions`
+- **Key Technologies**: React Hook Form, Yup validation, Context API, `useReducer`, Radix UI.
+- **Functionality**: Financial transactions ledger with balance calculation, category filtering, search, and validation-backed transaction creation.
+
+#### 9. Task Manager
+- **URL**: `https://aigreener.com/task-manager`
+- **Key Technologies**: Redux Toolkit (`@reduxjs/toolkit`), `react-redux`.
+- **Functionality**: Task manager showcasing clean Redux slices, memoized selectors, and dispatched actions.
+
+#### 10. Hacker News Reader
+- **URL**: `https://aigreener.com/hacker-news`
+- **Key Technologies**: Hacker News Firebase REST API, Context API, `useReducer`.
+- **Functionality**: Fast, lightweight Hacker News reader demonstrating that external state management libraries can often be avoided using built-in React hooks.
+
+#### 11. Multi Select Component
+- **URL**: `https://aigreener.com/multi-select`
+- **Key Technologies**: `cmdk` (Command menu pattern), Radix UI Popover, Tailwind CSS.
+- **Functionality**: Accessible, keyboard-first multi-option picker with badge tags and search filtering.
+
+#### 12. SVG Anime Universe
+- **URL**: `https://aigreener.com/svg-anime-universe`
+- **Key Technologies**: SVG DOM API, CSS keyframe animations, TypeScript.
+- **Functionality**: High-performance animated visual hero element built using pure vector geometry without canvas or external animation runtimes.
+
+#### 13. Framer Parallax
+- **URL**: `https://aigreener.com/framer-parallax`
+- **Key Technologies**: Framer Motion (`useScroll`, `useTransform`), Tailwind CSS.
+- **Functionality**: Smooth, hardware-accelerated scroll-linked parallax animations.
+
+#### 14. Firebase Authentication
+- **URL**: `https://aigreener.com/firebase-auth/signin`
+- **Key Technologies**: Firebase Auth, Firebase Admin SDK, Netlify Functions.
+- **Functionality**: Sign in, sign up, password recovery, and third-party OAuth flows with server-side HTTP-only session cookie issuance.
+
+#### 15. 3D Quantum Portfolio
+- **URL**: `https://aigreener.com/three-demo`
+- **Key Technologies**: Three.js, `@react-three/fiber`, `@react-three/drei`.
+- **Functionality**: Interactive 3D WebGL particle simulation with dynamic orbit controls and realistic lighting.
+
+---
+
+## 3. SEO, AEO & GEO Metadata Specifications
+
+- **Domain**: `https://aigreener.com`
+- **Sitemap**: `https://aigreener.com/sitemap-index.xml`
+- **RSS Feed**: `https://aigreener.com/rss.xml`
+- **Primary Languages**: English (`en-US`), Polish (`pl-PL`)
+- **JSON-LD Schema Types**: `WebSite`, `Person`, `BlogPosting`, `TechArticle`, `SoftwareApplication`
+- **Author Identity**: Lukasz Zatyka
+- **Author Profiles**:
+  - GitHub: `https://github.com/lukassso`
+  - LinkedIn: `https://www.linkedin.com/in/lukasz-zatyka/`
