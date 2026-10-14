@@ -19,6 +19,7 @@
     "@astrojs/tailwind": "^5.1.0",
     "@astrolib/seo": "1.0.0-beta.8",
     "@hookform/resolvers": "^3.3.4",
+    "@netlify/blobs": "^11.1.4",
     "@netlify/functions": "^2.7.0",
     "@radix-ui/react-avatar": "^1.0.4",
     "@radix-ui/react-collapsible": "^1.0.3",

@@ -68,7 +68,7 @@ const formattedDate = note.data.publishDate.toLocaleDateString(dateLocale, {
 
       <!-- Action toolbar -->
       <div class="note-card-toolbar mt-3 flex items-center justify-end">
-        <NoteLikeButton client:load noteId={note.id} initialLikes={note.data.likes} />
+        <NoteLikeButton client:visible noteId={note.id} initialLikes={note.data.likes} />
       </div>
     </div>
   </div>
